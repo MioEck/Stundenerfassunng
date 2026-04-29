@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#1a1d23"/>
+  <!-- Bus body -->
+  <rect x="96" y="160" width="320" height="200" rx="24" fill="#f4a623"/>
+  <!-- Windows -->
+  <rect x="120" y="184" width="60" height="56" rx="6" fill="#1a1d23"/>
+  <rect x="196" y="184" width="60" height="56" rx="6" fill="#1a1d23"/>
+  <rect x="272" y="184" width="60" height="56" rx="6" fill="#1a1d23"/>
+  <rect x="348" y="184" width="44" height="56" rx="6" fill="#1a1d23"/>
+  <!-- Door -->
+  <rect x="120" y="260" width="36" height="80" rx="4" fill="#1a1d23"/>
+  <!-- Front grille -->
+  <rect x="380" y="270" width="32" height="6" rx="3" fill="#1a1d23"/>
+  <rect x="380" y="284" width="32" height="6" rx="3" fill="#1a1d23"/>
+  <!-- Wheels -->
+  <circle cx="160" cy="380" r="32" fill="#1a1d23"/>
+  <circle cx="160" cy="380" r="14" fill="#f4a623"/>
+  <circle cx="352" cy="380" r="32" fill="#1a1d23"/>
+  <circle cx="352" cy="380" r="14" fill="#f4a623"/>
+  <!-- Headlight -->
+  <circle cx="402" cy="328" r="8" fill="#1a1d23"/>
+</svg>
