@@ -1,14 +1,7 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T13:06:56.113Z",
+  "aktualisiert": "2026-05-01T13:09:51.900Z",
   "eintraege": [
-    {
-      "datum": "2026-03-12",
-      "beginn": "06:40",
-      "ende": "18:08",
-      "kurs": "Kurs 215",
-      "sonderfahrt": ""
-    },
     {
       "datum": "2026-04-02",
       "beginn": "14:20",
@@ -19,22 +12,6 @@
     },
     {
       "datum": "2026-04-03",
-      "beginn": "04:00",
-      "ende": "19:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV HH Odense",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-03",
-      "beginn": "14:20",
-      "ende": "16:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV Vorbereitung",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-04",
       "beginn": "04:00",
       "ende": "19:00",
       "kurs": "Sonderfahrt",
@@ -208,63 +185,18 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Busreinigung 444",
       "pause": ""
-    },
-    {
-      "datum": "2026-05-01",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-01",
-      "beginn": "06:01",
-      "ende": "15:32",
-      "kurs": "Kurs 213",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-01",
-      "beginn": "11:56",
-      "ende": "23:18",
-      "kurs": "Kurs 216",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-02",
-      "beginn": "03:00",
-      "ende": "07:19",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Testfahrt",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-02",
-      "beginn": "04:38",
-      "ende": "16:20",
-      "kurs": "Kurs 212 + Bio",
-      "sonderfahrt": "Bio",
-      "pause": "",
-      "extraStunden": 11.7
-    },
-    {
-      "datum": "2026-05-02",
-      "beginn": "06:13",
-      "ende": "17:00",
-      "kurs": "Kurs 214",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
     }
+  ],
+  "geloescht": [
+    "2026-04-03|14:20|Sonderfahrt",
+    "2026-04-04|04:00|Sonderfahrt",
+    "2026-03-12|06:40|Kurs 215",
+    "2026-05-01||Frei",
+    "2026-05-01|06:01|Kurs 213",
+    "2026-05-01|11:56|Kurs 216",
+    "2026-05-02|03:00|Sonderfahrt",
+    "2026-05-02|04:38|Kurs 212 + Bio",
+    "2026-05-02|06:13|Kurs 214",
+    "2026-05-04||Frei"
   ]
 }
