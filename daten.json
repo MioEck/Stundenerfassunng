@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T04:43:20.741Z",
+  "aktualisiert": "2026-05-01T05:15:39.330Z",
   "eintraege": [
     {
       "datum": "2026-03-12",
@@ -8,6 +8,94 @@
       "ende": "18:08",
       "kurs": "Kurs 215",
       "sonderfahrt": ""
+    },
+    {
+      "datum": "2026-04-03",
+      "beginn": "14:20",
+      "ende": "16:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV Vorbereitung",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-04",
+      "beginn": "04:00",
+      "ende": "19:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH Odense",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-05",
+      "beginn": "06:00",
+      "ende": "19:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH Odense",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-06",
+      "beginn": "06:00",
+      "ende": "18:50",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH Odense",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-07",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-08",
+      "beginn": "19:10",
+      "ende": "04:15",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-09",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-10",
+      "beginn": "18:00",
+      "ende": "05:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-11",
+      "beginn": "19:30",
+      "ende": "02:50",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-17",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-18",
+      "beginn": "05:30",
+      "ende": "10:50",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Vorladefahrer Starlight",
+      "pause": ""
     },
     {
       "datum": "2026-04-20",
@@ -22,7 +110,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof Verstärker",
       "pause": "180"
     },
     {
