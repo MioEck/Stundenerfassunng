@@ -875,15 +875,15 @@ function exportMonatCSV() {
   const monatsEintraege = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (monatsEintraege.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
 
-  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Übernachtung\n';
+  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung\n';
   const zeilen = monatsEintraege.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
-    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : e.kurs;
     const uebWert = e.uebernachtung ? 'X' : '';
-    if (istFrei) return `${datumDE};;;—;;;`;
+    if (istFrei) return `${datumDE};;;-;;;`;
     return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert};${uebWert}`;
   }).join('\n');
   const csv = header + zeilen;
