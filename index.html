@@ -835,8 +835,9 @@ function exportMonatCSV() {
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
-    if (istFrei) return `${datumDE};;;Frei;;`;
-    return `${datumDE};${e.beginn};${e.ende};${e.kurs};${e.sonderfahrt};${pauseWert}`;
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    if (istFrei) return `${datumDE};;;—;;`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert}`;
   }).join('\n');
   const csv = header + zeilen;
 
