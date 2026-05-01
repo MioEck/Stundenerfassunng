@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T04:42:06.300Z",
+  "aktualisiert": "2026-05-01T04:42:24.356Z",
   "eintraege": [
     {
       "datum": "2026-03-12",
@@ -22,7 +22,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof Verstärker",
+      "sonderfahrt": "Lindhof VerstÃ¤rker",
       "pause": "180"
     },
     {
