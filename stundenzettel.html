@@ -237,6 +237,42 @@
   }
   .backup-bar.warn { background: #3a2520; border-color: #6a3520; color: #ffb733; }
 
+  .sync-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #1e2430;
+    border: 1px solid #2a3a5a;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #8a9abd;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .sync-bar.ok { border-color: #2a5a3a; background: #1e2a1e; color: #7ab48a; }
+  .sync-bar.warn { border-color: #6a3520; background: #3a2520; color: #ffb733; }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4a5a7a; flex-shrink: 0; }
+  .sync-dot.ok { background: #2a8d3a; }
+  .sync-dot.warn { background: #f4a623; }
+
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: none; align-items: center; justify-content: center;
+    z-index: 200; padding: 16px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #242830; border-radius: 12px; padding: 24px;
+    max-width: 480px; width: 100%; border: 1px solid #3a3f49;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { color: #f4a623; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+  .modal p { font-size: 13px; color: #a8a49d; margin-bottom: 10px; }
+  .modal-buttons { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; flex-wrap: wrap; }
+
   .toast {
     position: fixed;
     bottom: 24px;
@@ -273,8 +309,38 @@
     </div>
   </header>
 
+  <div id="sync-bar" class="sync-bar">
+    <div style="display:flex;align-items:center;gap:8px;flex:1;">
+      <div id="sync-dot" class="sync-dot"></div>
+      <span id="sync-text">GitHub Sync nicht eingerichtet — tippe auf ⚙</span>
+    </div>
+    <button class="btn-secondary" style="padding:6px 10px;font-size:12px;" onclick="zeigeSync()">⚙</button>
+  </div>
+
   <div id="backup-bar" class="backup-bar" style="display:none;">
     <span id="backup-text">Letzte Sicherung: noch nie</span>
+  </div>
+
+  <!-- Sync-Einstellungen Modal -->
+  <div id="sync-modal" class="modal-overlay">
+    <div class="modal">
+      <h3>GitHub Sync einrichten</h3>
+      <p>Damit beide Geräte denselben Datenstand haben, werden die Einträge in deinem GitHub-Repo gespeichert.</p>
+      <div class="field">
+        <label for="sync-token">GitHub Token</label>
+        <input type="password" id="sync-token" placeholder="ghp_...">
+      </div>
+      <div class="field">
+        <label for="sync-repo">GitHub Benutzername/Repo</label>
+        <input type="text" id="sync-repo" placeholder="MioEck/Stundenerfassung">
+      </div>
+      <p style="font-size:12px;color:#6a6660;">Der Token wird nur lokal auf diesem Gerät gespeichert und nirgendwo übertragen außer zu GitHub.</p>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="schliesseSync()">Abbrechen</button>
+        <button class="btn-secondary btn-danger" onclick="syncTrennen()">Trennen</button>
+        <button class="btn-primary" style="width:auto;padding:10px 20px;margin:0;" onclick="syncSpeichern()">Speichern</button>
+      </div>
+    </div>
   </div>
 
   <div class="card">
@@ -343,8 +409,9 @@
     </div>
 
     <div class="entries-actions">
+      <button class="btn-secondary" onclick="githubSync()">☁ Sync</button>
       <button class="btn-secondary" onclick="exportMonatCSV()">CSV (Monat)</button>
-      <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup an Drive</button>
+      <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup</button>
       <button class="btn-secondary" onclick="backupLaden()">📥 Backup laden</button>
       <button class="btn-secondary btn-danger" onclick="monatLoeschen()">Monat löschen</button>
     </div>
@@ -378,6 +445,9 @@ let eintraege = JSON.parse(localStorage.getItem('stundenzettel') || '[]');
 let aktiverMonat = null;
 let letztesBackup = localStorage.getItem('letztesBackup') || null;
 let eintraegeSeitBackup = parseInt(localStorage.getItem('eintraegeSeitBackup') || '0');
+let syncToken = localStorage.getItem('syncToken') || '';
+let syncRepo = localStorage.getItem('syncRepo') || '';
+let letzterSync = localStorage.getItem('letzterSync') || null;
 
 function init() {
   const heute = new Date().toISOString().split('T')[0];
@@ -392,6 +462,7 @@ function init() {
   // Aktiver Monat = aktueller Monat
   const d = new Date();
   aktiverMonat = monatsKey(d.toISOString().split('T')[0]);
+  aktualisiereSync();
   zeigeBackupStatus();
   zeigeAlles();
 }
@@ -700,6 +771,136 @@ function zeigeBackupStatus() {
     }
   }
 }
+
+// ─── GitHub Sync ──────────────────────────────────────────────
+function aktualisiereSync() {
+  const bar = document.getElementById('sync-bar');
+  const dot = document.getElementById('sync-dot');
+  const text = document.getElementById('sync-text');
+  dot.classList.remove('ok', 'warn');
+  if (!syncToken || !syncRepo) {
+    text.textContent = 'GitHub Sync nicht eingerichtet — tippe auf ⚙';
+    return;
+  }
+  dot.classList.add('ok');
+  const zeit = letzterSync ? new Date(letzterSync).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'noch nie';
+  text.textContent = `Sync: ${syncRepo} · Zuletzt: ${zeit}`;
+}
+
+async function githubSync() {
+  if (!syncToken || !syncRepo) {
+    toast('Erst GitHub Sync einrichten (⚙ Knopf)', true);
+    zeigeSync();
+    return;
+  }
+
+  const syncBtn = document.querySelector('[onclick="githubSync()"]');
+  if (syncBtn) syncBtn.textContent = '⏳ Sync...';
+
+  try {
+    // 1. Aktuelle Datei von GitHub holen (falls vorhanden)
+    const apiUrl = `https://api.github.com/repos/${syncRepo}/contents/daten.json`;
+    const headers = {
+      'Authorization': `token ${syncToken}`,
+      'Accept': 'application/vnd.github.v3+json'
+    };
+
+    let remoteSha = null;
+    let remoteEintraege = [];
+
+    const getResp = await fetch(apiUrl, { headers });
+    if (getResp.ok) {
+      const remoteDaten = await getResp.json();
+      remoteSha = remoteDaten.sha;
+      const decoded = JSON.parse(atob(remoteDaten.content.replace(/\n/g, '')));
+      remoteEintraege = decoded.eintraege || [];
+    } else if (getResp.status !== 404) {
+      throw new Error(`GitHub Fehler: ${getResp.status}`);
+    }
+
+    // 2. Zusammenführen: lokale + remote Einträge (Duplikate per datum+beginn+kurs filtern)
+    const alle = [...eintraege, ...remoteEintraege];
+    const einzigartig = [];
+    const gesehen = new Set();
+    alle.forEach(e => {
+      const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+      if (!gesehen.has(key)) { gesehen.add(key); einzigartig.push(e); }
+    });
+    einzigartig.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+
+    // 3. Zusammengeführte Daten zurück zu GitHub schreiben
+    const inhalt = btoa(unescape(encodeURIComponent(JSON.stringify({
+      version: 1,
+      aktualisiert: new Date().toISOString(),
+      eintraege: einzigartig
+    }, null, 2))));
+
+    const putBody = {
+      message: `Sync ${new Date().toISOString().slice(0, 16)}`,
+      content: inhalt,
+      ...(remoteSha && { sha: remoteSha })
+    };
+
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify(putBody)
+    });
+
+    if (!putResp.ok) throw new Error(`Schreiben fehlgeschlagen: ${putResp.status}`);
+
+    // 4. Lokal aktualisieren
+    eintraege = einzigartig;
+    speichern();
+    letzterSync = new Date().toISOString();
+    localStorage.setItem('letzterSync', letzterSync);
+    aktualisiereSync();
+    zeigeAlles();
+    toast(`Sync erfolgreich · ${einzigartig.length} Einträge`);
+
+  } catch (err) {
+    toast(`Sync Fehler: ${err.message}`, true);
+    console.error(err);
+  }
+
+  if (syncBtn) syncBtn.textContent = '☁ Sync';
+}
+
+function zeigeSync() {
+  document.getElementById('sync-token').value = syncToken;
+  document.getElementById('sync-repo').value = syncRepo;
+  document.getElementById('sync-modal').classList.add('show');
+}
+function schliesseSync() { document.getElementById('sync-modal').classList.remove('show'); }
+
+function syncSpeichern() {
+  const token = document.getElementById('sync-token').value.trim();
+  const repo = document.getElementById('sync-repo').value.trim();
+  if (token && !token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    toast('Token sieht nicht richtig aus (sollte mit ghp_ beginnen)', true);
+    return;
+  }
+  syncToken = token;
+  syncRepo = repo;
+  localStorage.setItem('syncToken', token);
+  localStorage.setItem('syncRepo', repo);
+  aktualisiereSync();
+  schliesseSync();
+  toast('Sync-Einstellungen gespeichert');
+  if (token && repo) githubSync();
+}
+
+function syncTrennen() {
+  if (!confirm('GitHub Sync trennen?')) return;
+  syncToken = ''; syncRepo = ''; letzterSync = null;
+  localStorage.removeItem('syncToken');
+  localStorage.removeItem('syncRepo');
+  localStorage.removeItem('letzterSync');
+  aktualisiereSync();
+  schliesseSync();
+  toast('Sync getrennt');
+}
+// ─────────────────────────────────────────────────────────────
 
 function toast(text, fehler = false) {
   const t = document.getElementById('toast');
