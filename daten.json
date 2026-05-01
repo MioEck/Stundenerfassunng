@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T09:54:16.899Z",
+  "aktualisiert": "2026-05-01T12:50:38.697Z",
   "eintraege": [
     {
       "datum": "2026-03-12",
@@ -8,6 +8,22 @@
       "ende": "18:08",
       "kurs": "Kurs 215",
       "sonderfahrt": ""
+    },
+    {
+      "datum": "2026-04-02",
+      "beginn": "14:20",
+      "ende": "16:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV Hamburg Vorbereitung",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-03",
+      "beginn": "04:00",
+      "ende": "19:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH Odense",
+      "pause": ""
     },
     {
       "datum": "2026-04-03",
@@ -20,6 +36,14 @@
     {
       "datum": "2026-04-04",
       "beginn": "04:00",
+      "ende": "19:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH Odense",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-04",
+      "beginn": "06:00",
       "ende": "19:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SEV HH Odense",
@@ -110,7 +134,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof Verstärker",
       "pause": "180"
     },
     {
@@ -183,6 +207,14 @@
       "ende": "13:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Busreinigung 444",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-01",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
       "pause": ""
     },
     {
