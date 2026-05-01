@@ -344,7 +344,7 @@
   </div>
 
   <div class="card">
-    <div class="card-title">Neue Eintragung</div>
+    <div class="card-title" id="formular-titel">Neue Eintragung</div>
 
     <div class="toggle" style="grid-template-columns:1fr 1fr 1fr 1fr;">
       <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
@@ -422,7 +422,10 @@
       <div id="kombi-gesamt" class="preview" style="display:none;"></div>
     </div>
 
-    <button class="btn-primary" onclick="eintragen()">Speichern</button>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <button class="btn-primary" id="speichern-btn" onclick="eintragen()" style="flex:1;">Speichern</button>
+      <button id="abbrechen-btn" class="btn-secondary" onclick="bearbeitenAbbrechen()" style="display:none;padding:16px 20px;">✕</button>
+    </div>
   </div>
 
   <div class="card">
@@ -476,6 +479,7 @@ const KURSE = {
 const MONATE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 
 let modus = 'kurs';
+let bearbeitenIndex = null; // null = neuer Eintrag, sonst Index des zu bearbeitenden
 let eintraege = JSON.parse(localStorage.getItem('stundenzettel') || '[]');
 let aktiverMonat = null;
 let letztesBackup = localStorage.getItem('letztesBackup') || null;
@@ -569,6 +573,70 @@ function aktualisiereKombiGesamt() {
   }
 }
 
+function bearbeiten(originalIndex) {
+  const e = eintraege[originalIndex];
+  bearbeitenIndex = originalIndex;
+  document.getElementById('formular-titel').textContent = 'Eintrag bearbeiten';
+  document.getElementById('speichern-btn').textContent = 'Änderung speichern';
+  document.getElementById('abbrechen-btn').style.display = 'block';
+  document.getElementById('datum').value = e.datum;
+
+  // Modus erkennen
+  if (e.kurs === 'Frei') {
+    setMode('frei');
+  } else if (e.kurs === 'Sonderfahrt') {
+    setMode('sonder');
+    document.getElementById('sonder-beginn').value = e.beginn;
+    document.getElementById('sonder-ende').value = e.ende;
+    document.getElementById('sonder-art').value = e.sonderfahrt;
+    document.getElementById('sonder-pause').value = e.pause || '';
+  } else if (e.extraStunden !== undefined) {
+    // Kombi — Kurs aus kurs-Feld extrahieren (z.B. "Kurs 211 + Schulausflug")
+    setMode('kombi');
+    const kursnr = e.kurs.match(/Kurs (\d+)/)?.[1] || '';
+    document.getElementById('kombi-kurs').value = kursnr;
+    document.getElementById('kombi-beginn').value = e.beginn; // Sonderfahrt-Beginn
+    document.getElementById('kombi-ende').value = e.ende;
+    document.getElementById('kombi-art').value = e.sonderfahrt;
+    document.getElementById('kombi-pause').value = e.pause || '';
+    zeigeKombiVorschau();
+  } else {
+    setMode('kurs');
+    const kursnr = e.kurs.replace('Kurs ', '');
+    document.getElementById('kurs').value = kursnr;
+    zeigeVorschau();
+  }
+
+  // Zum Formular scrollen
+  document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function bearbeitenAbbrechen() {
+  bearbeitenIndex = null;
+  document.getElementById('formular-titel').textContent = 'Neue Eintragung';
+  document.getElementById('speichern-btn').textContent = 'Speichern';
+  document.getElementById('abbrechen-btn').style.display = 'none';
+  formularZuruecksetzen();
+  setMode('kurs');
+}
+
+function formularZuruecksetzen() {
+  document.getElementById('datum').value = new Date().toISOString().split('T')[0];
+  document.getElementById('kurs').value = '';
+  document.getElementById('vorschau').style.display = 'none';
+  document.getElementById('sonder-beginn').value = '';
+  document.getElementById('sonder-ende').value = '';
+  document.getElementById('sonder-art').value = '';
+  document.getElementById('sonder-pause').value = '';
+  document.getElementById('kombi-kurs').value = '';
+  document.getElementById('kombi-beginn').value = '';
+  document.getElementById('kombi-ende').value = '';
+  document.getElementById('kombi-art').value = '';
+  document.getElementById('kombi-pause').value = '';
+  document.getElementById('kombi-vorschau').style.display = 'none';
+  document.getElementById('kombi-gesamt').style.display = 'none';
+}
+
 function eintragen() {
   const datum = document.getElementById('datum').value;
   if (!datum) { toast('Bitte Datum wählen', true); return; }
@@ -613,6 +681,20 @@ function eintragen() {
     eintrag = { datum, beginn: '', ende: '', kurs: 'Frei', sonderfahrt: '', pause: '' };
   }
 
+  if (bearbeitenIndex !== null) {
+    // Alten Eintrag als gelöscht markieren (damit Sync ihn nicht zurückholt)
+    const alter = eintraege[bearbeitenIndex];
+    const alterKey = `${alter.datum}|${alter.beginn}|${alter.kurs}`;
+    let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+    if (!geloescht.includes(alterKey)) geloescht.push(alterKey);
+    localStorage.setItem('geloescht', JSON.stringify(geloescht));
+    eintraege.splice(bearbeitenIndex, 1);
+    bearbeitenIndex = null;
+    document.getElementById('formular-titel').textContent = 'Neue Eintragung';
+    document.getElementById('speichern-btn').textContent = 'Speichern';
+    document.getElementById('abbrechen-btn').style.display = 'none';
+  }
+
   eintraege.push(eintrag);
   eintraege.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
   speichern();
@@ -623,20 +705,7 @@ function eintragen() {
   aktiverMonat = monatsKey(datum);
   zeigeAlles();
 
-  document.getElementById('kurs').value = '';
-  document.getElementById('vorschau').style.display = 'none';
-  document.getElementById('sonder-beginn').value = '';
-  document.getElementById('sonder-ende').value = '';
-  document.getElementById('sonder-art').value = '';
-  document.getElementById('sonder-pause').value = '';
-  document.getElementById('kombi-kurs').value = '';
-  document.getElementById('kombi-beginn').value = '';
-  document.getElementById('kombi-ende').value = '';
-  document.getElementById('kombi-art').value = '';
-  document.getElementById('kombi-pause').value = '';
-  document.getElementById('kombi-vorschau').style.display = 'none';
-  document.getElementById('kombi-gesamt').style.display = 'none';
-
+  formularZuruecksetzen();
   toast('Eintrag gespeichert');
   zeigeBackupStatus();
 }
@@ -645,6 +714,12 @@ function speichern() { localStorage.setItem('stundenzettel', JSON.stringify(eint
 
 function loeschen(originalIndex) {
   if (!confirm('Diesen Eintrag löschen?')) return;
+  const e = eintraege[originalIndex];
+  // Als gelöscht markieren statt wirklich löschen — damit Sync es weiß
+  const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+  let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+  if (!geloescht.includes(key)) geloescht.push(key);
+  localStorage.setItem('geloescht', JSON.stringify(geloescht));
   eintraege.splice(originalIndex, 1);
   speichern();
   zeigeAlles();
@@ -656,6 +731,13 @@ function monatLoeschen() {
   const imMonat = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (imMonat.length === 0) { toast('Monat ist leer', true); return; }
   if (!confirm(`Wirklich ALLE ${imMonat.length} Einträge im Monat ${aktiverMonat} löschen?`)) return;
+  // Alle als gelöscht markieren
+  let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+  imMonat.forEach(e => {
+    const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+    if (!geloescht.includes(key)) geloescht.push(key);
+  });
+  localStorage.setItem('geloescht', JSON.stringify(geloescht));
   eintraege = eintraege.filter(e => monatsKey(e.datum) !== aktiverMonat);
   speichern();
   zeigeAlles();
@@ -727,15 +809,16 @@ function zeigeTabelle() {
     const istFrei = e.kurs === 'Frei' || !e.beginn;
     const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
-    html += `<tr>
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
       <td>${datumKurz}</td>
       <td>${e.beginn || '—'}</td>
       <td>${e.ende || '—'}</td>
       <td class="std">${std}</td>
-      <td>${e.kurs}</td>
+      <td>${kursAnzeige}</td>
       <td>${e.sonderfahrt || '—'}</td>
       <td>${pauseAnzeige}</td>
-      <td class="actions"><button class="delete-btn" onclick="loeschen(${e.originalIndex})" title="Löschen">×</button></td>
+      <td class="actions"><button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button></td>
     </tr>`;
   });
   html += '</tbody></table>';
@@ -916,23 +999,33 @@ async function githubSync() {
     let remoteSha = null;
     let remoteEintraege = [];
 
+    let decoded = { eintraege: [], geloescht: [] };
     const getResp = await fetch(apiUrl, { headers });
     if (getResp.ok) {
       const remoteDaten = await getResp.json();
       remoteSha = remoteDaten.sha;
-      const decoded = JSON.parse(atob(remoteDaten.content.replace(/\n/g, '')));
+      decoded = JSON.parse(atob(remoteDaten.content.replace(/\n/g, '')));
       remoteEintraege = decoded.eintraege || [];
     } else if (getResp.status !== 404) {
       throw new Error(`GitHub Fehler: ${getResp.status}`);
     }
 
-    // 2. Zusammenführen: lokale + remote Einträge (Duplikate per datum+beginn+kurs filtern)
+    // 2. Zusammenführen mit Tombstone-Logik
+    let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+    // Remote gelöschte auch lokal übernehmen
+    const remoteGeloescht = decoded.geloescht || [];
+    remoteGeloescht.forEach(k => { if (!geloescht.includes(k)) geloescht.push(k); });
+    localStorage.setItem('geloescht', JSON.stringify(geloescht));
+
     const alle = [...eintraege, ...remoteEintraege];
     const einzigartig = [];
     const gesehen = new Set();
     alle.forEach(e => {
       const key = `${e.datum}|${e.beginn}|${e.kurs}`;
-      if (!gesehen.has(key)) { gesehen.add(key); einzigartig.push(e); }
+      if (!gesehen.has(key) && !geloescht.includes(key)) {
+        gesehen.add(key);
+        einzigartig.push(e);
+      }
     });
     einzigartig.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
 
@@ -940,7 +1033,8 @@ async function githubSync() {
     const inhalt = btoa(unescape(encodeURIComponent(JSON.stringify({
       version: 1,
       aktualisiert: new Date().toISOString(),
-      eintraege: einzigartig
+      eintraege: einzigartig,
+      geloescht: geloescht
     }, null, 2))));
 
     const putBody = {
