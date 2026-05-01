@@ -346,9 +346,11 @@
   <div class="card">
     <div class="card-title">Neue Eintragung</div>
 
-    <div class="toggle">
+    <div class="toggle" style="grid-template-columns:1fr 1fr 1fr 1fr;">
       <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
       <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
+      <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
+      <button id="btn-frei" onclick="setMode('frei')">Frei</button>
     </div>
 
     <div class="field">
@@ -381,10 +383,43 @@
         <label for="sonder-art">Art der Sonderfahrt</label>
         <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
       </div>
-      <div class="field">
+      <div id="sonder-pause-feld" class="field">
         <label for="sonder-pause">Pause (Minuten, optional)</label>
         <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30">
       </div>
+    </div>
+
+    <!-- Kombiniert: Kurs + Sonderfahrt -->
+    <div id="kombi-felder" style="display:none;">
+      <div class="field">
+        <label for="kombi-kurs">Kurs auswählen</label>
+        <select id="kombi-kurs" onchange="zeigeKombiVorschau()">
+          <option value="">— Kurs wählen —</option>
+        </select>
+      </div>
+      <div id="kombi-vorschau" class="preview" style="display:none;"></div>
+      <div style="margin:12px 0;border-top:1px solid #3a3f49;padding-top:12px;">
+        <label style="color:#f4a623;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt danach</label>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="kombi-beginn">Beginn Sonderfahrt</label>
+          <input type="time" id="kombi-beginn">
+        </div>
+        <div class="field">
+          <label for="kombi-ende">Ende Sonderfahrt</label>
+          <input type="time" id="kombi-ende">
+        </div>
+      </div>
+      <div class="field">
+        <label for="kombi-art">Art der Sonderfahrt</label>
+        <input type="text" id="kombi-art" placeholder="z.B. Schulausflug, Feuerwehr">
+      </div>
+      <div class="field">
+        <label for="kombi-pause">Pause Sonderfahrt (Minuten, optional)</label>
+        <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30">
+      </div>
+      <div id="kombi-gesamt" class="preview" style="display:none;"></div>
     </div>
 
     <button class="btn-primary" onclick="eintragen()">Speichern</button>
@@ -458,6 +493,9 @@ function init() {
     opt.value = nr;
     opt.textContent = `Kurs ${nr} (${KURSE[nr].beginn}–${KURSE[nr].ende}, ${KURSE[nr].tage})`;
     select.appendChild(opt);
+    // auch Kombi-Dropdown füllen
+    const opt2 = opt.cloneNode(true);
+    document.getElementById('kombi-kurs').appendChild(opt2);
   });
   // Aktiver Monat = aktueller Monat
   const d = new Date();
@@ -474,10 +512,13 @@ function monatsKey(datumStr) {
 
 function setMode(neuerModus) {
   modus = neuerModus;
-  document.getElementById('btn-kurs').classList.toggle('active', modus === 'kurs');
-  document.getElementById('btn-sonder').classList.toggle('active', modus === 'sonder');
+  ['kurs','sonder','kombi','frei'].forEach(m => {
+    const btn = document.getElementById(`btn-${m}`);
+    if (btn) btn.classList.toggle('active', modus === m);
+  });
   document.getElementById('kurs-felder').style.display = modus === 'kurs' ? 'block' : 'none';
   document.getElementById('sonder-felder').style.display = modus === 'sonder' ? 'block' : 'none';
+  document.getElementById('kombi-felder').style.display = modus === 'kombi' ? 'block' : 'none';
 }
 
 function zeigeVorschau() {
@@ -500,6 +541,34 @@ function berechneStunden(beginn, ende) {
   return min / 60;
 }
 
+function zeigeKombiVorschau() {
+  const nr = document.getElementById('kombi-kurs').value;
+  const v = document.getElementById('kombi-vorschau');
+  if (nr && KURSE[nr]) {
+    const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    v.style.display = 'block';
+    v.innerHTML = `Kurs ${nr}: <strong>${KURSE[nr].beginn}–${KURSE[nr].ende}</strong> · ${std.toFixed(2).replace('.',',')} h`;
+  } else {
+    v.style.display = 'none';
+  }
+  aktualisiereKombiGesamt();
+}
+
+function aktualisiereKombiGesamt() {
+  const nr = document.getElementById('kombi-kurs').value;
+  const sonderBeginn = document.getElementById('kombi-beginn').value;
+  const sonderEnde = document.getElementById('kombi-ende').value;
+  const g = document.getElementById('kombi-gesamt');
+  if (nr && sonderBeginn && sonderEnde) {
+    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std2 = berechneStunden(sonderBeginn, sonderEnde);
+    g.style.display = 'block';
+    g.innerHTML = `Gesamt: <strong>${KURSE[nr].beginn} – ${sonderEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
+  } else {
+    g.style.display = 'none';
+  }
+}
+
 function eintragen() {
   const datum = document.getElementById('datum').value;
   if (!datum) { toast('Bitte Datum wählen', true); return; }
@@ -509,14 +578,39 @@ function eintragen() {
     const nr = document.getElementById('kurs').value;
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
     eintrag = { datum, beginn: KURSE[nr].beginn, ende: KURSE[nr].ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '' };
-  } else {
+
+  } else if (modus === 'sonder') {
     const beginn = document.getElementById('sonder-beginn').value;
     const ende = document.getElementById('sonder-ende').value;
     const art = document.getElementById('sonder-art').value.trim();
     const pause = document.getElementById('sonder-pause').value.trim();
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
-    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause: pause };
+    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause };
+
+  } else if (modus === 'kombi') {
+    const nr = document.getElementById('kombi-kurs').value;
+    const sBeginn = document.getElementById('kombi-beginn').value;
+    const sEnde = document.getElementById('kombi-ende').value;
+    const sArt = document.getElementById('kombi-art').value.trim();
+    const sPause = document.getElementById('kombi-pause').value.trim();
+    if (!nr) { toast('Bitte Kurs wählen', true); return; }
+    if (!sBeginn || !sEnde) { toast('Bitte Beginn und Ende der Sonderfahrt eingeben', true); return; }
+    if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
+    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std2 = berechneStunden(sBeginn, sEnde);
+    eintrag = {
+      datum,
+      beginn: KURSE[nr].beginn,
+      ende: sEnde,
+      kurs: `Kurs ${nr} + ${sArt}`,
+      sonderfahrt: sArt,
+      pause: sPause,
+      extraStunden: std1 + std2  // gespeichert für korrekte Berechnung
+    };
+
+  } else if (modus === 'frei') {
+    eintrag = { datum, beginn: '', ende: '', kurs: 'Frei', sonderfahrt: '', pause: '' };
   }
 
   eintraege.push(eintrag);
@@ -535,6 +629,13 @@ function eintragen() {
   document.getElementById('sonder-ende').value = '';
   document.getElementById('sonder-art').value = '';
   document.getElementById('sonder-pause').value = '';
+  document.getElementById('kombi-kurs').value = '';
+  document.getElementById('kombi-beginn').value = '';
+  document.getElementById('kombi-ende').value = '';
+  document.getElementById('kombi-art').value = '';
+  document.getElementById('kombi-pause').value = '';
+  document.getElementById('kombi-vorschau').style.display = 'none';
+  document.getElementById('kombi-gesamt').style.display = 'none';
 
   toast('Eintrag gespeichert');
   zeigeBackupStatus();
@@ -604,8 +705,12 @@ function zeigeTabelle() {
     if (monatsKey(e.datum) === aktiverMonat) monatsEintraege.push({ ...e, originalIndex: i });
   });
 
-  // Stunden-Summe
-  const summe = monatsEintraege.reduce((s, e) => s + berechneStunden(e.beginn, e.ende), 0);
+  // Stunden-Summe (Frei = 0, Kombi = extraStunden)
+  const summe = monatsEintraege.reduce((s, e) => {
+    if (e.kurs === 'Frei' || !e.beginn || !e.ende) return s;
+    if (e.extraStunden !== undefined) return s + e.extraStunden;
+    return s + berechneStunden(e.beginn, e.ende);
+  }, 0);
   document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
   document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
   info.style.display = 'flex';
@@ -619,12 +724,13 @@ function zeigeTabelle() {
   monatsEintraege.forEach(e => {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
-    const std = berechneStunden(e.beginn, e.ende).toFixed(2).replace('.', ',');
+    const istFrei = e.kurs === 'Frei' || !e.beginn;
+    const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
     html += `<tr>
       <td>${datumKurz}</td>
-      <td>${e.beginn}</td>
-      <td>${e.ende}</td>
+      <td>${e.beginn || '—'}</td>
+      <td>${e.ende || '—'}</td>
       <td class="std">${std}</td>
       <td>${e.kurs}</td>
       <td>${e.sonderfahrt || '—'}</td>
@@ -644,7 +750,9 @@ function exportMonatCSV() {
   const zeilen = monatsEintraege.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
+    const istFrei = e.kurs === 'Frei' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
+    if (istFrei) return `${datumDE};;;Frei;;`;
     return `${datumDE};${e.beginn};${e.ende};${e.kurs};${e.sonderfahrt};${pauseWert}`;
   }).join('\n');
   const csv = header + zeilen;
