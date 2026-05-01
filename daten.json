@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T16:14:42.582Z",
+  "aktualisiert": "2026-05-01T16:44:06.359Z",
   "eintraege": [
     {
       "datum": "2026-03-12",
@@ -134,7 +134,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof VerstÃÂ¤rker",
       "pause": "180"
     },
     {
@@ -209,5 +209,6 @@
       "sonderfahrt": "Busreinigung 444",
       "pause": ""
     }
-  ]
+  ],
+  "geloescht": []
 }
