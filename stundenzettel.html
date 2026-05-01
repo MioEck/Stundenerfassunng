@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stundenzettel — Riesebyer Kreutzer</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f4a623">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Stundenzettel">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #1a1d23;
+    color: #e8e6e1;
+    min-height: 100vh;
+    padding: 16px;
+    line-height: 1.5;
+  }
+  .container { max-width: 720px; margin: 0 auto; }
+  header {
+    border-bottom: 2px solid #f4a623;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .subtitle { font-size: 13px; color: #8a8680; margin-top: 4px; }
+
+  .card {
+    background: #242830;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid #2f343d;
+  }
+  .card-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #f4a623;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  label {
+    display: block;
+    font-size: 13px;
+    color: #a8a49d;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  input, select {
+    width: 100%;
+    padding: 12px 14px;
+    background: #1a1d23;
+    border: 1px solid #3a3f49;
+    border-radius: 8px;
+    color: #e8e6e1;
+    font-size: 16px;
+    font-family: inherit;
+  }
+  input:focus, select:focus { outline: none; border-color: #f4a623; }
+  .field { margin-bottom: 14px; }
+
+  .toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .toggle button {
+    padding: 14px;
+    background: #1a1d23;
+    border: 1px solid #3a3f49;
+    border-radius: 8px;
+    color: #a8a49d;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .toggle button.active {
+    background: #f4a623;
+    border-color: #f4a623;
+    color: #1a1d23;
+  }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: #f4a623;
+    color: #1a1d23;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .btn-primary:hover { background: #ffb733; }
+
+  .btn-secondary {
+    padding: 10px 14px;
+    background: transparent;
+    color: #a8a49d;
+    border: 1px solid #3a3f49;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { color: #e8e6e1; border-color: #5a5f69; }
+  .btn-danger { color: #e87a5d; border-color: #4a2f29; }
+  .btn-danger:hover { color: #ff8a6d; border-color: #6a3f39; }
+
+  .preview {
+    background: #1a1d23;
+    border-radius: 6px;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #a8a49d;
+    border-left: 3px solid #f4a623;
+  }
+  .preview strong { color: #e8e6e1; }
+
+  /* Monats-Tabs */
+  .tabs-wrapper {
+    overflow-x: auto;
+    margin-bottom: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding-bottom: 4px;
+    min-width: max-content;
+  }
+  .tab {
+    padding: 10px 16px;
+    background: #242830;
+    border: 1px solid #2f343d;
+    border-radius: 6px;
+    color: #a8a49d;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: #f4a623;
+    border-color: #f4a623;
+    color: #1a1d23;
+  }
+  .tab .badge {
+    margin-left: 6px;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .monat-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #1a1d23;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  .monat-info .label { color: #8a8680; }
+  .monat-info .wert { color: #f4a623; font-weight: 700; font-size: 15px; }
+
+  .entries-actions {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left;
+    padding: 8px 6px;
+    color: #8a8680;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #3a3f49;
+  }
+  td {
+    padding: 10px 6px;
+    border-bottom: 1px solid #2f343d;
+    color: #e8e6e1;
+  }
+  td.std { color: #f4a623; font-weight: 600; }
+  td.actions { text-align: right; }
+  .delete-btn {
+    background: none;
+    border: none;
+    color: #6a6660;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 16px;
+  }
+  .delete-btn:hover { color: #e87a5d; }
+
+  .empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: #6a6660;
+    font-size: 14px;
+  }
+
+  .backup-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #2a2530;
+    border: 1px solid #4a3a2a;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #c8c4bd;
+  }
+  .backup-bar.warn { background: #3a2520; border-color: #6a3520; color: #ffb733; }
+
+  .sync-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #1e2430;
+    border: 1px solid #2a3a5a;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #8a9abd;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .sync-bar.ok { border-color: #2a5a3a; background: #1e2a1e; color: #7ab48a; }
+  .sync-bar.warn { border-color: #6a3520; background: #3a2520; color: #ffb733; }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4a5a7a; flex-shrink: 0; }
+  .sync-dot.ok { background: #2a8d3a; }
+  .sync-dot.warn { background: #f4a623; }
+
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: none; align-items: center; justify-content: center;
+    z-index: 200; padding: 16px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #242830; border-radius: 12px; padding: 24px;
+    max-width: 480px; width: 100%; border: 1px solid #3a3f49;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { color: #f4a623; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+  .modal p { font-size: 13px; color: #a8a49d; margin-bottom: 10px; }
+  .modal-buttons { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; flex-wrap: wrap; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2a8d3a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 100;
+    max-width: 90%;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 480px) {
+    .row { grid-template-columns: 1fr; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>Stundenzettel</h1>
+      <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
+    </div>
+  </header>
+
+  <div id="sync-bar" class="sync-bar">
+    <div style="display:flex;align-items:center;gap:8px;flex:1;">
+      <div id="sync-dot" class="sync-dot"></div>
+      <span id="sync-text">GitHub Sync nicht eingerichtet — tippe auf ⚙</span>
+    </div>
+    <button class="btn-secondary" style="padding:6px 10px;font-size:12px;" onclick="zeigeSync()">⚙</button>
+  </div>
+
+  <div id="backup-bar" class="backup-bar" style="display:none;">
+    <span id="backup-text">Letzte Sicherung: noch nie</span>
+  </div>
+
+  <!-- Sync-Einstellungen Modal -->
+  <div id="sync-modal" class="modal-overlay">
+    <div class="modal">
+      <h3>GitHub Sync einrichten</h3>
+      <p>Damit beide Geräte denselben Datenstand haben, werden die Einträge in deinem GitHub-Repo gespeichert.</p>
+      <div class="field">
+        <label for="sync-token">GitHub Token</label>
+        <input type="password" id="sync-token" placeholder="ghp_...">
+      </div>
+      <div class="field">
+        <label for="sync-repo">GitHub Benutzername/Repo</label>
+        <input type="text" id="sync-repo" placeholder="MioEck/Stundenerfassung">
+      </div>
+      <p style="font-size:12px;color:#6a6660;">Der Token wird nur lokal auf diesem Gerät gespeichert und nirgendwo übertragen außer zu GitHub.</p>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="schliesseSync()">Abbrechen</button>
+        <button class="btn-secondary btn-danger" onclick="syncTrennen()">Trennen</button>
+        <button class="btn-primary" style="width:auto;padding:10px 20px;margin:0;" onclick="syncSpeichern()">Speichern</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" id="formular-titel">Neue Eintragung</div>
+
+    <div class="toggle" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+      <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
+      <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
+      <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
+      <button id="btn-frei" onclick="setMode('frei')">Frei</button>
+    </div>
+
+    <div class="field">
+      <label for="datum">Datum</label>
+      <input type="date" id="datum">
+    </div>
+
+    <div id="kurs-felder">
+      <div class="field">
+        <label for="kurs">Kurs auswählen</label>
+        <select id="kurs" onchange="zeigeVorschau()">
+          <option value="">— Kurs wählen —</option>
+        </select>
+      </div>
+      <div id="vorschau" class="preview" style="display:none;"></div>
+    </div>
+
+    <div id="sonder-felder" style="display:none;">
+      <div class="row">
+        <div class="field">
+          <label for="sonder-beginn">Beginn</label>
+          <input type="time" id="sonder-beginn">
+        </div>
+        <div class="field">
+          <label for="sonder-ende">Ende</label>
+          <input type="time" id="sonder-ende">
+        </div>
+      </div>
+      <div class="field">
+        <label for="sonder-art">Art der Sonderfahrt</label>
+        <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
+      </div>
+      <div id="sonder-pause-feld" class="field">
+        <label for="sonder-pause">Pause (Minuten, optional)</label>
+        <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30">
+      </div>
+    </div>
+
+    <!-- Kombiniert: Kurs + Sonderfahrt -->
+    <div id="kombi-felder" style="display:none;">
+      <div class="field">
+        <label for="kombi-kurs">Kurs auswählen</label>
+        <select id="kombi-kurs" onchange="zeigeKombiVorschau()">
+          <option value="">— Kurs wählen —</option>
+        </select>
+      </div>
+      <div id="kombi-vorschau" class="preview" style="display:none;"></div>
+      <div style="margin:12px 0;border-top:1px solid #3a3f49;padding-top:12px;">
+        <label style="color:#f4a623;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt danach</label>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="kombi-beginn">Beginn Sonderfahrt</label>
+          <input type="time" id="kombi-beginn">
+        </div>
+        <div class="field">
+          <label for="kombi-ende">Ende Sonderfahrt</label>
+          <input type="time" id="kombi-ende">
+        </div>
+      </div>
+      <div class="field">
+        <label for="kombi-art">Art der Sonderfahrt</label>
+        <input type="text" id="kombi-art" placeholder="z.B. Schulausflug, Feuerwehr">
+      </div>
+      <div class="field">
+        <label for="kombi-pause">Pause Sonderfahrt (Minuten, optional)</label>
+        <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30">
+      </div>
+      <div id="kombi-gesamt" class="preview" style="display:none;"></div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <button class="btn-primary" id="speichern-btn" onclick="eintragen()" style="flex:1;">Speichern</button>
+      <button id="abbrechen-btn" class="btn-secondary" onclick="bearbeitenAbbrechen()" style="display:none;padding:16px 20px;">✕</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Monatsübersicht</div>
+
+    <div class="tabs-wrapper">
+      <div id="tabs" class="tabs"></div>
+    </div>
+
+    <div id="monat-info" class="monat-info" style="display:none;">
+      <div>
+        <div class="label">Einträge</div>
+        <div class="wert"><span id="anzahl-monat">0</span></div>
+      </div>
+      <div>
+        <div class="label">Gesamtstunden</div>
+        <div class="wert"><span id="stunden-monat">0,00</span> h</div>
+      </div>
+    </div>
+
+    <div class="entries-actions">
+      <button class="btn-secondary" onclick="githubSync()">☁ Sync</button>
+      <button class="btn-secondary" onclick="exportMonatCSV()">CSV (Monat)</button>
+      <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup</button>
+      <button class="btn-secondary" onclick="backupLaden()">📥 Backup laden</button>
+      <button class="btn-secondary btn-danger" onclick="monatLoeschen()">Monat löschen</button>
+    </div>
+
+    <input type="file" id="backup-input" accept=".json" style="display:none;" onchange="backupDateiVerarbeiten(event)">
+
+    <div id="tabelle-container"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const KURSE = {
+  "211": { beginn: "04:27", ende: "08:53", tage: "Mo-Fr Schulzeit" },
+  "212": { beginn: "04:38", ende: "08:23", tage: "Mo-Fr Schulzeit" },
+  "213": { beginn: "06:01", ende: "15:32", tage: "Mo-Fr Schulzeit" },
+  "214": { beginn: "06:13", ende: "17:00", tage: "Mo-Fr Schulzeit" },
+  "215": { beginn: "06:40", ende: "18:08", tage: "Mo-Fr Schulzeit" },
+  "216": { beginn: "11:56", ende: "23:18", tage: "Mo-Fr Schulzeit" },
+  "217": { beginn: "12:43", ende: "23:40", tage: "Mo-Fr" },
+  "611": { beginn: "05:30", ende: "14:55", tage: "Sa ganzjährig" },
+  "613": { beginn: "14:40", ende: "22:25", tage: "Sa ganzjährig" },
+  "811": { beginn: "07:49", ende: "20:25", tage: "So ganzjährig" }
+};
+
+const MONATE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+let modus = 'kurs';
+let bearbeitenIndex = null; // null = neuer Eintrag, sonst Index des zu bearbeitenden
+let eintraege = JSON.parse(localStorage.getItem('stundenzettel') || '[]');
+let aktiverMonat = null;
+let letztesBackup = localStorage.getItem('letztesBackup') || null;
+let eintraegeSeitBackup = parseInt(localStorage.getItem('eintraegeSeitBackup') || '0');
+let syncToken = localStorage.getItem('syncToken') || '';
+let syncRepo = localStorage.getItem('syncRepo') || '';
+let letzterSync = localStorage.getItem('letzterSync') || null;
+
+function init() {
+  const heute = new Date().toISOString().split('T')[0];
+  document.getElementById('datum').value = heute;
+  const select = document.getElementById('kurs');
+  Object.keys(KURSE).forEach(nr => {
+    const opt = document.createElement('option');
+    opt.value = nr;
+    opt.textContent = `Kurs ${nr} (${KURSE[nr].beginn}–${KURSE[nr].ende}, ${KURSE[nr].tage})`;
+    select.appendChild(opt);
+    // auch Kombi-Dropdown füllen
+    const opt2 = opt.cloneNode(true);
+    document.getElementById('kombi-kurs').appendChild(opt2);
+  });
+  // Aktiver Monat = aktueller Monat
+  const d = new Date();
+  aktiverMonat = monatsKey(d.toISOString().split('T')[0]);
+  aktualisiereSync();
+  zeigeBackupStatus();
+  zeigeAlles();
+}
+
+function monatsKey(datumStr) {
+  const d = new Date(datumStr);
+  return `${MONATE[d.getMonth()]}${String(d.getFullYear()).slice(-2)}`;
+}
+
+function setMode(neuerModus) {
+  modus = neuerModus;
+  ['kurs','sonder','kombi','frei'].forEach(m => {
+    const btn = document.getElementById(`btn-${m}`);
+    if (btn) btn.classList.toggle('active', modus === m);
+  });
+  document.getElementById('kurs-felder').style.display = modus === 'kurs' ? 'block' : 'none';
+  document.getElementById('sonder-felder').style.display = modus === 'sonder' ? 'block' : 'none';
+  document.getElementById('kombi-felder').style.display = modus === 'kombi' ? 'block' : 'none';
+}
+
+function zeigeVorschau() {
+  const nr = document.getElementById('kurs').value;
+  const v = document.getElementById('vorschau');
+  if (nr && KURSE[nr]) {
+    const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    v.style.display = 'block';
+    v.innerHTML = `Beginn: <strong>${KURSE[nr].beginn}</strong> · Ende: <strong>${KURSE[nr].ende}</strong> · Dauer: <strong>${std.toFixed(2).replace('.',',')} h</strong>`;
+  } else {
+    v.style.display = 'none';
+  }
+}
+
+function berechneStunden(beginn, ende) {
+  const [bh, bm] = beginn.split(':').map(Number);
+  const [eh, em] = ende.split(':').map(Number);
+  let min = (eh * 60 + em) - (bh * 60 + bm);
+  if (min < 0) min += 24 * 60; // über Mitternacht
+  return min / 60;
+}
+
+function zeigeKombiVorschau() {
+  const nr = document.getElementById('kombi-kurs').value;
+  const v = document.getElementById('kombi-vorschau');
+  if (nr && KURSE[nr]) {
+    const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    v.style.display = 'block';
+    v.innerHTML = `Kurs ${nr}: <strong>${KURSE[nr].beginn}–${KURSE[nr].ende}</strong> · ${std.toFixed(2).replace('.',',')} h`;
+  } else {
+    v.style.display = 'none';
+  }
+  aktualisiereKombiGesamt();
+}
+
+function aktualisiereKombiGesamt() {
+  const nr = document.getElementById('kombi-kurs').value;
+  const sonderBeginn = document.getElementById('kombi-beginn').value;
+  const sonderEnde = document.getElementById('kombi-ende').value;
+  const g = document.getElementById('kombi-gesamt');
+  if (nr && sonderBeginn && sonderEnde) {
+    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std2 = berechneStunden(sonderBeginn, sonderEnde);
+    g.style.display = 'block';
+    g.innerHTML = `Gesamt: <strong>${KURSE[nr].beginn} – ${sonderEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
+  } else {
+    g.style.display = 'none';
+  }
+}
+
+function bearbeiten(originalIndex) {
+  const e = eintraege[originalIndex];
+  bearbeitenIndex = originalIndex;
+  document.getElementById('formular-titel').textContent = 'Eintrag bearbeiten';
+  document.getElementById('speichern-btn').textContent = 'Änderung speichern';
+  document.getElementById('abbrechen-btn').style.display = 'block';
+  document.getElementById('datum').value = e.datum;
+
+  // Modus erkennen
+  if (e.kurs === 'Frei') {
+    setMode('frei');
+  } else if (e.kurs === 'Sonderfahrt') {
+    setMode('sonder');
+    document.getElementById('sonder-beginn').value = e.beginn;
+    document.getElementById('sonder-ende').value = e.ende;
+    document.getElementById('sonder-art').value = e.sonderfahrt;
+    document.getElementById('sonder-pause').value = e.pause || '';
+  } else if (e.extraStunden !== undefined) {
+    // Kombi — Kurs aus kurs-Feld extrahieren (z.B. "Kurs 211 + Schulausflug")
+    setMode('kombi');
+    const kursnr = e.kurs.match(/Kurs (\d+)/)?.[1] || '';
+    document.getElementById('kombi-kurs').value = kursnr;
+    document.getElementById('kombi-beginn').value = e.beginn; // Sonderfahrt-Beginn
+    document.getElementById('kombi-ende').value = e.ende;
+    document.getElementById('kombi-art').value = e.sonderfahrt;
+    document.getElementById('kombi-pause').value = e.pause || '';
+    zeigeKombiVorschau();
+  } else {
+    setMode('kurs');
+    const kursnr = e.kurs.replace('Kurs ', '');
+    document.getElementById('kurs').value = kursnr;
+    zeigeVorschau();
+  }
+
+  // Zum Formular scrollen
+  document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
+}
+
+function bearbeitenAbbrechen() {
+  bearbeitenIndex = null;
+  document.getElementById('formular-titel').textContent = 'Neue Eintragung';
+  document.getElementById('speichern-btn').textContent = 'Speichern';
+  document.getElementById('abbrechen-btn').style.display = 'none';
+  formularZuruecksetzen();
+  setMode('kurs');
+}
+
+function formularZuruecksetzen() {
+  document.getElementById('datum').value = new Date().toISOString().split('T')[0];
+  document.getElementById('kurs').value = '';
+  document.getElementById('vorschau').style.display = 'none';
+  document.getElementById('sonder-beginn').value = '';
+  document.getElementById('sonder-ende').value = '';
+  document.getElementById('sonder-art').value = '';
+  document.getElementById('sonder-pause').value = '';
+  document.getElementById('kombi-kurs').value = '';
+  document.getElementById('kombi-beginn').value = '';
+  document.getElementById('kombi-ende').value = '';
+  document.getElementById('kombi-art').value = '';
+  document.getElementById('kombi-pause').value = '';
+  document.getElementById('kombi-vorschau').style.display = 'none';
+  document.getElementById('kombi-gesamt').style.display = 'none';
+}
+
+function eintragen() {
+  const datum = document.getElementById('datum').value;
+  if (!datum) { toast('Bitte Datum wählen', true); return; }
+
+  let eintrag;
+  if (modus === 'kurs') {
+    const nr = document.getElementById('kurs').value;
+    if (!nr) { toast('Bitte Kurs wählen', true); return; }
+    eintrag = { datum, beginn: KURSE[nr].beginn, ende: KURSE[nr].ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '' };
+
+  } else if (modus === 'sonder') {
+    const beginn = document.getElementById('sonder-beginn').value;
+    const ende = document.getElementById('sonder-ende').value;
+    const art = document.getElementById('sonder-art').value.trim();
+    const pause = document.getElementById('sonder-pause').value.trim();
+    if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
+    if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
+    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause };
+
+  } else if (modus === 'kombi') {
+    const nr = document.getElementById('kombi-kurs').value;
+    const sBeginn = document.getElementById('kombi-beginn').value;
+    const sEnde = document.getElementById('kombi-ende').value;
+    const sArt = document.getElementById('kombi-art').value.trim();
+    const sPause = document.getElementById('kombi-pause').value.trim();
+    if (!nr) { toast('Bitte Kurs wählen', true); return; }
+    if (!sBeginn || !sEnde) { toast('Bitte Beginn und Ende der Sonderfahrt eingeben', true); return; }
+    if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
+    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std2 = berechneStunden(sBeginn, sEnde);
+    eintrag = {
+      datum,
+      beginn: KURSE[nr].beginn,
+      ende: sEnde,
+      kurs: `Kurs ${nr} + ${sArt}`,
+      sonderfahrt: sArt,
+      pause: sPause,
+      extraStunden: std1 + std2  // gespeichert für korrekte Berechnung
+    };
+
+  } else if (modus === 'frei') {
+    eintrag = { datum, beginn: '', ende: '', kurs: 'Frei', sonderfahrt: '', pause: '' };
+  }
+
+  if (bearbeitenIndex !== null) {
+    // Alten Eintrag als gelöscht markieren (damit Sync ihn nicht zurückholt)
+    const alter = eintraege[bearbeitenIndex];
+    const alterKey = `${alter.datum}|${alter.beginn}|${alter.kurs}`;
+    let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+    if (!geloescht.includes(alterKey)) geloescht.push(alterKey);
+    localStorage.setItem('geloescht', JSON.stringify(geloescht));
+    eintraege.splice(bearbeitenIndex, 1);
+    bearbeitenIndex = null;
+    document.getElementById('formular-titel').textContent = 'Neue Eintragung';
+    document.getElementById('speichern-btn').textContent = 'Speichern';
+    document.getElementById('abbrechen-btn').style.display = 'none';
+  }
+
+  eintraege.push(eintrag);
+  eintraege.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+  speichern();
+  eintraegeSeitBackup++;
+  localStorage.setItem('eintraegeSeitBackup', eintraegeSeitBackup);
+
+  // Auf Monat des neuen Eintrags wechseln
+  aktiverMonat = monatsKey(datum);
+  zeigeAlles();
+
+  formularZuruecksetzen();
+  toast('Eintrag gespeichert');
+  zeigeBackupStatus();
+}
+
+function speichern() { localStorage.setItem('stundenzettel', JSON.stringify(eintraege)); }
+
+function loeschen(originalIndex) {
+  if (!confirm('Diesen Eintrag löschen?')) return;
+  const e = eintraege[originalIndex];
+  // Als gelöscht markieren statt wirklich löschen — damit Sync es weiß
+  const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+  let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+  if (!geloescht.includes(key)) geloescht.push(key);
+  localStorage.setItem('geloescht', JSON.stringify(geloescht));
+  eintraege.splice(originalIndex, 1);
+  speichern();
+  zeigeAlles();
+  toast('Eintrag gelöscht');
+}
+
+function monatLoeschen() {
+  if (!aktiverMonat) return;
+  const imMonat = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
+  if (imMonat.length === 0) { toast('Monat ist leer', true); return; }
+  if (!confirm(`Wirklich ALLE ${imMonat.length} Einträge im Monat ${aktiverMonat} löschen?`)) return;
+  // Alle als gelöscht markieren
+  let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+  imMonat.forEach(e => {
+    const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+    if (!geloescht.includes(key)) geloescht.push(key);
+  });
+  localStorage.setItem('geloescht', JSON.stringify(geloescht));
+  eintraege = eintraege.filter(e => monatsKey(e.datum) !== aktiverMonat);
+  speichern();
+  zeigeAlles();
+  toast(`Monat ${aktiverMonat} gelöscht`);
+}
+
+function zeigeAlles() {
+  zeigeTabs();
+  zeigeTabelle();
+}
+
+function zeigeTabs() {
+  const tabs = document.getElementById('tabs');
+  // Alle vorhandenen Monate sammeln
+  const monate = [...new Set(eintraege.map(e => monatsKey(e.datum)))];
+  // Aktuellen Monat hinzufügen falls nicht vorhanden
+  const heuteMonat = monatsKey(new Date().toISOString().split('T')[0]);
+  if (!monate.includes(heuteMonat)) monate.push(heuteMonat);
+  // Falls aktiver Monat noch nicht in der Liste (z.B. nach Löschen), aktiven Monat hinzufügen
+  if (aktiverMonat && !monate.includes(aktiverMonat)) monate.push(aktiverMonat);
+  // Sortieren chronologisch
+  monate.sort((a, b) => {
+    const ay = parseInt(a.slice(-2)), by = parseInt(b.slice(-2));
+    if (ay !== by) return ay - by;
+    const am = MONATE.indexOf(a.slice(0, -2)), bm = MONATE.indexOf(b.slice(0, -2));
+    return am - bm;
+  });
+
+  tabs.innerHTML = '';
+  monate.forEach(m => {
+    const anzahl = eintraege.filter(e => monatsKey(e.datum) === m).length;
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (m === aktiverMonat ? ' active' : '');
+    btn.innerHTML = `${m}${anzahl > 0 ? `<span class="badge">${anzahl}</span>` : ''}`;
+    btn.onclick = () => { aktiverMonat = m; zeigeAlles(); };
+    tabs.appendChild(btn);
+  });
+}
+
+function zeigeTabelle() {
+  const c = document.getElementById('tabelle-container');
+  const info = document.getElementById('monat-info');
+
+  // Einträge des aktiven Monats mit Original-Index
+  const monatsEintraege = [];
+  eintraege.forEach((e, i) => {
+    if (monatsKey(e.datum) === aktiverMonat) monatsEintraege.push({ ...e, originalIndex: i });
+  });
+
+  // Stunden-Summe (Frei = 0, Kombi = extraStunden)
+  const summe = monatsEintraege.reduce((s, e) => {
+    if (e.kurs === 'Frei' || !e.beginn || !e.ende) return s;
+    if (e.extraStunden !== undefined) return s + e.extraStunden;
+    return s + berechneStunden(e.beginn, e.ende);
+  }, 0);
+  document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
+  document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
+  info.style.display = 'flex';
+
+  if (monatsEintraege.length === 0) {
+    c.innerHTML = `<div class="empty">Keine Einträge im Monat ${aktiverMonat}.<br>Trage oben deinen ersten Kurs ein.</div>`;
+    return;
+  }
+
+  let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th></th></tr></thead><tbody>`;
+  monatsEintraege.forEach(e => {
+    const d = new Date(e.datum);
+    const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
+    const istFrei = e.kurs === 'Frei' || !e.beginn;
+    const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
+    const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
+      <td>${datumKurz}</td>
+      <td>${e.beginn || '—'}</td>
+      <td>${e.ende || '—'}</td>
+      <td class="std">${std}</td>
+      <td>${kursAnzeige}</td>
+      <td>${e.sonderfahrt || '—'}</td>
+      <td>${pauseAnzeige}</td>
+      <td class="actions"><button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button></td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  c.innerHTML = html;
+}
+
+function exportMonatCSV() {
+  const monatsEintraege = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
+  if (monatsEintraege.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
+
+  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause\n';
+  const zeilen = monatsEintraege.map(e => {
+    const d = new Date(e.datum);
+    const datumDE = d.toLocaleDateString('de-DE');
+    const istFrei = e.kurs === 'Frei' || !e.beginn;
+    const pauseWert = e.pause ? `${e.pause} min` : '';
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    if (istFrei) return `${datumDE};;;—;;`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert}`;
+  }).join('\n');
+  const csv = header + zeilen;
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `stundenzettel_${aktiverMonat}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+  toast('CSV exportiert');
+}
+
+function backupSpeichern() {
+  if (eintraege.length === 0) { toast('Keine Einträge zum Sichern', true); return; }
+
+  const backup = {
+    version: 1,
+    erstellt: new Date().toISOString(),
+    eintraege: eintraege
+  };
+  const json = JSON.stringify(backup, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const datum = new Date().toISOString().split('T')[0];
+  const dateiname = `stundenzettel_backup_${datum}.json`;
+
+  // Web Share API für Android (öffnet Teilen-Dialog mit Drive-Option)
+  if (navigator.canShare && navigator.canShare({ files: [new File([blob], dateiname, { type: 'application/json' })] })) {
+    const file = new File([blob], dateiname, { type: 'application/json' });
+    navigator.share({
+      files: [file],
+      title: 'Stundenzettel Backup',
+      text: 'Backup vom ' + new Date().toLocaleDateString('de-DE')
+    }).then(() => {
+      backupErfolgreich();
+    }).catch(err => {
+      if (err.name !== 'AbortError') {
+        // Fallback: Download
+        downloadBackup(blob, dateiname);
+      }
+    });
+  } else {
+    // Fallback für Browser ohne Share API
+    downloadBackup(blob, dateiname);
+  }
+}
+
+function downloadBackup(blob, dateiname) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = dateiname;
+  link.click();
+  URL.revokeObjectURL(url);
+  backupErfolgreich();
+  toast('Backup heruntergeladen — bitte in Drive speichern');
+}
+
+function backupErfolgreich() {
+  letztesBackup = new Date().toISOString();
+  eintraegeSeitBackup = 0;
+  localStorage.setItem('letztesBackup', letztesBackup);
+  localStorage.setItem('eintraegeSeitBackup', '0');
+  zeigeBackupStatus();
+}
+
+function backupLaden() {
+  document.getElementById('backup-input').click();
+}
+
+function backupDateiVerarbeiten(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const backup = JSON.parse(e.target.result);
+      if (!backup.eintraege || !Array.isArray(backup.eintraege)) {
+        toast('Ungültige Backup-Datei', true);
+        return;
+      }
+      const erstellt = backup.erstellt ? new Date(backup.erstellt).toLocaleDateString('de-DE') : 'unbekannt';
+      if (!confirm(`Backup vom ${erstellt} mit ${backup.eintraege.length} Einträgen laden?\n\nACHTUNG: Aktuelle Einträge (${eintraege.length}) werden ersetzt!`)) {
+        event.target.value = '';
+        return;
+      }
+      eintraege = backup.eintraege;
+      speichern();
+      zeigeAlles();
+      toast(`${backup.eintraege.length} Einträge geladen`);
+    } catch (err) {
+      toast('Fehler beim Lesen der Datei', true);
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function zeigeBackupStatus() {
+  const bar = document.getElementById('backup-bar');
+  const text = document.getElementById('backup-text');
+
+  if (eintraege.length === 0) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  bar.style.display = 'flex';
+  bar.classList.remove('warn');
+
+  if (!letztesBackup) {
+    text.textContent = `⚠ Noch nie gesichert (${eintraege.length} Einträge)`;
+    bar.classList.add('warn');
+  } else {
+    const datum = new Date(letztesBackup).toLocaleDateString('de-DE');
+    if (eintraegeSeitBackup >= 10) {
+      text.textContent = `⚠ ${eintraegeSeitBackup} neue Einträge seit letzter Sicherung (${datum})`;
+      bar.classList.add('warn');
+    } else if (eintraegeSeitBackup > 0) {
+      text.textContent = `Letzte Sicherung: ${datum} · ${eintraegeSeitBackup} neue Einträge`;
+    } else {
+      text.textContent = `Letzte Sicherung: ${datum} ✓`;
+    }
+  }
+}
+
+// ─── GitHub Sync ──────────────────────────────────────────────
+function aktualisiereSync() {
+  const bar = document.getElementById('sync-bar');
+  const dot = document.getElementById('sync-dot');
+  const text = document.getElementById('sync-text');
+  dot.classList.remove('ok', 'warn');
+  if (!syncToken || !syncRepo) {
+    text.textContent = 'GitHub Sync nicht eingerichtet — tippe auf ⚙';
+    return;
+  }
+  dot.classList.add('ok');
+  const zeit = letzterSync ? new Date(letzterSync).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'noch nie';
+  text.textContent = `Sync: ${syncRepo} · Zuletzt: ${zeit}`;
+}
+
+async function githubSync() {
+  if (!syncToken || !syncRepo) {
+    toast('Erst GitHub Sync einrichten (⚙ Knopf)', true);
+    zeigeSync();
+    return;
+  }
+
+  const syncBtn = document.querySelector('[onclick="githubSync()"]');
+  if (syncBtn) syncBtn.textContent = '⏳ Sync...';
+
+  try {
+    // 1. Aktuelle Datei von GitHub holen (falls vorhanden)
+    const apiUrl = `https://api.github.com/repos/${syncRepo}/contents/daten.json`;
+    const headers = {
+      'Authorization': `token ${syncToken}`,
+      'Accept': 'application/vnd.github.v3+json'
+    };
+
+    let remoteSha = null;
+    let remoteEintraege = [];
+
+    let decoded = { eintraege: [], geloescht: [] };
+    const getResp = await fetch(apiUrl, { headers });
+    if (getResp.ok) {
+      const remoteDaten = await getResp.json();
+      remoteSha = remoteDaten.sha;
+      decoded = JSON.parse(atob(remoteDaten.content.replace(/\n/g, '')));
+      remoteEintraege = decoded.eintraege || [];
+    } else if (getResp.status !== 404) {
+      throw new Error(`GitHub Fehler: ${getResp.status}`);
+    }
+
+    // 2. Zusammenführen mit Tombstone-Logik
+    let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+    // Remote gelöschte auch lokal übernehmen
+    const remoteGeloescht = decoded.geloescht || [];
+    remoteGeloescht.forEach(k => { if (!geloescht.includes(k)) geloescht.push(k); });
+    localStorage.setItem('geloescht', JSON.stringify(geloescht));
+
+    const alle = [...eintraege, ...remoteEintraege];
+    const einzigartig = [];
+    const gesehen = new Set();
+    alle.forEach(e => {
+      const key = `${e.datum}|${e.beginn}|${e.kurs}`;
+      if (!gesehen.has(key) && !geloescht.includes(key)) {
+        gesehen.add(key);
+        einzigartig.push(e);
+      }
+    });
+    einzigartig.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+
+    // 3. Zusammengeführte Daten zurück zu GitHub schreiben
+    const inhalt = btoa(unescape(encodeURIComponent(JSON.stringify({
+      version: 1,
+      aktualisiert: new Date().toISOString(),
+      eintraege: einzigartig,
+      geloescht: geloescht
+    }, null, 2))));
+
+    const putBody = {
+      message: `Sync ${new Date().toISOString().slice(0, 16)}`,
+      content: inhalt,
+      ...(remoteSha && { sha: remoteSha })
+    };
+
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify(putBody)
+    });
+
+    if (!putResp.ok) throw new Error(`Schreiben fehlgeschlagen: ${putResp.status}`);
+
+    // 4. Lokal aktualisieren
+    eintraege = einzigartig;
+    speichern();
+    letzterSync = new Date().toISOString();
+    localStorage.setItem('letzterSync', letzterSync);
+    aktualisiereSync();
+    zeigeAlles();
+    toast(`Sync erfolgreich · ${einzigartig.length} Einträge`);
+
+  } catch (err) {
+    toast(`Sync Fehler: ${err.message}`, true);
+    console.error(err);
+  }
+
+  if (syncBtn) syncBtn.textContent = '☁ Sync';
+}
+
+function zeigeSync() {
+  document.getElementById('sync-token').value = syncToken;
+  document.getElementById('sync-repo').value = syncRepo;
+  document.getElementById('sync-modal').classList.add('show');
+}
+function schliesseSync() { document.getElementById('sync-modal').classList.remove('show'); }
+
+function syncSpeichern() {
+  const token = document.getElementById('sync-token').value.trim();
+  const repo = document.getElementById('sync-repo').value.trim();
+  if (token && !token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    toast('Token sieht nicht richtig aus (sollte mit ghp_ beginnen)', true);
+    return;
+  }
+  syncToken = token;
+  syncRepo = repo;
+  localStorage.setItem('syncToken', token);
+  localStorage.setItem('syncRepo', repo);
+  aktualisiereSync();
+  schliesseSync();
+  toast('Sync-Einstellungen gespeichert');
+  if (token && repo) githubSync();
+}
+
+function syncTrennen() {
+  if (!confirm('GitHub Sync trennen?')) return;
+  syncToken = ''; syncRepo = ''; letzterSync = null;
+  localStorage.removeItem('syncToken');
+  localStorage.removeItem('syncRepo');
+  localStorage.removeItem('letzterSync');
+  aktualisiereSync();
+  schliesseSync();
+  toast('Sync getrennt');
+}
+// ─────────────────────────────────────────────────────────────
+
+function toast(text, fehler = false) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.style.background = fehler ? '#a8423a' : '#2a8d3a';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+init();
+
+// Service Worker für PWA-Funktion (nur wenn von einer https-URL geladen)
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed:', err));
+  });
+}
+</script>
+</body>
+</html>
