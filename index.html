@@ -387,6 +387,13 @@
         <label for="sonder-pause">Pause (Minuten, optional)</label>
         <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30">
       </div>
+      <div class="field">
+        <label>Übernachtung</label>
+        <button type="button" id="uebernachtung-btn" onclick="toggleUebernachtung()"
+          style="width:100%;padding:12px 14px;background:#1a1d23;border:1px solid #3a3f49;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
+          Nein
+        </button>
+        </div>
     </div>
 
     <!-- Kombiniert: Kurs + Sonderfahrt -->
@@ -545,6 +552,33 @@ function berechneStunden(beginn, ende) {
   return min / 60;
 }
 
+function toggleUebernachtung() {
+  const btn = document.getElementById('uebernachtung-btn');
+  const aktiv = btn.getAttribute('data-aktiv') === '1';
+  if (aktiv) {
+    btn.setAttribute('data-aktiv', '0');
+    btn.textContent = 'Nein';
+    btn.style.color = '#a8a49d';
+    btn.style.borderColor = '#3a3f49';
+    btn.style.background = '#1a1d23';
+  } else {
+    btn.setAttribute('data-aktiv', '1');
+    btn.textContent = '✕  Ja — Übernachtung';
+    btn.style.color = '#1a1d23';
+    btn.style.borderColor = '#f4a623';
+    btn.style.background = '#f4a623';
+  }
+}
+
+function uebernachtungReset() {
+  const btn = document.getElementById('uebernachtung-btn');
+  btn.setAttribute('data-aktiv', '0');
+  btn.textContent = 'Nein';
+  btn.style.color = '#a8a49d';
+  btn.style.borderColor = '#3a3f49';
+  btn.style.background = '#1a1d23';
+}
+
 function zeigeKombiVorschau() {
   const nr = document.getElementById('kombi-kurs').value;
   const v = document.getElementById('kombi-vorschau');
@@ -590,6 +624,14 @@ function bearbeiten(originalIndex) {
     document.getElementById('sonder-ende').value = e.ende;
     document.getElementById('sonder-art').value = e.sonderfahrt;
     document.getElementById('sonder-pause').value = e.pause || '';
+    if (e.uebernachtung) {
+      const btn = document.getElementById('uebernachtung-btn');
+      btn.setAttribute('data-aktiv', '1');
+      btn.textContent = '✕  Ja — Übernachtung';
+      btn.style.color = '#1a1d23';
+      btn.style.borderColor = '#f4a623';
+      btn.style.background = '#f4a623';
+    }
   } else if (e.extraStunden !== undefined) {
     // Kombi — Kurs aus kurs-Feld extrahieren (z.B. "Kurs 211 + Schulausflug")
     setMode('kombi');
@@ -621,6 +663,7 @@ function bearbeitenAbbrechen() {
 }
 
 function formularZuruecksetzen() {
+  uebernachtungReset();
   document.getElementById('datum').value = new Date().toISOString().split('T')[0];
   document.getElementById('kurs').value = '';
   document.getElementById('vorschau').style.display = 'none';
@@ -652,9 +695,10 @@ function eintragen() {
     const ende = document.getElementById('sonder-ende').value;
     const art = document.getElementById('sonder-art').value.trim();
     const pause = document.getElementById('sonder-pause').value.trim();
+    const uebernachtung = document.getElementById('uebernachtung-btn').getAttribute('data-aktiv') === '1';
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
-    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause };
+    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung };
 
   } else if (modus === 'kombi') {
     const nr = document.getElementById('kombi-kurs').value;
@@ -802,7 +846,7 @@ function zeigeTabelle() {
     return;
   }
 
-  let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th></th></tr></thead><tbody>`;
+  let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th>Üb.</th><th></th></tr></thead><tbody>`;
   monatsEintraege.forEach(e => {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
@@ -810,6 +854,7 @@ function zeigeTabelle() {
     const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    const uebAnzeige = e.uebernachtung ? '<span style="color:#f4a623;font-weight:700;">✕</span>' : '—';
     html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
       <td>${datumKurz}</td>
       <td>${e.beginn || '—'}</td>
@@ -818,6 +863,7 @@ function zeigeTabelle() {
       <td>${kursAnzeige}</td>
       <td>${e.sonderfahrt || '—'}</td>
       <td>${pauseAnzeige}</td>
+      <td>${uebAnzeige}</td>
       <td class="actions"><button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button></td>
     </tr>`;
   });
@@ -829,15 +875,16 @@ function exportMonatCSV() {
   const monatsEintraege = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (monatsEintraege.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
 
-  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause\n';
+  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Übernachtung\n';
   const zeilen = monatsEintraege.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
-    if (istFrei) return `${datumDE};;;—;;`;
-    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert}`;
+    const uebWert = e.uebernachtung ? 'X' : '';
+    if (istFrei) return `${datumDE};;;—;;;`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert};${uebWert}`;
   }).join('\n');
   const csv = header + zeilen;
 
