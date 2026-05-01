@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T04:07:05.491Z",
+  "aktualisiert": "2026-05-01T04:42:06.300Z",
   "eintraege": [
     {
       "datum": "2026-03-12",
@@ -8,6 +8,94 @@
       "ende": "18:08",
       "kurs": "Kurs 215",
       "sonderfahrt": ""
+    },
+    {
+      "datum": "2026-04-20",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-21",
+      "beginn": "07:30",
+      "ende": "14:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Lindhof Verstärker",
+      "pause": "180"
+    },
+    {
+      "datum": "2026-04-22",
+      "beginn": "04:27",
+      "ende": "14:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Kurs 211 GPSund Kamera Einbau Ri900",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-23",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-24",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-25",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-26",
+      "beginn": "00:00",
+      "ende": "00:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Frei",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-27",
+      "beginn": "13:00",
+      "ende": "18:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Busreinigung 414",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-28",
+      "beginn": "08:30",
+      "ende": "15:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Busreinigung 424",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-29",
+      "beginn": "08:30",
+      "ende": "16:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Busreinigung 434",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-30",
+      "beginn": "08:00",
+      "ende": "13:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Busreinigung 444",
+      "pause": ""
     },
     {
       "datum": "2026-05-01",
