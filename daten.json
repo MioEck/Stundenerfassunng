@@ -1,1 +1,13 @@
-{"version":1,"eintraege":[]}
+{
+  "version": 1,
+  "aktualisiert": "2026-05-01T03:56:17.333Z",
+  "eintraege": [
+    {
+      "datum": "2026-03-12",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": ""
+    }
+  ]
+}
