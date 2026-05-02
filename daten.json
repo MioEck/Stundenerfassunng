@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-02T13:46:33.362Z",
+  "aktualisiert": "2026-05-02T13:52:28.070Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -167,7 +167,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃÂÃÂ¤rker",
+      "sonderfahrt": "Lindhof Verstärker",
       "pause": "180"
     },
     {
@@ -243,6 +243,38 @@
       "pause": ""
     },
     {
+      "datum": "2026-05-01",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-02",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-03",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-04",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
       "datum": "2026-05-05",
       "beginn": "",
       "ende": "",
@@ -260,12 +292,8 @@
     "2026-05-02|03:00|Sonderfahrt",
     "2026-05-02|04:38|Kurs 212 + Bio",
     "2026-05-02|06:13|Kurs 214",
-    "2026-05-04||Frei",
     "2026-05-01|02:02|Sonderfahrt",
     "2026-05-04|11:56|Kurs 216",
-    "2026-05-01||Frei",
-    "2026-05-02||Frei",
-    "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
-    "2026-05-03||Frei"
+    "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt"
   ]
 }
