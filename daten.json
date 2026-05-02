@@ -1,7 +1,15 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-01T16:45:03.972Z",
+  "aktualisiert": "2026-05-02T08:53:20.126Z",
   "eintraege": [
+    {
+      "datum": "2026-04-01",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
     {
       "datum": "2026-04-02",
       "beginn": "14:20",
@@ -83,6 +91,46 @@
       "pause": ""
     },
     {
+      "datum": "2026-04-12",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-13",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-14",
+      "beginn": "06:00",
+      "ende": "14:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Biohof Verstaerker",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-15",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-16",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
       "datum": "2026-04-17",
       "beginn": "00:00",
       "ende": "00:00",
@@ -96,6 +144,14 @@
       "ende": "10:50",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Vorladefahrer Starlight",
+      "pause": ""
+    },
+    {
+      "datum": "2026-04-19",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
       "pause": ""
     },
     {
@@ -185,6 +241,22 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Busreinigung 444",
       "pause": ""
+    },
+    {
+      "datum": "2026-05-02",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-03",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -197,6 +269,7 @@
     "2026-05-02|03:00|Sonderfahrt",
     "2026-05-02|04:38|Kurs 212 + Bio",
     "2026-05-02|06:13|Kurs 214",
-    "2026-05-04||Frei"
+    "2026-05-04||Frei",
+    "2026-05-01|02:02|Sonderfahrt"
   ]
 }
