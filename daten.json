@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-02T09:28:02.621Z",
+  "aktualisiert": "2026-05-02T09:31:16.640Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -259,18 +259,19 @@
       "pause": ""
     },
     {
+      "datum": "2026-05-02",
+      "beginn": "06:01",
+      "ende": "17:00",
+      "kurs": "Kurs 213 + Das ist ein Test Fahrt",
+      "sonderfahrt": "Das ist ein Test Fahrt",
+      "pause": "",
+      "extraStunden": 10.983333333333334
+    },
+    {
       "datum": "2026-05-03",
       "beginn": "",
       "ende": "",
       "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
-      "beginn": "11:56",
-      "ende": "23:18",
-      "kurs": "Kurs 216",
       "sonderfahrt": "",
       "pause": ""
     }
@@ -285,6 +286,7 @@
     "2026-05-02|04:38|Kurs 212 + Bio",
     "2026-05-02|06:13|Kurs 214",
     "2026-05-04||Frei",
-    "2026-05-01|02:02|Sonderfahrt"
+    "2026-05-01|02:02|Sonderfahrt",
+    "2026-05-04|11:56|Kurs 216"
   ]
 }
