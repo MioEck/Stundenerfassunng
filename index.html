@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stundenzettel — Riesebyer Kreutzer</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#f4a623">
+<meta name="theme-color" content="#00b8c8">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +16,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    background: #1a1d23;
+    background: #0d1a2a;
     color: #e8e6e1;
     min-height: 100vh;
     padding: 16px;
@@ -24,7 +24,7 @@
   }
   .container { max-width: 720px; margin: 0 auto; }
   header {
-    border-bottom: 2px solid #f4a623;
+    border-bottom: 2px solid #00b8c8;
     padding-bottom: 12px;
     margin-bottom: 20px;
     display: flex;
@@ -35,17 +35,17 @@
   .subtitle { font-size: 13px; color: #8a8680; margin-top: 4px; }
 
   .card {
-    background: #242830;
+    background: #112038;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 16px;
-    border: 1px solid #2f343d;
+    border: 1px solid #1a2d45;
   }
   .card-title {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: #f4a623;
+    color: #00b8c8;
     margin-bottom: 16px;
     font-weight: 600;
   }
@@ -60,14 +60,14 @@
   input, select {
     width: 100%;
     padding: 12px 14px;
-    background: #1a1d23;
-    border: 1px solid #3a3f49;
+    background: #0d1a2a;
+    border: 1px solid #1e3050;
     border-radius: 8px;
     color: #e8e6e1;
     font-size: 16px;
     font-family: inherit;
   }
-  input:focus, select:focus { outline: none; border-color: #f4a623; }
+  input:focus, select:focus { outline: none; border-color: #00b8c8; }
   .field { margin-bottom: 14px; }
 
   .toggle-wrapper {
@@ -86,8 +86,8 @@
   }
   .toggle button {
     padding: 14px 20px;
-    background: #1a1d23;
-    border: 1px solid #3a3f49;
+    background: #0d1a2a;
+    border: 1px solid #1e3050;
     border-radius: 8px;
     color: #a8a49d;
     font-size: 15px;
@@ -98,9 +98,9 @@
     flex-shrink: 0;
   }
   .toggle button.active {
-    background: #f4a623;
-    border-color: #f4a623;
-    color: #1a1d23;
+    background: #00b8c8;
+    border-color: #00b8c8;
+    color: #0d1a2a;
   }
 
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -108,8 +108,8 @@
   .btn-primary {
     width: 100%;
     padding: 16px;
-    background: #f4a623;
-    color: #1a1d23;
+    background: #00b8c8;
+    color: #0d1a2a;
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -117,13 +117,13 @@
     cursor: pointer;
     margin-top: 8px;
   }
-  .btn-primary:hover { background: #ffb733; }
+  .btn-primary:hover { background: #40d0e0; }
 
   .btn-secondary {
     padding: 10px 14px;
     background: transparent;
     color: #a8a49d;
-    border: 1px solid #3a3f49;
+    border: 1px solid #1e3050;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
@@ -134,13 +134,13 @@
   .btn-danger:hover { color: #ff8a6d; border-color: #6a3f39; }
 
   .preview {
-    background: #1a1d23;
+    background: #0d1a2a;
     border-radius: 6px;
     padding: 12px;
     margin-top: 12px;
     font-size: 13px;
     color: #a8a49d;
-    border-left: 3px solid #f4a623;
+    border-left: 3px solid #00b8c8;
   }
   .preview strong { color: #e8e6e1; }
 
@@ -158,8 +158,8 @@
   }
   .tab {
     padding: 10px 16px;
-    background: #242830;
-    border: 1px solid #2f343d;
+    background: #112038;
+    border: 1px solid #1a2d45;
     border-radius: 6px;
     color: #a8a49d;
     font-size: 13px;
@@ -168,9 +168,9 @@
     white-space: nowrap;
   }
   .tab.active {
-    background: #f4a623;
-    border-color: #f4a623;
-    color: #1a1d23;
+    background: #00b8c8;
+    border-color: #00b8c8;
+    color: #0d1a2a;
   }
   .tab .badge {
     margin-left: 6px;
@@ -183,13 +183,13 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 14px;
-    background: #1a1d23;
+    background: #0d1a2a;
     border-radius: 6px;
     margin-bottom: 14px;
     font-size: 13px;
   }
   .monat-info .label { color: #8a8680; }
-  .monat-info .wert { color: #f4a623; font-weight: 700; font-size: 15px; }
+  .monat-info .wert { color: #00b8c8; font-weight: 700; font-size: 15px; }
 
   .entries-actions {
     display: flex;
@@ -207,14 +207,14 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid #3a3f49;
+    border-bottom: 1px solid #1e3050;
   }
   td {
     padding: 10px 6px;
-    border-bottom: 1px solid #2f343d;
+    border-bottom: 1px solid #1a2d45;
     color: #e8e6e1;
   }
-  td.std { color: #f4a623; font-weight: 600; }
+  td.std { color: #00b8c8; font-weight: 600; }
   td.actions { text-align: right; }
   .delete-btn {
     background: none;
@@ -238,22 +238,22 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 14px;
-    background: #2a2530;
-    border: 1px solid #4a3a2a;
+    background: #0d1e30;
+    border: 1px solid #0d2a3a;
     border-radius: 8px;
     margin-bottom: 16px;
     font-size: 13px;
     color: #c8c4bd;
   }
-  .backup-bar.warn { background: #3a2520; border-color: #6a3520; color: #ffb733; }
+  .backup-bar.warn { background: #0d2535; border-color: #0d2535; color: #40d0e0; }
 
   .sync-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 14px;
-    background: #1e2430;
-    border: 1px solid #2a3a5a;
+    background: #0a1828;
+    border: 1px solid #1a3a5a;
     border-radius: 8px;
     margin-bottom: 16px;
     font-size: 13px;
@@ -261,11 +261,11 @@
     gap: 8px;
     flex-wrap: wrap;
   }
-  .sync-bar.ok { border-color: #2a5a3a; background: #1e2a1e; color: #7ab48a; }
-  .sync-bar.warn { border-color: #6a3520; background: #3a2520; color: #ffb733; }
+  .sync-bar.ok { border-color: #2a5a3a; background: #0a1828; color: #7ab48a; }
+  .sync-bar.warn { border-color: #0d2535; background: #0d2535; color: #40d0e0; }
   .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4a5a7a; flex-shrink: 0; }
-  .sync-dot.ok { background: #2a8d3a; }
-  .sync-dot.warn { background: #f4a623; }
+  .sync-dot.ok { background: #00a0b0; }
+  .sync-dot.warn { background: #00b8c8; }
 
   .modal-overlay {
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -275,11 +275,11 @@
   }
   .modal-overlay.show { display: flex; }
   .modal {
-    background: #242830; border-radius: 12px; padding: 24px;
-    max-width: 480px; width: 100%; border: 1px solid #3a3f49;
+    background: #112038; border-radius: 12px; padding: 24px;
+    max-width: 480px; width: 100%; border: 1px solid #1e3050;
     max-height: 90vh; overflow-y: auto;
   }
-  .modal h3 { color: #f4a623; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+  .modal h3 { color: #00b8c8; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
   .modal p { font-size: 13px; color: #a8a49d; margin-bottom: 10px; }
   .modal-buttons { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; flex-wrap: wrap; }
 
@@ -288,7 +288,7 @@
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    background: #2a8d3a;
+    background: #00a0b0;
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.11</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.12</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -402,7 +402,7 @@
       <div class="field">
         <label>Übernachtung</label>
         <button type="button" id="uebernachtung-btn" onclick="toggleUebernachtung()"
-          style="width:100%;padding:12px 14px;background:#1a1d23;border:1px solid #3a3f49;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
+          style="width:100%;padding:12px 14px;background:#0d1a2a;border:1px solid #1e3050;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
           Nein
         </button>
         </div>
@@ -417,8 +417,8 @@
         </select>
       </div>
       <div id="kombi-vorschau" class="preview" style="display:none;"></div>
-      <div style="margin:12px 0;border-top:1px solid #3a3f49;padding-top:12px;">
-        <label style="color:#f4a623;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt danach</label>
+      <div style="margin:12px 0;border-top:1px solid #1e3050;padding-top:12px;">
+        <label style="color:#00b8c8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt danach</label>
       </div>
       <div class="row">
         <div class="field">
@@ -571,14 +571,14 @@ function toggleUebernachtung() {
     btn.setAttribute('data-aktiv', '0');
     btn.textContent = 'Nein';
     btn.style.color = '#a8a49d';
-    btn.style.borderColor = '#3a3f49';
-    btn.style.background = '#1a1d23';
+    btn.style.borderColor = '#1e3050';
+    btn.style.background = '#0d1a2a';
   } else {
     btn.setAttribute('data-aktiv', '1');
     btn.textContent = '✕  Ja — Übernachtung';
-    btn.style.color = '#1a1d23';
-    btn.style.borderColor = '#f4a623';
-    btn.style.background = '#f4a623';
+    btn.style.color = '#0d1a2a';
+    btn.style.borderColor = '#00b8c8';
+    btn.style.background = '#00b8c8';
   }
 }
 
@@ -587,8 +587,8 @@ function uebernachtungReset() {
   btn.setAttribute('data-aktiv', '0');
   btn.textContent = 'Nein';
   btn.style.color = '#a8a49d';
-  btn.style.borderColor = '#3a3f49';
-  btn.style.background = '#1a1d23';
+  btn.style.borderColor = '#1e3050';
+  btn.style.background = '#0d1a2a';
 }
 
 function zeigeKombiVorschau() {
@@ -640,9 +640,9 @@ function bearbeiten(originalIndex) {
       const btn = document.getElementById('uebernachtung-btn');
       btn.setAttribute('data-aktiv', '1');
       btn.textContent = '✕  Ja — Übernachtung';
-      btn.style.color = '#1a1d23';
-      btn.style.borderColor = '#f4a623';
-      btn.style.background = '#f4a623';
+      btn.style.color = '#0d1a2a';
+      btn.style.borderColor = '#00b8c8';
+      btn.style.background = '#00b8c8';
     }
   } else if (e.extraStunden !== undefined) {
     // Kombi — Kurs aus kurs-Feld extrahieren (z.B. "Kurs 211 + Schulausflug")
@@ -871,7 +871,7 @@ function zeigeTabelle() {
     const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
-    const uebAnzeige = e.uebernachtung ? '<span style="color:#f4a623;font-weight:700;">✕</span>' : '—';
+    const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
     html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
       <td>${datumKurz}</td>
       <td>${e.beginn || '—'}</td>
@@ -1184,7 +1184,7 @@ function syncTrennen() {
 function toast(text, fehler = false) {
   const t = document.getElementById('toast');
   t.textContent = text;
-  t.style.background = fehler ? '#a8423a' : '#2a8d3a';
+  t.style.background = fehler ? '#8b2020' : '#00a0b0';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
