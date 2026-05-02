@@ -883,7 +883,7 @@ function exportMonatCSV() {
     const pauseWert = e.pause ? `${e.pause} min` : '';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : e.kurs;
     const uebWert = e.uebernachtung ? 'X' : '';
-    if (istFrei) return `${datumDE};;;-;;;`;
+    if (istFrei) return `${datumDE};;;-;Frei;;`;
     return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert};${uebWert}`;
   }).join('\n');
   const csv = header + zeilen;
