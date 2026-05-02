@@ -1074,6 +1074,11 @@ async function githubSync(autoSync = false) {
     // Remote gelöschte auch lokal übernehmen
     const remoteGeloescht = decoded.geloescht || [];
     remoteGeloescht.forEach(k => { if (!geloescht.includes(k)) geloescht.push(k); });
+
+    // Lokale Einträge haben immer Vorrang:
+    // Wenn ein lokaler Eintrag denselben Key hat wie ein gelöschter, aus der geloescht-Liste entfernen
+    const lokaleKeys = new Set(eintraege.map(e => `${e.datum}|${e.beginn}|${e.kurs}`));
+    geloescht = geloescht.filter(k => !lokaleKeys.has(k));
     localStorage.setItem('geloescht', JSON.stringify(geloescht));
 
     const alle = [...eintraege, ...remoteEintraege];
