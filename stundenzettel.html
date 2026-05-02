@@ -70,14 +70,22 @@
   input:focus, select:focus { outline: none; border-color: #f4a623; }
   .field { margin-bottom: 14px; }
 
-  .toggle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+  .toggle-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 18px;
+    /* Scrollbar verstecken */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .toggle-wrapper::-webkit-scrollbar { display: none; }
+  .toggle {
+    display: flex;
+    gap: 8px;
+    min-width: max-content;
   }
   .toggle button {
-    padding: 14px;
+    padding: 14px 20px;
     background: #1a1d23;
     border: 1px solid #3a3f49;
     border-radius: 8px;
@@ -86,6 +94,8 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .toggle button.active {
     background: #f4a623;
@@ -304,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel</h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.11</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -346,11 +356,13 @@
   <div class="card">
     <div class="card-title" id="formular-titel">Neue Eintragung</div>
 
-    <div class="toggle" style="grid-template-columns:1fr 1fr 1fr 1fr;">
-      <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
-      <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
-      <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
-      <button id="btn-frei" onclick="setMode('frei')">Frei</button>
+    <div class="toggle-wrapper">
+      <div class="toggle">
+        <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
+        <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
+        <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
+        <button id="btn-frei" onclick="setMode('frei')">Frei</button>
+      </div>
     </div>
 
     <div class="field">
