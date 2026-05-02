@@ -750,8 +750,13 @@ function eintragen() {
   zeigeAlles();
 
   formularZuruecksetzen();
-  toast('Eintrag gespeichert');
   zeigeBackupStatus();
+  if (syncToken && syncRepo) {
+    toast('Gespeichert — Sync läuft...');
+    githubSync(true);
+  } else {
+    toast('Eintrag gespeichert');
+  }
 }
 
 function speichern() { localStorage.setItem('stundenzettel', JSON.stringify(eintraege)); }
@@ -1012,7 +1017,7 @@ function zeigeBackupStatus() {
 }
 
 // ─── GitHub Sync ──────────────────────────────────────────────
-function aktualisiereSync() {
+function aktualisiereSync(erfolg = false) {
   const bar = document.getElementById('sync-bar');
   const dot = document.getElementById('sync-dot');
   const text = document.getElementById('sync-text');
@@ -1024,12 +1029,18 @@ function aktualisiereSync() {
   dot.classList.add('ok');
   const zeit = letzterSync ? new Date(letzterSync).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'noch nie';
   text.textContent = `Sync: ${syncRepo} · Zuletzt: ${zeit}`;
+
+  // Grüner Puls-Effekt nach erfolgreichem Sync
+  if (erfolg) {
+    dot.style.transform = 'scale(1.8)';
+    dot.style.transition = 'transform 0.3s';
+    setTimeout(() => { dot.style.transform = 'scale(1)'; }, 400);
+  }
 }
 
-async function githubSync() {
+async function githubSync(autoSync = false) {
   if (!syncToken || !syncRepo) {
-    toast('Erst GitHub Sync einrichten (⚙ Knopf)', true);
-    zeigeSync();
+    if (!autoSync) { toast('Erst GitHub Sync einrichten (⚙ Knopf)', true); zeigeSync(); }
     return;
   }
 
@@ -1104,9 +1115,10 @@ async function githubSync() {
     speichern();
     letzterSync = new Date().toISOString();
     localStorage.setItem('letzterSync', letzterSync);
-    aktualisiereSync();
+    aktualisiereSync(true); // grüner Punkt
     zeigeAlles();
-    toast(`Sync erfolgreich · ${einzigartig.length} Einträge`);
+    if (!autoSync) toast(`Sync erfolgreich · ${einzigartig.length} Einträge`);
+    else toast('Gespeichert und synchronisiert ✓');
 
   } catch (err) {
     toast(`Sync Fehler: ${err.message}`, true);
