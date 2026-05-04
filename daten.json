@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-04T09:07:45.528Z",
+  "aktualisiert": "2026-05-04T09:07:53.964Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -225,7 +225,8 @@
       "ende": "15:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Busreinigung 424",
-      "pause": ""
+      "pause": "",
+      "uebernachtung": true
     },
     {
       "datum": "2026-04-29",
