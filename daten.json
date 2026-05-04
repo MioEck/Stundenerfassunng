@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-04T13:08:04.018Z",
+  "aktualisiert": "2026-05-04T17:24:45.696Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -280,6 +280,14 @@
       "sonderfahrt": "Ulsnis Verstärker",
       "pause": "",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-05",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -295,7 +303,6 @@
     "2026-05-04|11:56|Kurs 216",
     "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
     "2026-05-04||Frei",
-    "2026-05-05||Frei",
     "2026-05-04|10:54|Sonderfahrt"
   ]
 }
