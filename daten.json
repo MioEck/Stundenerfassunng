@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-02T14:06:55.271Z",
+  "aktualisiert": "2026-05-04T09:07:45.528Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -216,7 +216,8 @@
       "ende": "18:30",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Busreinigung 414",
-      "pause": ""
+      "pause": "",
+      "uebernachtung": true
     },
     {
       "datum": "2026-04-28",
@@ -265,22 +266,6 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-05",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
     }
   ],
   "geloescht": [
@@ -294,6 +279,8 @@
     "2026-05-02|06:13|Kurs 214",
     "2026-05-01|02:02|Sonderfahrt",
     "2026-05-04|11:56|Kurs 216",
-    "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt"
+    "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
+    "2026-05-04||Frei",
+    "2026-05-05||Frei"
   ]
 }
