@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.12</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.13</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -903,7 +903,7 @@ function exportMonatCSV() {
     if (istFrei) return `${datumDE};;;-;Frei;;`;
     return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert};${uebWert}`;
   }).join('\n');
-  const csv = header + zeilen;
+  const csv = '\uFEFF' + header + zeilen;
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
