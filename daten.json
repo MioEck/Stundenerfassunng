@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-07T03:48:37.273Z",
+  "aktualisiert": "2026-05-07T07:26:17.224Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -167,7 +167,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof Verstärker",
       "pause": "180"
     },
     {
@@ -268,18 +268,10 @@
     },
     {
       "datum": "2026-05-04",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis VerstÃ¤rker",
+      "sonderfahrt": "Ulsnis Verstärker",
       "pause": "",
       "uebernachtung": false
     },
@@ -298,9 +290,18 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-05-07",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
+    "2026-05-04||Frei",
     "2026-04-03|14:20|Sonderfahrt",
     "2026-04-04|04:00|Sonderfahrt",
     "2026-03-12|06:40|Kurs 215",
