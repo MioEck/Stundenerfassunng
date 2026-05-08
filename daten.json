@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-07T14:16:15.297Z",
+  "aktualisiert": "2026-05-08T06:20:10.416Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -167,7 +167,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof VerstÃÂ¤rker",
       "pause": "180"
     },
     {
@@ -279,7 +279,7 @@
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis VerstÃ¤rker",
+      "sonderfahrt": "Ulsnis VerstÃÂ¤rker",
       "pause": "",
       "uebernachtung": false
     },
