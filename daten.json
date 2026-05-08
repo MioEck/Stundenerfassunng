@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-08T06:20:10.416Z",
+  "aktualisiert": "2026-05-08T06:21:23.379Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -306,6 +306,15 @@
       "kurs": "Kurs 215",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-05-07",
+      "beginn": "07:00",
+      "ende": "14:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Schlüttsiel , Schleswig",
+      "pause": "",
+      "uebernachtung": false
     }
   ],
   "geloescht": [
