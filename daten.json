@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-08T13:49:11.981Z",
+  "aktualisiert": "2026-05-08T13:49:43.698Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -310,7 +310,7 @@
     {
       "datum": "2026-05-07",
       "beginn": "07:00",
-      "ende": "14:20",
+      "ende": "15:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SchlÃ¼ttsiel , Schleswig",
       "pause": "",
