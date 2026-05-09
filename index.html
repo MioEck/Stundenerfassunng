@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.13</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.14</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -1075,7 +1075,11 @@ async function githubSync(autoSync = false) {
     if (getResp.ok) {
       const remoteDaten = await getResp.json();
       remoteSha = remoteDaten.sha;
-      decoded = JSON.parse(atob(remoteDaten.content.replace(/\n/g, '')));
+      // UTF-8 sicher dekodieren (atob versteht kein UTF-8)
+      const binStr = atob(remoteDaten.content.replace(/\n/g, ''));
+      const bytes = new Uint8Array(binStr.length);
+      for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
+      decoded = JSON.parse(new TextDecoder('utf-8').decode(bytes));
       remoteEintraege = decoded.eintraege || [];
     } else if (getResp.status !== 404) {
       throw new Error(`GitHub Fehler: ${getResp.status}`);
@@ -1106,12 +1110,12 @@ async function githubSync(autoSync = false) {
     einzigartig.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
 
     // 3. Zusammengeführte Daten zurück zu GitHub schreiben
-    const inhalt = btoa(unescape(encodeURIComponent(JSON.stringify({
-      version: 1,
-      aktualisiert: new Date().toISOString(),
-      eintraege: einzigartig,
-      geloescht: geloescht
-    }, null, 2))));
+    // UTF-8 sicher kodieren
+    const jsonStr = JSON.stringify({ version: 1, aktualisiert: new Date().toISOString(), eintraege: einzigartig, geloescht: geloescht }, null, 2);
+    const utf8Bytes = new TextEncoder().encode(jsonStr);
+    let binStr = '';
+    utf8Bytes.forEach(b => binStr += String.fromCharCode(b));
+    const inhalt = btoa(binStr);
 
     const putBody = {
       message: `Sync ${new Date().toISOString().slice(0, 16)}`,
