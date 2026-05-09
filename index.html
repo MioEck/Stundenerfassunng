@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.16</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.17</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -888,6 +888,15 @@ function zeigeTabelle() {
   c.innerHTML = html;
 }
 
+function ersetzeUmlaute(text) {
+  if (!text) return text;
+  return text
+    .replace(/ä/g, 'ae').replace(/Ä/g, 'Ae')
+    .replace(/ö/g, 'oe').replace(/Ö/g, 'Oe')
+    .replace(/ü/g, 'ue').replace(/Ü/g, 'Ue')
+    .replace(/ß/g, 'ss');
+}
+
 function exportMonatCSV() {
   const monatsEintraege = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (monatsEintraege.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
@@ -898,15 +907,14 @@ function exportMonatCSV() {
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
-    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : e.kurs;
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(e.kurs);
+    const sonderfahrtAnzeige = ersetzeUmlaute(e.sonderfahrt);
     const uebWert = e.uebernachtung ? 'X' : '';
     if (istFrei) return `${datumDE};;;-;Frei;;`;
-    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${e.sonderfahrt};${pauseWert};${uebWert}`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sonderfahrtAnzeige};${pauseWert};${uebWert}`;
   }).join('\n');
   const csv = header + zeilen;
-  const bom = new Uint8Array([0xEF, 0xBB, 0xBF]); // UTF-8 BOM als echte Bytes
-  const encoded = new TextEncoder().encode(csv);
-  const blob = new Blob([bom, encoded], { type: 'text/csv;charset=utf-8;' });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
