@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-09T07:11:11.169Z",
+  "aktualisiert": "2026-05-09T08:59:52.323Z",
   "eintraege": [
     {
       "datum": "2026-04-01",
@@ -167,7 +167,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃ¤rker",
+      "sonderfahrt": "Lindhof VerstÃÂ¤rker",
       "pause": "180"
     },
     {
@@ -279,7 +279,7 @@
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis VerstÃ¤rker",
+      "sonderfahrt": "Ulsnis VerstÃÂ¤rker",
       "pause": "",
       "uebernachtung": false
     },
@@ -312,7 +312,7 @@
       "beginn": "07:00",
       "ende": "15:00",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "SchlÃ¼ttsiel , Schleswig",
+      "sonderfahrt": "SchlÃÂ¼ttsiel , Schleswig",
       "pause": "",
       "uebernachtung": false
     },
