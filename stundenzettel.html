@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.17</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.18</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -362,6 +362,7 @@
         <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
         <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
         <button id="btn-frei" onclick="setMode('frei')">Frei</button>
+        <button id="btn-urlaub" onclick="setMode('urlaub')">Urlaub</button>
       </div>
     </div>
 
@@ -535,7 +536,7 @@ function monatsKey(datumStr) {
 
 function setMode(neuerModus) {
   modus = neuerModus;
-  ['kurs','sonder','kombi','frei'].forEach(m => {
+  ['kurs','sonder','kombi','frei','urlaub'].forEach(m => {
     const btn = document.getElementById(`btn-${m}`);
     if (btn) btn.classList.toggle('active', modus === m);
   });
@@ -630,6 +631,8 @@ function bearbeiten(originalIndex) {
   // Modus erkennen
   if (e.kurs === 'Frei') {
     setMode('frei');
+  } else if (e.kurs === 'Urlaub') {
+    setMode('urlaub');
   } else if (e.kurs === 'Sonderfahrt') {
     setMode('sonder');
     document.getElementById('sonder-beginn').value = e.beginn;
@@ -735,6 +738,8 @@ function eintragen() {
 
   } else if (modus === 'frei') {
     eintrag = { datum, beginn: '', ende: '', kurs: 'Frei', sonderfahrt: '', pause: '' };
+  } else if (modus === 'urlaub') {
+    eintrag = { datum, beginn: '', ende: '', kurs: 'Urlaub', sonderfahrt: '', pause: '' };
   }
 
   if (bearbeitenIndex !== null) {
@@ -850,7 +855,7 @@ function zeigeTabelle() {
 
   // Stunden-Summe (Frei = 0, Kombi = extraStunden)
   const summe = monatsEintraege.reduce((s, e) => {
-    if (e.kurs === 'Frei' || !e.beginn || !e.ende) return s;
+    if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn || !e.ende) return s;
     if (e.extraStunden !== undefined) return s + e.extraStunden;
     return s + berechneStunden(e.beginn, e.ende);
   }, 0);
@@ -867,7 +872,7 @@ function zeigeTabelle() {
   monatsEintraege.forEach(e => {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
-    const istFrei = e.kurs === 'Frei' || !e.beginn;
+    const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
     const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? `${e.pause} min` : '—';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
@@ -905,12 +910,12 @@ function exportMonatCSV() {
   const zeilen = monatsEintraege.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
-    const istFrei = e.kurs === 'Frei' || !e.beginn;
+    const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
     const pauseWert = e.pause ? `${e.pause} min` : '';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(e.kurs);
     const sonderfahrtAnzeige = ersetzeUmlaute(e.sonderfahrt);
     const uebWert = e.uebernachtung ? 'X' : '';
-    if (istFrei) return `${datumDE};;;-;Frei;;`;
+    if (istFrei) return `${datumDE};;;-;${e.kurs};;`;
     return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sonderfahrtAnzeige};${pauseWert};${uebWert}`;
   }).join('\n');
   const csv = header + zeilen;

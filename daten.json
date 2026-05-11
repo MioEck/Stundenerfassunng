@@ -1,344 +1,827 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-10T17:52:39.775Z",
+  "aktualisiert": "2026-05-11T05:55:45.124696",
   "eintraege": [
     {
-      "datum": "2026-04-01",
+      "datum": "2026-01-01",
       "beginn": "",
       "ende": "",
-      "kurs": "Frei",
+      "kurs": "Urlaub",
       "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-02",
-      "beginn": "14:20",
-      "ende": "16:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV Hamburg Vorbereitung",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-03",
-      "beginn": "04:00",
-      "ende": "19:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV HH Odense",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-04",
-      "beginn": "06:00",
-      "ende": "19:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV HH Odense",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-05",
-      "beginn": "06:00",
-      "ende": "19:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV HH Odense",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-06",
-      "beginn": "06:00",
-      "ende": "18:50",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV HH Odense",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-07",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-08",
-      "beginn": "19:10",
-      "ende": "04:15",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-09",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-10",
-      "beginn": "18:00",
-      "ende": "05:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-11",
-      "beginn": "19:30",
-      "ende": "02:50",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-12",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-13",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-14",
-      "beginn": "06:00",
-      "ende": "14:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Biohof Verstaerker",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-15",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-16",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-17",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-18",
-      "beginn": "05:30",
-      "ende": "10:50",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Vorladefahrer Starlight",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-19",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-20",
-      "beginn": "06:13",
-      "ende": "17:00",
-      "kurs": "Kurs 214",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-21",
-      "beginn": "07:30",
-      "ende": "14:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃÂ¤rker",
-      "pause": "180"
-    },
-    {
-      "datum": "2026-04-22",
-      "beginn": "04:27",
-      "ende": "14:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Kurs 211 GPSund Kamera Einbau Ri900",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-23",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-24",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-25",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-26",
-      "beginn": "00:00",
-      "ende": "00:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Frei",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-27",
-      "beginn": "13:00",
-      "ende": "18:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Busreinigung 414",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-28",
-      "beginn": "08:30",
-      "ende": "15:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Busreinigung 424",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-29",
-      "beginn": "08:30",
-      "ende": "16:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Busreinigung 434",
-      "pause": ""
-    },
-    {
-      "datum": "2026-04-30",
-      "beginn": "08:00",
-      "ende": "13:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Busreinigung 444",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-01",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-02",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-03",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
-      "beginn": "08:20",
-      "ende": "14:38",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis Verstärker",
       "pause": "",
       "uebernachtung": false
     },
     {
-      "datum": "2026-05-05",
+      "datum": "2026-01-02",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-03",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-04",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-05",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-06",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-07",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-08",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-09",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-10",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-11",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-12",
+      "beginn": "06:00",
+      "ende": "15:32",
+      "kurs": "Kurs 213",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-13",
+      "beginn": "04:27",
+      "ende": "08:53",
+      "kurs": "Kurs 211",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-14",
       "beginn": "",
       "ende": "",
       "kurs": "Frei",
       "sonderfahrt": "",
-      "pause": ""
+      "pause": "",
+      "uebernachtung": false
     },
     {
-      "datum": "2026-05-06",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-07",
+      "datum": "2026-01-15",
       "beginn": "06:40",
       "ende": "18:08",
       "kurs": "Kurs 215",
       "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-07",
-      "beginn": "07:00",
-      "ende": "15:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Schlüttsiel , Schleswig",
       "pause": "",
       "uebernachtung": false
     },
     {
-      "datum": "2026-05-09",
+      "datum": "2026-01-16",
+      "beginn": "06:00",
+      "ende": "15:32",
+      "kurs": "Kurs 213",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-17",
+      "beginn": "06:40",
+      "ende": "18:25",
+      "kurs": "Kurs 612",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-18",
       "beginn": "",
       "ende": "",
       "kurs": "Frei",
       "sonderfahrt": "",
-      "pause": ""
+      "pause": "",
+      "uebernachtung": false
     },
     {
-      "datum": "2026-05-10",
-      "beginn": "07:49",
-      "ende": "20:25",
-      "kurs": "Kurs 811",
+      "datum": "2026-01-19",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
       "sonderfahrt": "",
-      "pause": ""
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-20",
+      "beginn": "04:38",
+      "ende": "15:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Schwimmen, Verstaerker, Mohrkirch",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-21",
+      "beginn": "04:27",
+      "ende": "16:00",
+      "kurs": "Kurs 211",
+      "sonderfahrt": "Werkstatt",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 11.55
+    },
+    {
+      "datum": "2026-01-22",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-23",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-24",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-25",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-26",
+      "beginn": "12:43",
+      "ende": "19:00",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "Abbruch wegen Schnee",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 6.28
+    },
+    {
+      "datum": "2026-01-27",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-28",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-29",
+      "beginn": "12:43",
+      "ende": "23:40",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-30",
+      "beginn": "12:43",
+      "ende": "23:40",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-01-31",
+      "beginn": "14:40",
+      "ende": "22:25",
+      "kurs": "Kurs 613",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-01",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-02",
+      "beginn": "06:01",
+      "ende": "15:32",
+      "kurs": "Kurs 213",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-03",
+      "beginn": "04:27",
+      "ende": "08:53",
+      "kurs": "Kurs 211",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-04",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-05",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-06",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-07",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-08",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-09",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-10",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-11",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-12",
+      "beginn": "06:01",
+      "ende": "15:32",
+      "kurs": "Kurs 213",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-13",
+      "beginn": "04:38",
+      "ende": "10:50",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Dekra",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 6.2
+    },
+    {
+      "datum": "2026-02-14",
+      "beginn": "05:25",
+      "ende": "14:55",
+      "kurs": "Kurs 611",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-15",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-16",
+      "beginn": "04:38",
+      "ende": "08:23",
+      "kurs": "Kurs 212",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-17",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-18",
+      "beginn": "04:27",
+      "ende": "08:53",
+      "kurs": "Kurs 211",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-19",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-20",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-21",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-22",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-23",
+      "beginn": "04:32",
+      "ende": "14:09",
+      "kurs": "Kurs 1512051",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-24",
+      "beginn": "06:01",
+      "ende": "15:32",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Reparatur am 111",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 9.07
+    },
+    {
+      "datum": "2026-02-25",
+      "beginn": "04:32",
+      "ende": "14:09",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Mit dem 8000er nach Wahlstedt gefahren",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 11.47
+    },
+    {
+      "datum": "2026-02-26",
+      "beginn": "16:40",
+      "ende": "23:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "HH Airport",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-27",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-02-28",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-01",
+      "beginn": "07:48",
+      "ende": "20:25",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Den 454 mit nach Wahlstedt genommen",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 13.37
+    },
+    {
+      "datum": "2026-03-02",
+      "beginn": "14:00",
+      "ende": "16:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Werkstatt",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-03",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-04",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-05",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-06",
+      "beginn": "12:43",
+      "ende": "23:40",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-07",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-08",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-09",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-10",
+      "beginn": "06:00",
+      "ende": "15:32",
+      "kurs": "Kurs 213",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-11",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-12",
+      "beginn": "04:27",
+      "ende": "09:53",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV Notbus",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 5.43
+    },
+    {
+      "datum": "2026-03-13",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-14",
+      "beginn": "14:40",
+      "ende": "22:25",
+      "kurs": "Kurs 613",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-15",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-16",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-17",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-18",
+      "beginn": "04:38",
+      "ende": "12:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Bustausch in Kiel",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 7.37
+    },
+    {
+      "datum": "2026-03-19",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-20",
+      "beginn": "04:27",
+      "ende": "15:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Louisenlund, Werkstatt",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 10.56
+    },
+    {
+      "datum": "2026-03-21",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-22",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-23",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-24",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-25",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-26",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-27",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Erste Hilfe",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-28",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-29",
+      "beginn": "04:30",
+      "ende": "18:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Hildesheim",
+      "pause": "",
+      "uebernachtung": false,
+      "extraStunden": 12.5
+    },
+    {
+      "datum": "2026-03-30",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-03-31",
+      "beginn": "11:27",
+      "ende": "21:40",
+      "kurs": "Kurs 414",
+      "sonderfahrt": "",
+      "pause": "",
+      "uebernachtung": false
     }
   ],
-  "geloescht": [
-    "2026-04-03|14:20|Sonderfahrt",
-    "2026-04-04|04:00|Sonderfahrt",
-    "2026-03-12|06:40|Kurs 215",
-    "2026-05-01|06:01|Kurs 213",
-    "2026-05-01|11:56|Kurs 216",
-    "2026-05-02|03:00|Sonderfahrt",
-    "2026-05-02|04:38|Kurs 212 + Bio",
-    "2026-05-02|06:13|Kurs 214",
-    "2026-05-01|02:02|Sonderfahrt",
-    "2026-05-04|11:56|Kurs 216",
-    "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
-    "2026-05-04|10:54|Sonderfahrt",
-    "2026-05-04|08:00|Sonderfahrt",
-    "2026-05-04||Frei"
-  ]
+  "geloescht": []
 }
