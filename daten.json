@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-11T08:00:00.000Z",
+  "aktualisiert": "2026-05-11T06:25:41.527Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -987,7 +987,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof Verstärker",
+      "sonderfahrt": "Lindhof VerstÃ¤rker",
       "pause": "180"
     },
     {
@@ -995,7 +995,7 @@
       "beginn": "04:27",
       "ende": "14:00",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Kurs 211 GPS und Kamera Einbau Ri900",
+      "sonderfahrt": "Kurs 211 GPSund Kamera Einbau Ri900",
       "pause": ""
     },
     {
@@ -1088,10 +1088,18 @@
     },
     {
       "datum": "2026-05-04",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-04",
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis Verstärker",
+      "sonderfahrt": "Ulsnis VerstÃ¤rker",
       "pause": "",
       "uebernachtung": false
     },
@@ -1124,7 +1132,7 @@
       "beginn": "07:00",
       "ende": "15:00",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Schlüttsiel , Schleswig",
+      "sonderfahrt": "SchlÃ¼ttsiel , Schleswig",
       "pause": "",
       "uebernachtung": false
     },
@@ -1146,19 +1154,18 @@
     }
   ],
   "geloescht": [
-    "2026-05-04|11:56|Kurs 216",
+    "2026-04-03|14:20|Sonderfahrt",
+    "2026-04-04|04:00|Sonderfahrt",
+    "2026-03-12|06:40|Kurs 215",
+    "2026-05-01|06:01|Kurs 213",
+    "2026-05-01|11:56|Kurs 216",
     "2026-05-02|03:00|Sonderfahrt",
+    "2026-05-02|04:38|Kurs 212 + Bio",
     "2026-05-02|06:13|Kurs 214",
     "2026-05-01|02:02|Sonderfahrt",
-    "2026-05-04|10:54|Sonderfahrt",
-    "2026-05-04|08:00|Sonderfahrt",
-    "2026-05-04||Frei",
-    "2026-05-02|04:38|Kurs 212 + Bio",
-    "2026-04-04|04:00|Sonderfahrt",
+    "2026-05-04|11:56|Kurs 216",
     "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
-    "2026-05-01|11:56|Kurs 216",
-    "2026-05-01|06:01|Kurs 213",
-    "2026-04-03|14:20|Sonderfahrt",
-    "2026-03-12|06:40|Kurs 215"
+    "2026-05-04|10:54|Sonderfahrt",
+    "2026-05-04|08:00|Sonderfahrt"
   ]
 }
