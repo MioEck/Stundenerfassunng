@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-11T19:37:45.762Z",
+  "aktualisiert": "2026-05-13T04:08:59.500Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -987,7 +987,7 @@
       "beginn": "07:30",
       "ende": "14:30",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Lindhof VerstÃÂ¤rker",
+      "sonderfahrt": "Lindhof VerstÃ¤rker",
       "pause": "180"
     },
     {
@@ -1088,10 +1088,18 @@
     },
     {
       "datum": "2026-05-04",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-05-04",
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Ulsnis Verstärker",
+      "sonderfahrt": "Ulsnis VerstÃ¤rker",
       "pause": "",
       "uebernachtung": false
     },
@@ -1124,7 +1132,7 @@
       "beginn": "07:00",
       "ende": "15:00",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "Schlüttsiel , Schleswig",
+      "sonderfahrt": "SchlÃ¼ttsiel , Schleswig",
       "pause": "",
       "uebernachtung": false
     },
@@ -1151,6 +1159,15 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-05-12",
+      "beginn": "08:30",
+      "ende": "10:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Reinigung  111",
+      "pause": "",
+      "uebernachtung": false
     }
   ],
   "geloescht": [
@@ -1166,7 +1183,6 @@
     "2026-05-04|11:56|Kurs 216",
     "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
     "2026-05-04|10:54|Sonderfahrt",
-    "2026-05-04|08:00|Sonderfahrt",
-    "2026-05-04||Frei"
+    "2026-05-04|08:00|Sonderfahrt"
   ]
 }
