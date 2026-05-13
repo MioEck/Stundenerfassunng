@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-13T04:08:59.500Z",
+  "aktualisiert": "2026-05-13T16:50:14.583Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1166,6 +1166,15 @@
       "ende": "10:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Reinigung  111",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-13",
+      "beginn": "08:50",
+      "ende": "14:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Glücksburg,Schleswig",
       "pause": "",
       "uebernachtung": false
     }
