@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-17T10:47:29.059Z",
+  "aktualisiert": "2026-05-17T10:48:29.111Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1201,7 +1201,7 @@
       "beginn": "19:30",
       "ende": "05:40",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV , wegbringer",
+      "sonderfahrt": "SEV ,  Wegbringer",
       "pause": "",
       "uebernachtung": false
     }
