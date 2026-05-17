@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-16T16:35:26.464Z",
+  "aktualisiert": "2026-05-17T08:26:07.883Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1194,6 +1194,15 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Insel Föhr",
       "pause": "10",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-16",
+      "beginn": "19:30",
+      "ende": "05:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV , wegbringer",
+      "pause": "",
       "uebernachtung": false
     }
   ],
