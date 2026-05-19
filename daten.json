@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-19T06:16:00.804Z",
+  "aktualisiert": "2026-05-19T06:16:37.347Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1207,8 +1207,8 @@
     },
     {
       "datum": "2026-05-18",
-      "beginn": "10:30",
-      "ende": "08:15",
+      "beginn": "04:30",
+      "ende": "10:30",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Wegbringer Luxenburg",
       "pause": "",
@@ -1228,6 +1228,7 @@
     "2026-05-04|11:56|Kurs 216",
     "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
     "2026-05-04|10:54|Sonderfahrt",
-    "2026-05-04|08:00|Sonderfahrt"
+    "2026-05-04|08:00|Sonderfahrt",
+    "2026-05-18|10:30|Sonderfahrt"
   ]
 }
