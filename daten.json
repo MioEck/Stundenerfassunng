@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-19T06:15:08.446Z",
+  "aktualisiert": "2026-05-19T06:16:00.804Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1202,6 +1202,15 @@
       "ende": "05:40",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SEV , wegbringer",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-18",
+      "beginn": "10:30",
+      "ende": "08:15",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Wegbringer Luxenburg",
       "pause": "",
       "uebernachtung": false
     }
