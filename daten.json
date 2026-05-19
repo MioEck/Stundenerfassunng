@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-19T06:16:37.347Z",
+  "aktualisiert": "2026-05-19T06:17:05.333Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1213,6 +1213,14 @@
       "sonderfahrt": "Wegbringer Luxenburg",
       "pause": "",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-19",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
