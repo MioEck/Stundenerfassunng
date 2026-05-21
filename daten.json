@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-21T20:52:08.069Z",
+  "aktualisiert": "2026-05-21T20:52:59.865Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1233,7 +1233,7 @@
     {
       "datum": "2026-05-21",
       "beginn": "13:00",
-      "ende": "22:11",
+      "ende": "22:01",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Ablöser Kleinweisertal",
       "pause": "",
