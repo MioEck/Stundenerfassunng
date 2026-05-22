@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-21T20:52:59.865Z",
+  "aktualisiert": "2026-05-22T17:04:42.730Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1236,6 +1236,15 @@
       "ende": "22:01",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Ablöser Kleinweisertal",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-22",
+      "beginn": "08:30",
+      "ende": "15:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Ulsnis,Padborg",
       "pause": "",
       "uebernachtung": false
     }
