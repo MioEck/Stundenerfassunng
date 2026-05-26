@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-26T20:15:36.960Z",
+  "aktualisiert": "2026-05-26T20:16:13.436Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1263,7 +1263,7 @@
       "ende": "14:00",
       "kurs": "Kurs 211 + Verstärker",
       "sonderfahrt": "Verstärker",
-      "pause": "",
+      "pause": "2.5 Std",
       "extraStunden": 13.983333333333334
     }
   ],
