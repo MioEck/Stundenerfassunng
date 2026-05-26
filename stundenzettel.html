@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.18</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.19</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -397,8 +397,14 @@
         <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
       </div>
       <div id="sonder-pause-feld" class="field">
-        <label for="sonder-pause">Pause (Minuten, optional)</label>
-        <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30">
+        <label>Pause (optional)</label>
+        <div style="display:flex;gap:8px;">
+          <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
+          <select id="sonder-pause-einheit" style="width:110px;">
+            <option value="min">Minuten</option>
+            <option value="std">Stunden</option>
+          </select>
+        </div>
       </div>
       <div class="field">
         <label>Übernachtung</label>
@@ -436,8 +442,14 @@
         <input type="text" id="kombi-art" placeholder="z.B. Schulausflug, Feuerwehr">
       </div>
       <div class="field">
-        <label for="kombi-pause">Pause Sonderfahrt (Minuten, optional)</label>
-        <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30">
+        <label>Pause Sonderfahrt (optional)</label>
+        <div style="display:flex;gap:8px;">
+          <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
+          <select id="kombi-pause-einheit" style="width:110px;">
+            <option value="min">Minuten</option>
+            <option value="std">Stunden</option>
+          </select>
+        </div>
       </div>
       <div id="kombi-gesamt" class="preview" style="display:none;"></div>
     </div>
@@ -638,7 +650,12 @@ function bearbeiten(originalIndex) {
     document.getElementById('sonder-beginn').value = e.beginn;
     document.getElementById('sonder-ende').value = e.ende;
     document.getElementById('sonder-art').value = e.sonderfahrt;
-    document.getElementById('sonder-pause').value = e.pause || '';
+    // Pause und Einheit vorausfüllen
+    if (e.pause) {
+      const parts = e.pause.split(' ');
+      document.getElementById('sonder-pause').value = parts[0] || '';
+      document.getElementById('sonder-pause-einheit').value = (parts[1] === 'Std') ? 'std' : 'min';
+    }
     if (e.uebernachtung) {
       const btn = document.getElementById('uebernachtung-btn');
       btn.setAttribute('data-aktiv', '1');
@@ -655,7 +672,11 @@ function bearbeiten(originalIndex) {
     document.getElementById('kombi-beginn').value = e.beginn; // Sonderfahrt-Beginn
     document.getElementById('kombi-ende').value = e.ende;
     document.getElementById('kombi-art').value = e.sonderfahrt;
-    document.getElementById('kombi-pause').value = e.pause || '';
+    if (e.pause) {
+      const parts = e.pause.split(' ');
+      document.getElementById('kombi-pause').value = parts[0] || '';
+      document.getElementById('kombi-pause-einheit').value = (parts[1] === 'Std') ? 'std' : 'min';
+    }
     zeigeKombiVorschau();
   } else {
     setMode('kurs');
@@ -686,11 +707,13 @@ function formularZuruecksetzen() {
   document.getElementById('sonder-ende').value = '';
   document.getElementById('sonder-art').value = '';
   document.getElementById('sonder-pause').value = '';
+  document.getElementById('sonder-pause-einheit').value = 'min';
   document.getElementById('kombi-kurs').value = '';
   document.getElementById('kombi-beginn').value = '';
   document.getElementById('kombi-ende').value = '';
   document.getElementById('kombi-art').value = '';
   document.getElementById('kombi-pause').value = '';
+  document.getElementById('kombi-pause-einheit').value = 'min';
   document.getElementById('kombi-vorschau').style.display = 'none';
   document.getElementById('kombi-gesamt').style.display = 'none';
 }
@@ -709,7 +732,9 @@ function eintragen() {
     const beginn = document.getElementById('sonder-beginn').value;
     const ende = document.getElementById('sonder-ende').value;
     const art = document.getElementById('sonder-art').value.trim();
-    const pause = document.getElementById('sonder-pause').value.trim();
+    const pauseWert = document.getElementById('sonder-pause').value.trim();
+    const pauseEinheit = document.getElementById('sonder-pause-einheit').value;
+    const pause = pauseWert ? `${pauseWert} ${pauseEinheit === 'std' ? 'Std' : 'min'}` : '';
     const uebernachtung = document.getElementById('uebernachtung-btn').getAttribute('data-aktiv') === '1';
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
@@ -720,7 +745,9 @@ function eintragen() {
     const sBeginn = document.getElementById('kombi-beginn').value;
     const sEnde = document.getElementById('kombi-ende').value;
     const sArt = document.getElementById('kombi-art').value.trim();
-    const sPause = document.getElementById('kombi-pause').value.trim();
+    const sPauseWert = document.getElementById('kombi-pause').value.trim();
+    const sPauseEinheit = document.getElementById('kombi-pause-einheit').value;
+    const sPause = sPauseWert ? `${sPauseWert} ${sPauseEinheit === 'std' ? 'Std' : 'min'}` : '';
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
     if (!sBeginn || !sEnde) { toast('Bitte Beginn und Ende der Sonderfahrt eingeben', true); return; }
     if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
