@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-26T12:52:19.662Z",
+  "aktualisiert": "2026-05-26T20:15:36.960Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1193,7 +1193,7 @@
       "ende": "23:10",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Insel Föhr",
-      "pause": "10",
+      "pause": "10 Std",
       "uebernachtung": false
     },
     {
@@ -1260,11 +1260,11 @@
     {
       "datum": "2026-05-26",
       "beginn": "04:27",
-      "ende": "13:50",
+      "ende": "14:00",
       "kurs": "Kurs 211 + Verstärker",
       "sonderfahrt": "Verstärker",
-      "pause": "2.5",
-      "extraStunden": 13.816666666666666
+      "pause": "",
+      "extraStunden": 13.983333333333334
     }
   ],
   "geloescht": [
