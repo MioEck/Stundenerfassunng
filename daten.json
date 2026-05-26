@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-24T19:40:07.501Z",
+  "aktualisiert": "2026-05-26T04:57:48.812Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1256,6 +1256,15 @@
       "sonderfahrt": "SEV",
       "pause": "",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-26",
+      "beginn": "04:27",
+      "ende": "14:00",
+      "kurs": "Kurs 211 + Verstärker",
+      "sonderfahrt": "Verstärker",
+      "pause": "",
+      "extraStunden": 9.55
     }
   ],
   "geloescht": [
