@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-27T09:26:57.848Z",
+  "aktualisiert": "2026-05-27T09:27:08.965Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1193,7 +1193,7 @@
       "ende": "23:10",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Insel Föhr",
-      "pause": "10 min",
+      "pause": "10 Std",
       "uebernachtung": false
     },
     {
