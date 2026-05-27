@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-27T09:28:18.565Z",
+  "aktualisiert": "2026-05-27T09:31:56.376Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1245,6 +1245,15 @@
       "ende": "15:40",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Ulsnis,Padborg",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-23",
+      "beginn": "04:40",
+      "ende": "18:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Flughafen HH , Schönhagen",
       "pause": "",
       "uebernachtung": false
     },
