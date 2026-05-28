@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-28T12:42:06.016Z",
+  "aktualisiert": "2026-05-28T12:43:08.504Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1294,12 +1294,12 @@
     },
     {
       "datum": "2026-05-28",
-      "beginn": "12:43",
-      "ende": "23:40",
-      "kurs": "Kurs 217 + 424 von Mohrkich",
+      "beginn": "10:00",
+      "ende": "12:42",
+      "kurs": "Sonderfahrt",
       "sonderfahrt": "424 von Mohrkich",
       "pause": "",
-      "extraStunden": 24.616666666666667
+      "uebernachtung": false
     }
   ],
   "geloescht": [
@@ -1316,6 +1316,7 @@
     "2026-05-02|06:01|Kurs 213 + Das ist ein Test Fahrt",
     "2026-05-04|10:54|Sonderfahrt",
     "2026-05-04|08:00|Sonderfahrt",
-    "2026-05-18|10:30|Sonderfahrt"
+    "2026-05-18|10:30|Sonderfahrt",
+    "2026-05-28|12:43|Kurs 217 + 424 von Mohrkich"
   ]
 }
