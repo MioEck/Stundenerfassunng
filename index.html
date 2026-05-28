@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.20</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.21</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -575,6 +575,27 @@ function berechneStunden(beginn, ende) {
   let min = (eh * 60 + em) - (bh * 60 + bm);
   if (min < 0) min += 24 * 60; // über Mitternacht
   return min / 60;
+}
+
+// Berechnet den Pausenabzug nach der Regelung:
+// Erste 2 Stunden Pause werden voll abgezogen,
+// alles darüber nur zur Hälfte.
+function berechnePausenabzug(pauseStr) {
+  if (!pauseStr) return 0;
+  const parts = pauseStr.trim().split(' ');
+  const wert = parseFloat(parts[0]);
+  if (isNaN(wert) || wert <= 0) return 0;
+  const einheit = parts[1] || 'min';
+  const stundenGesamt = einheit === 'Std' ? wert : wert / 60;
+  if (stundenGesamt <= 2) return stundenGesamt;
+  return 2 + (stundenGesamt - 2) * 0.5;
+}
+
+// Berechnet bezahlte Stunden für Sonderfahrten (mit Pausenregelung)
+function berechneNettoStunden(beginn, ende, pause, istSonderfahrt) {
+  const brutto = berechneStunden(beginn, ende);
+  if (!istSonderfahrt || !pause) return brutto;
+  return Math.max(0, brutto - berechnePausenabzug(pause));
 }
 
 function toggleUebernachtung() {
@@ -884,7 +905,8 @@ function zeigeTabelle() {
   const summe = monatsEintraege.reduce((s, e) => {
     if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn || !e.ende) return s;
     if (e.extraStunden !== undefined) return s + e.extraStunden;
-    return s + berechneStunden(e.beginn, e.ende);
+    const istSonder = e.kurs === 'Sonderfahrt';
+    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, istSonder);
   }, 0);
   document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
   document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
@@ -900,7 +922,11 @@ function zeigeTabelle() {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
-    const std = istFrei ? '—' : (e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende)).toFixed(2).replace('.', ',');
+    const istSonder = e.kurs === 'Sonderfahrt';
+    const std = istFrei ? '—' : (e.extraStunden !== undefined
+      ? e.extraStunden
+      : berechneNettoStunden(e.beginn, e.ende, e.pause, istSonder)
+    ).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? e.pause : '—';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
     const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
