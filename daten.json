@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-28T12:43:08.504Z",
+  "aktualisiert": "2026-05-28T12:43:19.510Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1300,6 +1300,14 @@
       "sonderfahrt": "424 von Mohrkich",
       "pause": "",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-28",
+      "beginn": "12:43",
+      "ende": "23:40",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
