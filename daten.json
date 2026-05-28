@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-28T06:39:48.723Z",
+  "aktualisiert": "2026-05-28T12:38:44.434Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1291,6 +1291,15 @@
       "sonderfahrt": "Trappenkamp",
       "pause": "3 Std",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-05-28",
+      "beginn": "12:43",
+      "ende": "12:47",
+      "kurs": "Kurs 217 + 424 von Mohrkich",
+      "sonderfahrt": "424 von Mohrkich",
+      "pause": "",
+      "extraStunden": 13.733333333333333
     }
   ],
   "geloescht": [
