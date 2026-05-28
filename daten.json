@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-27T09:31:56.376Z",
+  "aktualisiert": "2026-05-28T02:50:20.881Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1282,6 +1282,15 @@
       "sonderfahrt": "Verstärker",
       "pause": "2.5 Std",
       "extraStunden": 13.983333333333334
+    },
+    {
+      "datum": "2026-05-27",
+      "beginn": "06:10",
+      "ende": "15:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Trappenkamp",
+      "pause": "3 Std",
+      "uebernachtung": false
     }
   ],
   "geloescht": [
