@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.22</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.23</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -968,7 +968,7 @@ function zeigeTabelle() {
       : berechneNettoStunden(e.beginn, e.ende, e.pause, istSonder)
     ).toFixed(2).replace('.', ',');
     const pauseAnzeige = e.pause ? e.pause : '—';
-    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : e.kurs;
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : extrahiereKurs(e.kurs);
     const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
     html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
       <td>${datumKurz}</td>
@@ -984,6 +984,13 @@ function zeigeTabelle() {
   });
   html += '</tbody></table>';
   c.innerHTML = html;
+}
+
+// Gibt nur den Kursanteil zurück — "Kurs 211 + Verstärker" → "Kurs 211"
+function extrahiereKurs(kurs) {
+  if (!kurs) return kurs;
+  const plusIdx = kurs.indexOf(' + ');
+  return plusIdx !== -1 ? kurs.substring(0, plusIdx) : kurs;
 }
 
 function ersetzeUmlaute(text) {
@@ -1005,7 +1012,7 @@ function exportMonatCSV() {
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
     const pauseWert = e.pause ? e.pause : '';
-    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(e.kurs);
+    const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(extrahiereKurs(e.kurs));
     const sonderfahrtAnzeige = ersetzeUmlaute(e.sonderfahrt);
     const uebWert = e.uebernachtung ? 'X' : '';
     if (istFrei) return `${datumDE};;;-;${e.kurs};;`;
