@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-29T07:02:47.724Z",
+  "aktualisiert": "2026-05-29T07:04:17.186Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1300,6 +1300,14 @@
       "sonderfahrt": "434 abgeholt Mohr",
       "pause": "",
       "extraStunden": 13.649999999999999
+    },
+    {
+      "datum": "2026-06-04",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
