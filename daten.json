@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-29T06:51:43.599Z",
+  "aktualisiert": "2026-05-29T06:53:46.793Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1295,19 +1295,11 @@
     {
       "datum": "2026-05-28",
       "beginn": "10:00",
-      "ende": "12:42",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "424 von Mohrkich",
-      "pause": "",
-      "uebernachtung": false
-    },
-    {
-      "datum": "2026-05-28",
-      "beginn": "12:43",
       "ende": "23:40",
-      "kurs": "Kurs 217",
-      "sonderfahrt": "",
-      "pause": ""
+      "kurs": "Kurs 217 + 434 abgeholt Mohr",
+      "sonderfahrt": "434 abgeholt Mohr",
+      "pause": "",
+      "extraStunden": 13.649999999999999
     }
   ],
   "geloescht": [
@@ -1325,6 +1317,8 @@
     "2026-05-04|10:54|Sonderfahrt",
     "2026-05-04|08:00|Sonderfahrt",
     "2026-05-18|10:30|Sonderfahrt",
-    "2026-05-28|12:43|Kurs 217 + 424 von Mohrkich"
+    "2026-05-28|12:43|Kurs 217 + 424 von Mohrkich",
+    "2026-05-28|12:43|Kurs 217",
+    "2026-05-28|10:00|Sonderfahrt"
   ]
 }
