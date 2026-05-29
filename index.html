@@ -314,7 +314,7 @@
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.21</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.22</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -418,6 +418,15 @@
     <!-- Kombiniert: Kurs + Sonderfahrt -->
     <div id="kombi-felder" style="display:none;">
       <div class="field">
+        <label>Reihenfolge</label>
+        <div class="toggle-wrapper">
+          <div class="toggle" style="min-width:unset;">
+            <button type="button" id="kombi-order-vor" class="active" onclick="setKombiOrder('vor')" style="padding:10px 14px;font-size:13px;">Sonder → Kurs</button>
+            <button type="button" id="kombi-order-nach" onclick="setKombiOrder('nach')" style="padding:10px 14px;font-size:13px;">Kurs → Sonder</button>
+          </div>
+        </div>
+      </div>
+      <div class="field">
         <label for="kombi-kurs">Kurs auswählen</label>
         <select id="kombi-kurs" onchange="zeigeKombiVorschau()">
           <option value="">— Kurs wählen —</option>
@@ -425,16 +434,16 @@
       </div>
       <div id="kombi-vorschau" class="preview" style="display:none;"></div>
       <div style="margin:12px 0;border-top:1px solid #1e3050;padding-top:12px;">
-        <label style="color:#00b8c8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt danach</label>
+        <label id="kombi-sonder-label" style="color:#00b8c8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt davor</label>
       </div>
       <div class="row">
         <div class="field">
           <label for="kombi-beginn">Beginn Sonderfahrt</label>
-          <input type="time" id="kombi-beginn">
+          <input type="time" id="kombi-beginn" onchange="aktualisiereKombiGesamt()">
         </div>
         <div class="field">
           <label for="kombi-ende">Ende Sonderfahrt</label>
-          <input type="time" id="kombi-ende">
+          <input type="time" id="kombi-ende" onchange="aktualisiereKombiGesamt()">
         </div>
       </div>
       <div class="field">
@@ -456,6 +465,7 @@
 
     <div style="display:flex;gap:8px;margin-top:8px;">
       <button class="btn-primary" id="speichern-btn" onclick="eintragen()" style="flex:1;">Speichern</button>
+      <button id="loeschen-btn" class="btn-secondary btn-danger" onclick="bearbeitenLoeschen()" style="display:none;padding:16px 14px;">🗑</button>
       <button id="abbrechen-btn" class="btn-secondary" onclick="bearbeitenAbbrechen()" style="display:none;padding:16px 20px;">✕</button>
     </div>
   </div>
@@ -625,6 +635,16 @@ function uebernachtungReset() {
   btn.style.background = '#0d1a2a';
 }
 
+let kombiOrder = 'vor'; // 'vor' = Sonder vor Kurs, 'nach' = Sonder nach Kurs
+
+function setKombiOrder(order) {
+  kombiOrder = order;
+  document.getElementById('kombi-order-vor').classList.toggle('active', order === 'vor');
+  document.getElementById('kombi-order-nach').classList.toggle('active', order === 'nach');
+  document.getElementById('kombi-sonder-label').textContent = order === 'vor' ? '+ Sonderfahrt davor' : '+ Sonderfahrt danach';
+  aktualisiereKombiGesamt();
+}
+
 function zeigeKombiVorschau() {
   const nr = document.getElementById('kombi-kurs').value;
   const v = document.getElementById('kombi-vorschau');
@@ -643,11 +663,13 @@ function aktualisiereKombiGesamt() {
   const sonderBeginn = document.getElementById('kombi-beginn').value;
   const sonderEnde = document.getElementById('kombi-ende').value;
   const g = document.getElementById('kombi-gesamt');
-  if (nr && sonderBeginn && sonderEnde) {
+  if (nr && sonderBeginn && sonderEnde && KURSE[nr]) {
     const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
     const std2 = berechneStunden(sonderBeginn, sonderEnde);
+    const gesamtBeginn = kombiOrder === 'vor' ? sonderBeginn : KURSE[nr].beginn;
+    const gesamtEnde = kombiOrder === 'vor' ? KURSE[nr].ende : sonderEnde;
     g.style.display = 'block';
-    g.innerHTML = `Gesamt: <strong>${KURSE[nr].beginn} – ${sonderEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
+    g.innerHTML = `Gesamt: <strong>${gesamtBeginn} – ${gesamtEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
   } else {
     g.style.display = 'none';
   }
@@ -659,6 +681,7 @@ function bearbeiten(originalIndex) {
   document.getElementById('formular-titel').textContent = 'Eintrag bearbeiten';
   document.getElementById('speichern-btn').textContent = 'Änderung speichern';
   document.getElementById('abbrechen-btn').style.display = 'block';
+  document.getElementById('loeschen-btn').style.display = 'block';
   document.getElementById('datum').value = e.datum;
 
   // Modus erkennen
@@ -710,11 +733,25 @@ function bearbeiten(originalIndex) {
   document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
 }
 
+function bearbeitenLoeschen() {
+  if (bearbeitenIndex === null) return;
+  if (!confirm('Diesen Eintrag löschen?')) return;
+  loeschen(bearbeitenIndex);
+  bearbeitenIndex = null;
+  document.getElementById('formular-titel').textContent = 'Neue Eintragung';
+  document.getElementById('speichern-btn').textContent = 'Speichern';
+  document.getElementById('abbrechen-btn').style.display = 'none';
+  document.getElementById('loeschen-btn').style.display = 'none';
+  formularZuruecksetzen();
+  setMode('kurs');
+}
+
 function bearbeitenAbbrechen() {
   bearbeitenIndex = null;
   document.getElementById('formular-titel').textContent = 'Neue Eintragung';
   document.getElementById('speichern-btn').textContent = 'Speichern';
   document.getElementById('abbrechen-btn').style.display = 'none';
+  document.getElementById('loeschen-btn').style.display = 'none';
   formularZuruecksetzen();
   setMode('kurs');
 }
@@ -774,14 +811,16 @@ function eintragen() {
     if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
     const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
     const std2 = berechneStunden(sBeginn, sEnde);
+    const gesamtBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
+    const gesamtEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
     eintrag = {
       datum,
-      beginn: KURSE[nr].beginn,
-      ende: sEnde,
+      beginn: gesamtBeginn,
+      ende: gesamtEnde,
       kurs: `Kurs ${nr} + ${sArt}`,
       sonderfahrt: sArt,
       pause: sPause,
-      extraStunden: std1 + std2  // gespeichert für korrekte Berechnung
+      extraStunden: std1 + std2
     };
 
   } else if (modus === 'frei') {
@@ -802,6 +841,7 @@ function eintragen() {
     document.getElementById('formular-titel').textContent = 'Neue Eintragung';
     document.getElementById('speichern-btn').textContent = 'Speichern';
     document.getElementById('abbrechen-btn').style.display = 'none';
+    document.getElementById('loeschen-btn').style.display = 'none';
   }
 
   eintraege.push(eintrag);
