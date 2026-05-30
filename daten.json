@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-30T08:21:25.808Z",
+  "aktualisiert": "2026-05-30T19:52:08.338Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1300,6 +1300,15 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-05-29",
+      "beginn": "10:10",
+      "ende": "18:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Shuttle LZDM",
+      "pause": "",
+      "uebernachtung": false
     }
   ],
   "geloescht": [
