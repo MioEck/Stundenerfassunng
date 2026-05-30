@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-05-29T07:04:51.064Z",
+  "aktualisiert": "2026-05-30T03:55:59.395Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1088,14 +1088,6 @@
     },
     {
       "datum": "2026-05-04",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
@@ -1128,7 +1120,7 @@
       "pause": ""
     },
     {
-      "datum": "2026-05-07",
+      "datum": "2026-05-08",
       "beginn": "07:00",
       "ende": "15:00",
       "kurs": "Sonderfahrt",
@@ -1328,6 +1320,8 @@
     "2026-05-28|12:43|Kurs 217 + 424 von Mohrkich",
     "2026-05-28|12:43|Kurs 217",
     "2026-05-28|10:00|Sonderfahrt",
-    "2026-06-04||Frei"
+    "2026-06-04||Frei",
+    "2026-05-04||Frei",
+    "2026-05-07|07:00|Sonderfahrt"
   ]
 }
