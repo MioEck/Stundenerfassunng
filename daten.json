@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-07T11:53:49.889Z",
+  "aktualisiert": "2026-06-07T11:54:46.200Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1350,6 +1350,15 @@
       "ende": "15:00",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Schleswig",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-06-06",
+      "beginn": "19:10",
+      "ende": "01:10",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Sev",
       "pause": "",
       "uebernachtung": false
     }
