@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-08T04:24:50.050Z",
+  "aktualisiert": "2026-06-08T04:25:40.007Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1361,6 +1361,14 @@
       "sonderfahrt": "Sev",
       "pause": "",
       "uebernachtung": false
+    },
+    {
+      "datum": "2026-06-07",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
