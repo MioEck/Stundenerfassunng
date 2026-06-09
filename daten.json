@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-08T18:18:30.844Z",
+  "aktualisiert": "2026-06-09T19:51:17.544Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1385,6 +1385,15 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Hoffahrten",
       "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-06-09",
+      "beginn": "07:10",
+      "ende": "18:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Hell Kiel",
+      "pause": "5 Std",
       "uebernachtung": false
     }
   ],
