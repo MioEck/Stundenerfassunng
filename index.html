@@ -13,312 +13,324 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-    background: #0d1a2a;
-    color: #e8e6e1;
-    min-height: 100vh;
-    padding: 16px;
-    line-height: 1.5;
-  }
-  .container { max-width: 720px; margin: 0 auto; }
-  header {
-    border-bottom: 2px solid #00b8c8;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-  .subtitle { font-size: 13px; color: #8a8680; margin-top: 4px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: #0d1a2a;
+  color: #e8e6e1;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 16px; }
 
-  .card {
-    background: #112038;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-    border: 1px solid #1a2d45;
-  }
-  .card-title {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #00b8c8;
-    margin-bottom: 16px;
-    font-weight: 600;
-  }
+header {
+  border-bottom: 2px solid #00b8c8;
+  padding-bottom: 12px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.subtitle { font-size: 13px; color: #8a8680; margin-top: 4px; }
 
-  label {
-    display: block;
-    font-size: 13px;
-    color: #a8a49d;
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-  input, select {
-    width: 100%;
-    padding: 12px 14px;
-    background: #0d1a2a;
-    border: 1px solid #1e3050;
-    border-radius: 8px;
-    color: #e8e6e1;
-    font-size: 16px;
-    font-family: inherit;
-  }
-  input:focus, select:focus { outline: none; border-color: #00b8c8; }
-  .field { margin-bottom: 14px; }
+/* Reiter-Navigation */
+.nav-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #1a2d45;
+}
+.nav-tab {
+  padding: 14px;
+  background: transparent;
+  border: none;
+  color: #a8a49d;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+.nav-tab.active {
+  color: #00b8c8;
+  border-bottom-color: #00b8c8;
+}
 
-  .toggle-wrapper {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-bottom: 18px;
-    /* Scrollbar verstecken */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .toggle-wrapper::-webkit-scrollbar { display: none; }
-  .toggle {
-    display: flex;
-    gap: 8px;
-    min-width: max-content;
-  }
-  .toggle button {
-    padding: 14px 20px;
-    background: #0d1a2a;
-    border: 1px solid #1e3050;
-    border-radius: 8px;
-    color: #a8a49d;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .toggle button.active {
-    background: #00b8c8;
-    border-color: #00b8c8;
-    color: #0d1a2a;
-  }
+.reiter { display: none; }
+.reiter.active { display: block; }
 
-  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.card {
+  background: #112038;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #1a2d45;
+}
+.card-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #00b8c8;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
 
-  .btn-primary {
-    width: 100%;
-    padding: 16px;
-    background: #00b8c8;
-    color: #0d1a2a;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 8px;
-  }
-  .btn-primary:hover { background: #40d0e0; }
+label { display: block; font-size: 13px; color: #a8a49d; margin-bottom: 6px; font-weight: 500; }
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  background: #0d1a2a;
+  border: 1px solid #1e3050;
+  border-radius: 8px;
+  color: #e8e6e1;
+  font-size: 16px;
+  font-family: inherit;
+}
+input:focus, select:focus { outline: none; border-color: #00b8c8; }
+.field { margin-bottom: 14px; }
 
-  .btn-secondary {
-    padding: 10px 14px;
-    background: transparent;
-    color: #a8a49d;
-    border: 1px solid #1e3050;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  .btn-secondary:hover { color: #e8e6e1; border-color: #5a5f69; }
-  .btn-danger { color: #e87a5d; border-color: #4a2f29; }
-  .btn-danger:hover { color: #ff8a6d; border-color: #6a3f39; }
+.toggle-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 18px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.toggle-wrapper::-webkit-scrollbar { display: none; }
+.toggle { display: flex; gap: 8px; min-width: max-content; }
+.toggle button {
+  padding: 14px 20px;
+  background: #0d1a2a;
+  border: 1px solid #1e3050;
+  border-radius: 8px;
+  color: #a8a49d;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.toggle button.active { background: #00b8c8; border-color: #00b8c8; color: #0d1a2a; }
 
-  .preview {
-    background: #0d1a2a;
-    border-radius: 6px;
-    padding: 12px;
-    margin-top: 12px;
-    font-size: 13px;
-    color: #a8a49d;
-    border-left: 3px solid #00b8c8;
-  }
-  .preview strong { color: #e8e6e1; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-  /* Monats-Tabs */
-  .tabs-wrapper {
-    overflow-x: auto;
-    margin-bottom: 16px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .tabs {
-    display: flex;
-    gap: 4px;
-    padding-bottom: 4px;
-    min-width: max-content;
-  }
-  .tab {
-    padding: 10px 16px;
-    background: #112038;
-    border: 1px solid #1a2d45;
-    border-radius: 6px;
-    color: #a8a49d;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .tab.active {
-    background: #00b8c8;
-    border-color: #00b8c8;
-    color: #0d1a2a;
-  }
-  .tab .badge {
-    margin-left: 6px;
-    font-size: 11px;
-    opacity: 0.7;
-  }
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: #00b8c8;
+  color: #0d1a2a;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.btn-primary:hover { background: #40d0e0; }
+.btn-secondary {
+  padding: 10px 14px;
+  background: transparent;
+  color: #a8a49d;
+  border: 1px solid #1e3050;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-secondary:hover { color: #e8e6e1; border-color: #5a5f69; }
+.btn-danger { color: #e87a5d; border-color: #4a2f29; }
+.btn-danger:hover { color: #ff8a6d; border-color: #6a3f39; }
 
-  .monat-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 14px;
-    background: #0d1a2a;
-    border-radius: 6px;
-    margin-bottom: 14px;
-    font-size: 13px;
-  }
-  .monat-info .label { color: #8a8680; }
-  .monat-info .wert { color: #00b8c8; font-weight: 700; font-size: 15px; }
+.preview {
+  background: #0d1a2a;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #a8a49d;
+  border-left: 3px solid #00b8c8;
+}
+.preview strong { color: #e8e6e1; }
 
-  .entries-actions {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 14px;
-    flex-wrap: wrap;
-  }
+.sync-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #0a1828;
+  border: 1px solid #1a3a5a;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: #8a9abd;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sync-bar.ok { border-color: #2a5a3a; background: #0a1e0a; color: #7ab48a; }
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4a5a7a; flex-shrink: 0; }
+.sync-dot.ok { background: #2a8d3a; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th {
-    text-align: left;
-    padding: 8px 6px;
-    color: #8a8680;
-    font-weight: 600;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid #1e3050;
-  }
-  td {
-    padding: 10px 6px;
-    border-bottom: 1px solid #1a2d45;
-    color: #e8e6e1;
-  }
-  td.std { color: #00b8c8; font-weight: 600; }
-  td.actions { text-align: right; }
-  .delete-btn {
-    background: none;
-    border: none;
-    color: #6a6660;
-    cursor: pointer;
-    padding: 4px 8px;
-    font-size: 16px;
-  }
-  .delete-btn:hover { color: #e87a5d; }
+.backup-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: #0d1e30;
+  border: 1px solid #0d2a3a;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #c8c4bd;
+}
+.backup-bar.warn { background: #3a2520; border-color: #6a3520; color: #ffb733; }
 
-  .empty {
-    text-align: center;
-    padding: 32px 16px;
-    color: #6a6660;
-    font-size: 14px;
-  }
+/* Monats-Tabs */
+.tabs-wrapper { overflow-x: auto; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
+.tabs { display: flex; gap: 4px; padding-bottom: 4px; min-width: max-content; }
+.tab {
+  padding: 10px 16px;
+  background: #112038;
+  border: 1px solid #1a2d45;
+  border-radius: 6px;
+  color: #a8a49d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tab.active { background: #00b8c8; border-color: #00b8c8; color: #0d1a2a; }
+.tab .badge { margin-left: 6px; font-size: 11px; opacity: 0.7; }
 
-  .backup-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 14px;
-    background: #0d1e30;
-    border: 1px solid #0d2a3a;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: #c8c4bd;
-  }
-  .backup-bar.warn { background: #0d2535; border-color: #0d2535; color: #40d0e0; }
+.monat-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: #0d1a2a;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+.monat-info .label { color: #8a8680; }
+.monat-info .wert { color: #00b8c8; font-weight: 700; font-size: 15px; }
 
-  .sync-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 14px;
-    background: #0a1828;
-    border: 1px solid #1a3a5a;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: #8a9abd;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .sync-bar.ok { border-color: #2a5a3a; background: #0a1828; color: #7ab48a; }
-  .sync-bar.warn { border-color: #0d2535; background: #0d2535; color: #40d0e0; }
-  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #4a5a7a; flex-shrink: 0; }
-  .sync-dot.ok { background: #00a0b0; }
-  .sync-dot.warn { background: #00b8c8; }
+.entries-actions { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 
-  .modal-overlay {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.75);
-    display: none; align-items: center; justify-content: center;
-    z-index: 200; padding: 16px;
-  }
-  .modal-overlay.show { display: flex; }
-  .modal {
-    background: #112038; border-radius: 12px; padding: 24px;
-    max-width: 480px; width: 100%; border: 1px solid #1e3050;
-    max-height: 90vh; overflow-y: auto;
-  }
-  .modal h3 { color: #00b8c8; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
-  .modal p { font-size: 13px; color: #a8a49d; margin-bottom: 10px; }
-  .modal-buttons { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; padding: 8px 6px; color: #8a8680; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1e3050; }
+td { padding: 10px 6px; border-bottom: 1px solid #1a2d45; color: #e8e6e1; }
+td.std { color: #00b8c8; font-weight: 600; }
+td.actions { text-align: right; }
+.delete-btn { background: none; border: none; color: #6a6660; cursor: pointer; padding: 4px 8px; font-size: 16px; }
+.delete-btn:hover { color: #e87a5d; }
 
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #00a0b0;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 100;
-    max-width: 90%;
-    text-align: center;
-  }
-  .toast.show { opacity: 1; }
+.empty { text-align: center; padding: 32px 16px; color: #6a6660; font-size: 14px; }
 
-  @media (max-width: 480px) {
-    .row { grid-template-columns: 1fr; }
-    table { font-size: 12px; }
-    th, td { padding: 8px 4px; }
-  }
+/* Finanzamt */
+.fa-card { background: #0d1e30; border: 1px solid #1a3050; border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+.fa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.fa-header:hover { background: #112038; }
+.fa-titel { font-size: 14px; font-weight: 700; color: #00b8c8; }
+.fa-gesamt { font-size: 22px; font-weight: 700; color: #e8e6e1; }
+.fa-sub { font-size: 12px; color: #8a8680; margin-top: 2px; }
+.fa-pfeil { font-size: 18px; color: #a8a49d; transition: transform 0.2s; }
+.fa-pfeil.offen { transform: rotate(180deg); }
+.fa-jahre { display: flex; gap: 8px; padding: 0 20px 12px; }
+.fa-jahr-btn {
+  padding: 6px 14px;
+  background: #0d1a2a;
+  border: 1px solid #1e3050;
+  border-radius: 6px;
+  color: #a8a49d;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.fa-jahr-btn.active { background: #00b8c8; border-color: #00b8c8; color: #0d1a2a; }
+.fa-monate { padding: 0 20px 16px; }
+.fa-monat-zeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a2d45;
+  font-size: 14px;
+}
+.fa-monat-zeile:last-child { border-bottom: none; }
+.fa-monat-name { color: #a8a49d; }
+.fa-monat-tage { color: #e8e6e1; font-weight: 600; }
+.fa-monat-tage span { color: #00b8c8; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.75);
+  display: none; align-items: center; justify-content: center;
+  z-index: 200; padding: 16px;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: #112038; border-radius: 12px; padding: 24px;
+  max-width: 480px; width: 100%; border: 1px solid #1a2d45;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal h3 { color: #00b8c8; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+.modal p { font-size: 13px; color: #a8a49d; margin-bottom: 10px; }
+.modal-buttons { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; flex-wrap: wrap; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00a0b0;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 300;
+  max-width: 90%;
+  text-align: center;
+}
+.toast.show { opacity: 1; }
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 1fr; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 4px; }
+}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.23</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.24</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
 
+  <nav class="nav-tabs" style="margin-top:16px;">
+    <button class="nav-tab active" onclick="wechsleReiter('eingabe')">✏️ Eingabe</button>
+    <button class="nav-tab" onclick="wechsleReiter('uebersicht')">📋 Übersicht</button>
+  </nav>
+
+  <!-- Sync-Bar (immer sichtbar) -->
   <div id="sync-bar" class="sync-bar">
     <div style="display:flex;align-items:center;gap:8px;flex:1;">
       <div id="sync-dot" class="sync-dot"></div>
@@ -331,7 +343,7 @@
     <span id="backup-text">Letzte Sicherung: noch nie</span>
   </div>
 
-  <!-- Sync-Einstellungen Modal -->
+  <!-- Sync Modal -->
   <div id="sync-modal" class="modal-overlay">
     <div class="modal">
       <h3>GitHub Sync einrichten</h3>
@@ -344,7 +356,7 @@
         <label for="sync-repo">GitHub Benutzername/Repo</label>
         <input type="text" id="sync-repo" placeholder="MioEck/Stundenerfassung">
       </div>
-      <p style="font-size:12px;color:#6a6660;">Der Token wird nur lokal auf diesem Gerät gespeichert und nirgendwo übertragen außer zu GitHub.</p>
+      <p style="font-size:12px;color:#6a6660;">Der Token wird nur lokal auf diesem Gerät gespeichert.</p>
       <div class="modal-buttons">
         <button class="btn-secondary" onclick="schliesseSync()">Abbrechen</button>
         <button class="btn-secondary btn-danger" onclick="syncTrennen()">Trennen</button>
@@ -353,155 +365,180 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title" id="formular-titel">Neue Eintragung</div>
+  <!-- REITER 1: EINGABE -->
+  <div id="reiter-eingabe" class="reiter active">
+    <div class="card">
+      <div class="card-title" id="formular-titel">Neue Eintragung</div>
 
-    <div class="toggle-wrapper">
-      <div class="toggle">
-        <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
-        <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
-        <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
-        <button id="btn-frei" onclick="setMode('frei')">Frei</button>
-        <button id="btn-urlaub" onclick="setMode('urlaub')">Urlaub</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label for="datum">Datum</label>
-      <input type="date" id="datum">
-    </div>
-
-    <div id="kurs-felder">
-      <div class="field">
-        <label for="kurs">Kurs auswählen</label>
-        <select id="kurs" onchange="zeigeVorschau()">
-          <option value="">— Kurs wählen —</option>
-        </select>
-      </div>
-      <div id="vorschau" class="preview" style="display:none;"></div>
-    </div>
-
-    <div id="sonder-felder" style="display:none;">
-      <div class="row">
-        <div class="field">
-          <label for="sonder-beginn">Beginn</label>
-          <input type="time" id="sonder-beginn">
-        </div>
-        <div class="field">
-          <label for="sonder-ende">Ende</label>
-          <input type="time" id="sonder-ende">
+      <div class="toggle-wrapper">
+        <div class="toggle">
+          <button id="btn-kurs" class="active" onclick="setMode('kurs')">Linienkurs</button>
+          <button id="btn-sonder" onclick="setMode('sonder')">Sonderfahrt</button>
+          <button id="btn-kombi" onclick="setMode('kombi')">Kurs+Sonder</button>
+          <button id="btn-frei" onclick="setMode('frei')">Frei</button>
+          <button id="btn-urlaub" onclick="setMode('urlaub')">Urlaub</button>
         </div>
       </div>
+
       <div class="field">
-        <label for="sonder-art">Art der Sonderfahrt</label>
-        <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
+        <label for="datum">Datum</label>
+        <input type="date" id="datum">
       </div>
-      <div id="sonder-pause-feld" class="field">
-        <label>Pause (optional)</label>
-        <div style="display:flex;gap:8px;">
-          <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
-          <select id="sonder-pause-einheit" style="width:110px;">
-            <option value="min">Minuten</option>
-            <option value="std">Stunden</option>
+
+      <div id="kurs-felder">
+        <div class="field">
+          <label for="kurs">Kurs auswählen</label>
+          <select id="kurs" onchange="zeigeVorschau()">
+            <option value="">— Kurs wählen —</option>
           </select>
         </div>
+        <div id="vorschau" class="preview" style="display:none;"></div>
       </div>
-      <div class="field">
-        <label>Übernachtung</label>
-        <button type="button" id="uebernachtung-btn" onclick="toggleUebernachtung()"
-          style="width:100%;padding:12px 14px;background:#0d1a2a;border:1px solid #1e3050;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
-          Nein
-        </button>
-        </div>
-    </div>
 
-    <!-- Kombiniert: Kurs + Sonderfahrt -->
-    <div id="kombi-felder" style="display:none;">
-      <div class="field">
-        <label>Reihenfolge</label>
-        <div class="toggle-wrapper">
-          <div class="toggle" style="min-width:unset;">
-            <button type="button" id="kombi-order-vor" class="active" onclick="setKombiOrder('vor')" style="padding:10px 14px;font-size:13px;">Sonder → Kurs</button>
-            <button type="button" id="kombi-order-nach" onclick="setKombiOrder('nach')" style="padding:10px 14px;font-size:13px;">Kurs → Sonder</button>
+      <div id="sonder-felder" style="display:none;">
+        <div class="row">
+          <div class="field">
+            <label for="sonder-beginn">Beginn</label>
+            <input type="time" id="sonder-beginn">
+          </div>
+          <div class="field">
+            <label for="sonder-ende">Ende</label>
+            <input type="time" id="sonder-ende">
           </div>
         </div>
-      </div>
-      <div class="field">
-        <label for="kombi-kurs">Kurs auswählen</label>
-        <select id="kombi-kurs" onchange="zeigeKombiVorschau()">
-          <option value="">— Kurs wählen —</option>
-        </select>
-      </div>
-      <div id="kombi-vorschau" class="preview" style="display:none;"></div>
-      <div style="margin:12px 0;border-top:1px solid #1e3050;padding-top:12px;">
-        <label id="kombi-sonder-label" style="color:#00b8c8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt davor</label>
-      </div>
-      <div class="row">
         <div class="field">
-          <label for="kombi-beginn">Beginn Sonderfahrt</label>
-          <input type="time" id="kombi-beginn" onchange="aktualisiereKombiGesamt()">
+          <label for="sonder-art">Art der Sonderfahrt</label>
+          <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
         </div>
         <div class="field">
-          <label for="kombi-ende">Ende Sonderfahrt</label>
-          <input type="time" id="kombi-ende" onchange="aktualisiereKombiGesamt()">
+          <label>Pause (optional)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="number" id="sonder-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
+            <select id="sonder-pause-einheit" style="width:110px;">
+              <option value="min">Minuten</option>
+              <option value="std">Stunden</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Übernachtung</label>
+          <button type="button" id="uebernachtung-btn" onclick="toggleUebernachtung()"
+            style="width:100%;padding:12px 14px;background:#0d1a2a;border:1px solid #1e3050;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
+            Nein
+          </button>
         </div>
       </div>
-      <div class="field">
-        <label for="kombi-art">Art der Sonderfahrt</label>
-        <input type="text" id="kombi-art" placeholder="z.B. Schulausflug, Feuerwehr">
-      </div>
-      <div class="field">
-        <label>Pause Sonderfahrt (optional)</label>
-        <div style="display:flex;gap:8px;">
-          <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
-          <select id="kombi-pause-einheit" style="width:110px;">
-            <option value="min">Minuten</option>
-            <option value="std">Stunden</option>
+
+      <div id="kombi-felder" style="display:none;">
+        <div class="field">
+          <label>Reihenfolge</label>
+          <div class="toggle-wrapper">
+            <div class="toggle" style="min-width:unset;">
+              <button type="button" id="kombi-order-vor" class="active" onclick="setKombiOrder('vor')" style="padding:10px 14px;font-size:13px;">Sonder → Kurs</button>
+              <button type="button" id="kombi-order-nach" onclick="setKombiOrder('nach')" style="padding:10px 14px;font-size:13px;">Kurs → Sonder</button>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="kombi-kurs">Kurs auswählen</label>
+          <select id="kombi-kurs" onchange="zeigeKombiVorschau()">
+            <option value="">— Kurs wählen —</option>
           </select>
         </div>
+        <div id="kombi-vorschau" class="preview" style="display:none;"></div>
+        <div style="margin:12px 0;border-top:1px solid #1e3050;padding-top:12px;">
+          <label id="kombi-sonder-label" style="color:#00b8c8;font-size:12px;text-transform:uppercase;letter-spacing:1px;">+ Sonderfahrt davor</label>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="kombi-beginn">Beginn Sonderfahrt</label>
+            <input type="time" id="kombi-beginn" onchange="aktualisiereKombiGesamt()">
+          </div>
+          <div class="field">
+            <label for="kombi-ende">Ende Sonderfahrt</label>
+            <input type="time" id="kombi-ende" onchange="aktualisiereKombiGesamt()">
+          </div>
+        </div>
+        <div class="field">
+          <label for="kombi-art">Art der Sonderfahrt</label>
+          <input type="text" id="kombi-art" placeholder="z.B. Schulausflug, Feuerwehr">
+        </div>
+        <div class="field">
+          <label>Pause Sonderfahrt (optional)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="number" id="kombi-pause" min="0" max="480" placeholder="z.B. 30" style="flex:1;">
+            <select id="kombi-pause-einheit" style="width:110px;">
+              <option value="min">Minuten</option>
+              <option value="std">Stunden</option>
+            </select>
+          </div>
+        </div>
+        <div id="kombi-gesamt" class="preview" style="display:none;"></div>
       </div>
-      <div id="kombi-gesamt" class="preview" style="display:none;"></div>
-    </div>
 
-    <div style="display:flex;gap:8px;margin-top:8px;">
-      <button class="btn-primary" id="speichern-btn" onclick="eintragen()" style="flex:1;">Speichern</button>
-      <button id="loeschen-btn" class="btn-secondary btn-danger" onclick="bearbeitenLoeschen()" style="display:none;padding:16px 14px;">🗑</button>
-      <button id="abbrechen-btn" class="btn-secondary" onclick="bearbeitenAbbrechen()" style="display:none;padding:16px 20px;">✕</button>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="btn-primary" id="speichern-btn" onclick="eintragen()" style="flex:1;">Speichern</button>
+        <button id="loeschen-btn" class="btn-secondary btn-danger" onclick="bearbeitenLoeschen()" style="display:none;padding:16px 14px;">🗑</button>
+        <button id="abbrechen-btn" class="btn-secondary" onclick="bearbeitenAbbrechen()" style="display:none;padding:16px 20px;">✕</button>
+      </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Monatsübersicht</div>
+  <!-- REITER 2: ÜBERSICHT -->
+  <div id="reiter-uebersicht" class="reiter">
 
-    <div class="tabs-wrapper">
-      <div id="tabs" class="tabs"></div>
-    </div>
-
-    <div id="monat-info" class="monat-info" style="display:none;">
-      <div>
-        <div class="label">Einträge</div>
-        <div class="wert"><span id="anzahl-monat">0</span></div>
+    <!-- Finanzamt-Karte -->
+    <div class="fa-card">
+      <div class="fa-header" onclick="toggleFA()">
+        <div>
+          <div class="fa-titel">Finanzamt — Arbeitstage</div>
+          <div class="fa-sub">Fahrten zur Arbeit pro Jahr</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div>
+            <div class="fa-gesamt" id="fa-gesamt">—</div>
+          </div>
+          <div class="fa-pfeil" id="fa-pfeil">▼</div>
+        </div>
       </div>
-      <div>
-        <div class="label">Gesamtstunden</div>
-        <div class="wert"><span id="stunden-monat">0,00</span> h</div>
+      <div id="fa-inhalt" style="display:none;">
+        <div class="fa-jahre" id="fa-jahre"></div>
+        <div class="fa-monate" id="fa-monate"></div>
       </div>
     </div>
 
-    <div class="entries-actions">
-      <button class="btn-secondary" onclick="githubSync()">☁ Sync</button>
-      <button class="btn-secondary" onclick="exportMonatCSV()">CSV (Monat)</button>
-      <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup</button>
-      <button class="btn-secondary" onclick="backupLaden()">📥 Backup laden</button>
-      <button class="btn-secondary btn-danger" onclick="monatLoeschen()">Monat löschen</button>
+    <div class="card">
+      <div class="card-title">Monatsübersicht</div>
+
+      <div class="tabs-wrapper">
+        <div id="tabs" class="tabs"></div>
+      </div>
+
+      <div id="monat-info" class="monat-info" style="display:none;">
+        <div>
+          <div class="label">Einträge</div>
+          <div class="wert"><span id="anzahl-monat">0</span></div>
+        </div>
+        <div>
+          <div class="label">Gesamtstunden</div>
+          <div class="wert"><span id="stunden-monat">0,00</span> h</div>
+        </div>
+      </div>
+
+      <div class="entries-actions">
+        <button class="btn-secondary" onclick="githubSync()">☁ Sync</button>
+        <button class="btn-secondary" onclick="exportMonatCSV()">CSV (Monat)</button>
+        <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup</button>
+        <button class="btn-secondary" onclick="backupLaden()">📥 Backup laden</button>
+        <button class="btn-secondary btn-danger" onclick="monatLoeschen()">Monat löschen</button>
+      </div>
+
+      <input type="file" id="backup-input" accept=".json" style="display:none;" onchange="backupDateiVerarbeiten(event)">
+      <div id="tabelle-container"></div>
     </div>
-
-    <input type="file" id="backup-input" accept=".json" style="display:none;" onchange="backupDateiVerarbeiten(event)">
-
-    <div id="tabelle-container"></div>
   </div>
+
 </div>
-
 <div id="toast" class="toast"></div>
 
 <script>
@@ -517,11 +554,10 @@ const KURSE = {
   "613": { beginn: "14:40", ende: "22:25", tage: "Sa ganzjährig" },
   "811": { beginn: "07:49", ende: "20:25", tage: "So ganzjährig" }
 };
-
 const MONATE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 
 let modus = 'kurs';
-let bearbeitenIndex = null; // null = neuer Eintrag, sonst Index des zu bearbeitenden
+let bearbeitenIndex = null;
 let eintraege = JSON.parse(localStorage.getItem('stundenzettel') || '[]');
 let aktiverMonat = null;
 let letztesBackup = localStorage.getItem('letztesBackup') || null;
@@ -529,6 +565,9 @@ let eintraegeSeitBackup = parseInt(localStorage.getItem('eintraegeSeitBackup') |
 let syncToken = localStorage.getItem('syncToken') || '';
 let syncRepo = localStorage.getItem('syncRepo') || '';
 let letzterSync = localStorage.getItem('letzterSync') || null;
+let kombiOrder = 'vor';
+let faOffen = false;
+let faJahr = new Date().getFullYear();
 
 function init() {
   const heute = new Date().toISOString().split('T')[0];
@@ -539,23 +578,194 @@ function init() {
     opt.value = nr;
     opt.textContent = `Kurs ${nr} (${KURSE[nr].beginn}–${KURSE[nr].ende}, ${KURSE[nr].tage})`;
     select.appendChild(opt);
-    // auch Kombi-Dropdown füllen
-    const opt2 = opt.cloneNode(true);
-    document.getElementById('kombi-kurs').appendChild(opt2);
+    document.getElementById('kombi-kurs').appendChild(opt.cloneNode(true));
   });
-  // Aktiver Monat = aktueller Monat
-  const d = new Date();
-  aktiverMonat = monatsKey(d.toISOString().split('T')[0]);
+  aktiverMonat = monatsKey(heute);
   aktualisiereSync();
   zeigeBackupStatus();
   zeigeAlles();
+  zeigeFA();
 }
 
+// ─── Navigation ───────────────────────────────────────────────
+function wechsleReiter(reiter) {
+  document.querySelectorAll('.reiter').forEach(r => r.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`reiter-${reiter}`).classList.add('active');
+  event.target.classList.add('active');
+  if (reiter === 'uebersicht') { zeigeAlles(); zeigeFA(); }
+}
+
+// ─── Finanzamt ─────────────────────────────────────────────────
+function istArbeitstag(e) {
+  return e.kurs !== 'Frei' && e.kurs !== 'Urlaub' && (e.beginn || e.kurs);
+}
+
+function berechneArbeitstage(jahr) {
+  // Sortiere alle relevanten Einträge des Jahres
+  const jahresEintraege = eintraege
+    .filter(e => new Date(e.datum).getFullYear() === jahr && istArbeitstag(e))
+    .sort((a, b) => a.datum.localeCompare(b.datum));
+
+  let tage = 0;
+  let i = 0;
+  while (i < jahresEintraege.length) {
+    const e = jahresEintraege[i];
+    if (e.uebernachtung) {
+      // Erster Tag einer Übernachtungsgruppe: zählt
+      tage++;
+      // Überspringe alle weiteren Tage mit gleichem Sonderfahrt-Text + Übernachtung
+      let j = i + 1;
+      while (j < jahresEintraege.length &&
+             jahresEintraege[j].uebernachtung &&
+             jahresEintraege[j].sonderfahrt === e.sonderfahrt) {
+        j++;
+      }
+      // Prüfe ob nächster Tag (j) letzter Tag der Gruppe ist (gleicher Text, kein ✕)
+      if (j < jahresEintraege.length &&
+          !jahresEintraege[j].uebernachtung &&
+          jahresEintraege[j].sonderfahrt === e.sonderfahrt) {
+        tage++; // letzter Tag zählt auch
+        i = j + 1;
+      } else {
+        i = j;
+      }
+    } else {
+      tage++;
+      i++;
+    }
+  }
+  return tage;
+}
+
+function berechneArbeitstageProMonat(jahr) {
+  const ergebnis = {};
+  MONATE.forEach((m, idx) => {
+    const monatsEintraege = eintraege.filter(e => {
+      const d = new Date(e.datum);
+      return d.getFullYear() === jahr && d.getMonth() === idx && istArbeitstag(e);
+    }).sort((a, b) => a.datum.localeCompare(b.datum));
+
+    let tage = 0;
+    let i = 0;
+    while (i < monatsEintraege.length) {
+      const e = monatsEintraege[i];
+      if (e.uebernachtung) {
+        tage++;
+        let j = i + 1;
+        while (j < monatsEintraege.length &&
+               monatsEintraege[j].uebernachtung &&
+               monatsEintraege[j].sonderfahrt === e.sonderfahrt) {
+          j++;
+        }
+        if (j < monatsEintraege.length &&
+            !monatsEintraege[j].uebernachtung &&
+            monatsEintraege[j].sonderfahrt === e.sonderfahrt) {
+          tage++;
+          i = j + 1;
+        } else {
+          i = j;
+        }
+      } else {
+        tage++;
+        i++;
+      }
+    }
+    if (tage > 0) ergebnis[m] = tage;
+  });
+  return ergebnis;
+}
+
+function zeigeFA() {
+  // Verfügbare Jahre ermitteln
+  const jahre = [...new Set(eintraege.map(e => new Date(e.datum).getFullYear()))].sort();
+  if (!jahre.includes(faJahr) && jahre.length > 0) faJahr = jahre[jahre.length - 1];
+
+  const gesamt = berechneArbeitstage(faJahr);
+  document.getElementById('fa-gesamt').textContent = `${gesamt} Tage`;
+
+  // Jahres-Buttons
+  const jahreDiv = document.getElementById('fa-jahre');
+  jahreDiv.innerHTML = '';
+  jahre.forEach(j => {
+    const btn = document.createElement('button');
+    btn.className = 'fa-jahr-btn' + (j === faJahr ? ' active' : '');
+    btn.textContent = j;
+    btn.onclick = () => { faJahr = j; zeigeFA(); };
+    jahreDiv.appendChild(btn);
+  });
+
+  // Monats-Aufschlüsselung
+  const proMonat = berechneArbeitstageProMonat(faJahr);
+  const monateDiv = document.getElementById('fa-monate');
+  monateDiv.innerHTML = '';
+  const vorhandeneMonate = MONATE.filter(m => proMonat[m]);
+  if (vorhandeneMonate.length === 0) {
+    monateDiv.innerHTML = '<div style="color:#6a6660;font-size:13px;padding:8px 0;">Keine Einträge für dieses Jahr.</div>';
+    return;
+  }
+  vorhandeneMonate.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'fa-monat-zeile';
+    div.innerHTML = `<span class="fa-monat-name">${m}</span><span class="fa-monat-tage"><span>${proMonat[m]}</span> Tage</span>`;
+    monateDiv.appendChild(div);
+  });
+}
+
+function toggleFA() {
+  faOffen = !faOffen;
+  document.getElementById('fa-inhalt').style.display = faOffen ? 'block' : 'none';
+  document.getElementById('fa-pfeil').classList.toggle('offen', faOffen);
+  if (faOffen) zeigeFA();
+}
+
+// ─── Hilfsfunktionen ──────────────────────────────────────────
 function monatsKey(datumStr) {
   const d = new Date(datumStr);
   return `${MONATE[d.getMonth()]}${String(d.getFullYear()).slice(-2)}`;
 }
 
+function berechneStunden(beginn, ende) {
+  const [bh, bm] = beginn.split(':').map(Number);
+  const [eh, em] = ende.split(':').map(Number);
+  let min = (eh * 60 + em) - (bh * 60 + bm);
+  if (min < 0) min += 24 * 60;
+  return min / 60;
+}
+
+function berechnePausenabzug(pauseStr) {
+  if (!pauseStr) return 0;
+  const parts = pauseStr.trim().split(' ');
+  const wert = parseFloat(parts[0]);
+  if (isNaN(wert) || wert <= 0) return 0;
+  const einheit = parts[1] || 'min';
+  const std = einheit === 'Std' ? wert : wert / 60;
+  if (std <= 2) return std;
+  return 2 + (std - 2) * 0.5;
+}
+
+function berechneNettoStunden(beginn, ende, pause, istSonder) {
+  const brutto = berechneStunden(beginn, ende);
+  if (!istSonder || !pause) return brutto;
+  return Math.max(0, brutto - berechnePausenabzug(pause));
+}
+
+function extrahiereKurs(kurs) {
+  if (!kurs) return kurs;
+  const plusIdx = kurs.indexOf(' + ');
+  return plusIdx !== -1 ? kurs.substring(0, plusIdx) : kurs;
+}
+
+function ersetzeUmlaute(text) {
+  if (!text) return text;
+  return text
+    .replace(/ä/g, 'ae').replace(/Ä/g, 'Ae')
+    .replace(/ö/g, 'oe').replace(/Ö/g, 'Oe')
+    .replace(/ü/g, 'ue').replace(/Ü/g, 'Ue')
+    .replace(/ß/g, 'ss');
+}
+
+// ─── Modus / Formular ─────────────────────────────────────────
 function setMode(neuerModus) {
   modus = neuerModus;
   ['kurs','sonder','kombi','frei','urlaub'].forEach(m => {
@@ -574,68 +784,26 @@ function zeigeVorschau() {
     const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
     v.style.display = 'block';
     v.innerHTML = `Beginn: <strong>${KURSE[nr].beginn}</strong> · Ende: <strong>${KURSE[nr].ende}</strong> · Dauer: <strong>${std.toFixed(2).replace('.',',')} h</strong>`;
-  } else {
-    v.style.display = 'none';
-  }
-}
-
-function berechneStunden(beginn, ende) {
-  const [bh, bm] = beginn.split(':').map(Number);
-  const [eh, em] = ende.split(':').map(Number);
-  let min = (eh * 60 + em) - (bh * 60 + bm);
-  if (min < 0) min += 24 * 60; // über Mitternacht
-  return min / 60;
-}
-
-// Berechnet den Pausenabzug nach der Regelung:
-// Erste 2 Stunden Pause werden voll abgezogen,
-// alles darüber nur zur Hälfte.
-function berechnePausenabzug(pauseStr) {
-  if (!pauseStr) return 0;
-  const parts = pauseStr.trim().split(' ');
-  const wert = parseFloat(parts[0]);
-  if (isNaN(wert) || wert <= 0) return 0;
-  const einheit = parts[1] || 'min';
-  const stundenGesamt = einheit === 'Std' ? wert : wert / 60;
-  if (stundenGesamt <= 2) return stundenGesamt;
-  return 2 + (stundenGesamt - 2) * 0.5;
-}
-
-// Berechnet bezahlte Stunden für Sonderfahrten (mit Pausenregelung)
-function berechneNettoStunden(beginn, ende, pause, istSonderfahrt) {
-  const brutto = berechneStunden(beginn, ende);
-  if (!istSonderfahrt || !pause) return brutto;
-  return Math.max(0, brutto - berechnePausenabzug(pause));
+  } else { v.style.display = 'none'; }
 }
 
 function toggleUebernachtung() {
   const btn = document.getElementById('uebernachtung-btn');
   const aktiv = btn.getAttribute('data-aktiv') === '1';
   if (aktiv) {
-    btn.setAttribute('data-aktiv', '0');
-    btn.textContent = 'Nein';
-    btn.style.color = '#a8a49d';
-    btn.style.borderColor = '#1e3050';
-    btn.style.background = '#0d1a2a';
+    btn.setAttribute('data-aktiv','0'); btn.textContent='Nein';
+    btn.style.color='#a8a49d'; btn.style.borderColor='#1e3050'; btn.style.background='#0d1a2a';
   } else {
-    btn.setAttribute('data-aktiv', '1');
-    btn.textContent = '✕  Ja — Übernachtung';
-    btn.style.color = '#0d1a2a';
-    btn.style.borderColor = '#00b8c8';
-    btn.style.background = '#00b8c8';
+    btn.setAttribute('data-aktiv','1'); btn.textContent='✕  Ja — Übernachtung';
+    btn.style.color='#0d1a2a'; btn.style.borderColor='#00b8c8'; btn.style.background='#00b8c8';
   }
 }
 
 function uebernachtungReset() {
   const btn = document.getElementById('uebernachtung-btn');
-  btn.setAttribute('data-aktiv', '0');
-  btn.textContent = 'Nein';
-  btn.style.color = '#a8a49d';
-  btn.style.borderColor = '#1e3050';
-  btn.style.background = '#0d1a2a';
+  btn.setAttribute('data-aktiv','0'); btn.textContent='Nein';
+  btn.style.color='#a8a49d'; btn.style.borderColor='#1e3050'; btn.style.background='#0d1a2a';
 }
-
-let kombiOrder = 'vor'; // 'vor' = Sonder vor Kurs, 'nach' = Sonder nach Kurs
 
 function setKombiOrder(order) {
   kombiOrder = order;
@@ -652,29 +820,46 @@ function zeigeKombiVorschau() {
     const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
     v.style.display = 'block';
     v.innerHTML = `Kurs ${nr}: <strong>${KURSE[nr].beginn}–${KURSE[nr].ende}</strong> · ${std.toFixed(2).replace('.',',')} h`;
-  } else {
-    v.style.display = 'none';
-  }
+  } else { v.style.display = 'none'; }
   aktualisiereKombiGesamt();
 }
 
 function aktualisiereKombiGesamt() {
   const nr = document.getElementById('kombi-kurs').value;
-  const sonderBeginn = document.getElementById('kombi-beginn').value;
-  const sonderEnde = document.getElementById('kombi-ende').value;
+  const sBeginn = document.getElementById('kombi-beginn').value;
+  const sEnde = document.getElementById('kombi-ende').value;
   const g = document.getElementById('kombi-gesamt');
-  if (nr && sonderBeginn && sonderEnde && KURSE[nr]) {
+  if (nr && sBeginn && sEnde && KURSE[nr]) {
     const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
-    const std2 = berechneStunden(sonderBeginn, sonderEnde);
-    const gesamtBeginn = kombiOrder === 'vor' ? sonderBeginn : KURSE[nr].beginn;
-    const gesamtEnde = kombiOrder === 'vor' ? KURSE[nr].ende : sonderEnde;
+    const std2 = berechneStunden(sBeginn, sEnde);
+    const gBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
+    const gEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
     g.style.display = 'block';
-    g.innerHTML = `Gesamt: <strong>${gesamtBeginn} – ${gesamtEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
-  } else {
-    g.style.display = 'none';
-  }
+    g.innerHTML = `Gesamt: <strong>${gBeginn} – ${gEnde}</strong> · <strong>${(std1+std2).toFixed(2).replace('.',',')} h</strong>`;
+  } else { g.style.display = 'none'; }
 }
 
+function formularZuruecksetzen() {
+  uebernachtungReset();
+  document.getElementById('datum').value = new Date().toISOString().split('T')[0];
+  document.getElementById('kurs').value = '';
+  document.getElementById('vorschau').style.display = 'none';
+  document.getElementById('sonder-beginn').value = '';
+  document.getElementById('sonder-ende').value = '';
+  document.getElementById('sonder-art').value = '';
+  document.getElementById('sonder-pause').value = '';
+  document.getElementById('sonder-pause-einheit').value = 'min';
+  document.getElementById('kombi-kurs').value = '';
+  document.getElementById('kombi-beginn').value = '';
+  document.getElementById('kombi-ende').value = '';
+  document.getElementById('kombi-art').value = '';
+  document.getElementById('kombi-pause').value = '';
+  document.getElementById('kombi-pause-einheit').value = 'min';
+  document.getElementById('kombi-vorschau').style.display = 'none';
+  document.getElementById('kombi-gesamt').style.display = 'none';
+}
+
+// ─── Bearbeiten ────────────────────────────────────────────────
 function bearbeiten(originalIndex) {
   const e = eintraege[originalIndex];
   bearbeitenIndex = originalIndex;
@@ -684,52 +869,47 @@ function bearbeiten(originalIndex) {
   document.getElementById('loeschen-btn').style.display = 'block';
   document.getElementById('datum').value = e.datum;
 
-  // Modus erkennen
-  if (e.kurs === 'Frei') {
-    setMode('frei');
-  } else if (e.kurs === 'Urlaub') {
-    setMode('urlaub');
+  if (e.kurs === 'Frei') { setMode('frei');
+  } else if (e.kurs === 'Urlaub') { setMode('urlaub');
   } else if (e.kurs === 'Sonderfahrt') {
     setMode('sonder');
     document.getElementById('sonder-beginn').value = e.beginn;
     document.getElementById('sonder-ende').value = e.ende;
     document.getElementById('sonder-art').value = e.sonderfahrt;
-    // Pause und Einheit vorausfüllen
     if (e.pause) {
-      const parts = e.pause.split(' ');
-      document.getElementById('sonder-pause').value = parts[0] || '';
-      document.getElementById('sonder-pause-einheit').value = (parts[1] === 'Std') ? 'std' : 'min';
+      const p = e.pause.split(' ');
+      document.getElementById('sonder-pause').value = p[0] || '';
+      document.getElementById('sonder-pause-einheit').value = p[1] === 'Std' ? 'std' : 'min';
     }
     if (e.uebernachtung) {
       const btn = document.getElementById('uebernachtung-btn');
-      btn.setAttribute('data-aktiv', '1');
-      btn.textContent = '✕  Ja — Übernachtung';
-      btn.style.color = '#0d1a2a';
-      btn.style.borderColor = '#00b8c8';
-      btn.style.background = '#00b8c8';
+      btn.setAttribute('data-aktiv','1'); btn.textContent='✕  Ja — Übernachtung';
+      btn.style.color='#0d1a2a'; btn.style.borderColor='#00b8c8'; btn.style.background='#00b8c8';
     }
   } else if (e.extraStunden !== undefined) {
-    // Kombi — Kurs aus kurs-Feld extrahieren (z.B. "Kurs 211 + Schulausflug")
     setMode('kombi');
-    const kursnr = e.kurs.match(/Kurs (\d+)/)?.[1] || '';
-    document.getElementById('kombi-kurs').value = kursnr;
-    document.getElementById('kombi-beginn').value = e.beginn; // Sonderfahrt-Beginn
+    const nr = e.kurs.match(/Kurs (\d+)/)?.[1] || '';
+    document.getElementById('kombi-kurs').value = nr;
+    document.getElementById('kombi-beginn').value = e.beginn;
     document.getElementById('kombi-ende').value = e.ende;
     document.getElementById('kombi-art').value = e.sonderfahrt;
     if (e.pause) {
-      const parts = e.pause.split(' ');
-      document.getElementById('kombi-pause').value = parts[0] || '';
-      document.getElementById('kombi-pause-einheit').value = (parts[1] === 'Std') ? 'std' : 'min';
+      const p = e.pause.split(' ');
+      document.getElementById('kombi-pause').value = p[0] || '';
+      document.getElementById('kombi-pause-einheit').value = p[1] === 'Std' ? 'std' : 'min';
     }
     zeigeKombiVorschau();
   } else {
     setMode('kurs');
-    const kursnr = e.kurs.replace('Kurs ', '');
-    document.getElementById('kurs').value = kursnr;
+    document.getElementById('kurs').value = e.kurs.replace('Kurs ','');
     zeigeVorschau();
   }
 
-  // Zum Formular scrollen
+  // Zum Eingabe-Reiter wechseln
+  document.querySelectorAll('.reiter').forEach(r => r.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('reiter-eingabe').classList.add('active');
+  document.querySelectorAll('.nav-tab')[0].classList.add('active');
   document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -756,26 +936,7 @@ function bearbeitenAbbrechen() {
   setMode('kurs');
 }
 
-function formularZuruecksetzen() {
-  uebernachtungReset();
-  document.getElementById('datum').value = new Date().toISOString().split('T')[0];
-  document.getElementById('kurs').value = '';
-  document.getElementById('vorschau').style.display = 'none';
-  document.getElementById('sonder-beginn').value = '';
-  document.getElementById('sonder-ende').value = '';
-  document.getElementById('sonder-art').value = '';
-  document.getElementById('sonder-pause').value = '';
-  document.getElementById('sonder-pause-einheit').value = 'min';
-  document.getElementById('kombi-kurs').value = '';
-  document.getElementById('kombi-beginn').value = '';
-  document.getElementById('kombi-ende').value = '';
-  document.getElementById('kombi-art').value = '';
-  document.getElementById('kombi-pause').value = '';
-  document.getElementById('kombi-pause-einheit').value = 'min';
-  document.getElementById('kombi-vorschau').style.display = 'none';
-  document.getElementById('kombi-gesamt').style.display = 'none';
-}
-
+// ─── Eintragen ─────────────────────────────────────────────────
 function eintragen() {
   const datum = document.getElementById('datum').value;
   if (!datum) { toast('Bitte Datum wählen', true); return; }
@@ -785,44 +946,33 @@ function eintragen() {
     const nr = document.getElementById('kurs').value;
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
     eintrag = { datum, beginn: KURSE[nr].beginn, ende: KURSE[nr].ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '' };
-
   } else if (modus === 'sonder') {
     const beginn = document.getElementById('sonder-beginn').value;
     const ende = document.getElementById('sonder-ende').value;
     const art = document.getElementById('sonder-art').value.trim();
-    const pauseWert = document.getElementById('sonder-pause').value.trim();
-    const pauseEinheit = document.getElementById('sonder-pause-einheit').value;
-    const pause = pauseWert ? `${pauseWert} ${pauseEinheit === 'std' ? 'Std' : 'min'}` : '';
+    const pw = document.getElementById('sonder-pause').value.trim();
+    const pe = document.getElementById('sonder-pause-einheit').value;
+    const pause = pw ? `${pw} ${pe === 'std' ? 'Std' : 'min'}` : '';
     const uebernachtung = document.getElementById('uebernachtung-btn').getAttribute('data-aktiv') === '1';
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
     eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung };
-
   } else if (modus === 'kombi') {
     const nr = document.getElementById('kombi-kurs').value;
     const sBeginn = document.getElementById('kombi-beginn').value;
     const sEnde = document.getElementById('kombi-ende').value;
     const sArt = document.getElementById('kombi-art').value.trim();
-    const sPauseWert = document.getElementById('kombi-pause').value.trim();
-    const sPauseEinheit = document.getElementById('kombi-pause-einheit').value;
-    const sPause = sPauseWert ? `${sPauseWert} ${sPauseEinheit === 'std' ? 'Std' : 'min'}` : '';
+    const pw = document.getElementById('kombi-pause').value.trim();
+    const pe = document.getElementById('kombi-pause-einheit').value;
+    const sPause = pw ? `${pw} ${pe === 'std' ? 'Std' : 'min'}` : '';
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
     if (!sBeginn || !sEnde) { toast('Bitte Beginn und Ende der Sonderfahrt eingeben', true); return; }
     if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
     const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
     const std2 = berechneStunden(sBeginn, sEnde);
-    const gesamtBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
-    const gesamtEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
-    eintrag = {
-      datum,
-      beginn: gesamtBeginn,
-      ende: gesamtEnde,
-      kurs: `Kurs ${nr} + ${sArt}`,
-      sonderfahrt: sArt,
-      pause: sPause,
-      extraStunden: std1 + std2
-    };
-
+    const gBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
+    const gEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
+    eintrag = { datum, beginn: gBeginn, ende: gEnde, kurs: `Kurs ${nr} + ${sArt}`, sonderfahrt: sArt, pause: sPause, extraStunden: std1 + std2 };
   } else if (modus === 'frei') {
     eintrag = { datum, beginn: '', ende: '', kurs: 'Frei', sonderfahrt: '', pause: '' };
   } else if (modus === 'urlaub') {
@@ -830,7 +980,6 @@ function eintragen() {
   }
 
   if (bearbeitenIndex !== null) {
-    // Alten Eintrag als gelöscht markieren (damit Sync ihn nicht zurückholt)
     const alter = eintraege[bearbeitenIndex];
     const alterKey = `${alter.datum}|${alter.beginn}|${alter.kurs}`;
     let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
@@ -849,19 +998,13 @@ function eintragen() {
   speichern();
   eintraegeSeitBackup++;
   localStorage.setItem('eintraegeSeitBackup', eintraegeSeitBackup);
-
-  // Auf Monat des neuen Eintrags wechseln
   aktiverMonat = monatsKey(datum);
-  zeigeAlles();
-
   formularZuruecksetzen();
   zeigeBackupStatus();
   if (syncToken && syncRepo) {
     toast('Gespeichert — Sync läuft...');
     githubSync(true);
-  } else {
-    toast('Eintrag gespeichert');
-  }
+  } else { toast('Eintrag gespeichert'); }
 }
 
 function speichern() { localStorage.setItem('stundenzettel', JSON.stringify(eintraege)); }
@@ -869,7 +1012,6 @@ function speichern() { localStorage.setItem('stundenzettel', JSON.stringify(eint
 function loeschen(originalIndex) {
   if (!confirm('Diesen Eintrag löschen?')) return;
   const e = eintraege[originalIndex];
-  // Als gelöscht markieren statt wirklich löschen — damit Sync es weiß
   const key = `${e.datum}|${e.beginn}|${e.kurs}`;
   let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
   if (!geloescht.includes(key)) geloescht.push(key);
@@ -877,6 +1019,7 @@ function loeschen(originalIndex) {
   eintraege.splice(originalIndex, 1);
   speichern();
   zeigeAlles();
+  zeigeFA();
   toast('Eintrag gelöscht');
 }
 
@@ -885,7 +1028,6 @@ function monatLoeschen() {
   const imMonat = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (imMonat.length === 0) { toast('Monat ist leer', true); return; }
   if (!confirm(`Wirklich ALLE ${imMonat.length} Einträge im Monat ${aktiverMonat} löschen?`)) return;
-  // Alle als gelöscht markieren
   let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
   imMonat.forEach(e => {
     const key = `${e.datum}|${e.beginn}|${e.kurs}`;
@@ -895,31 +1037,24 @@ function monatLoeschen() {
   eintraege = eintraege.filter(e => monatsKey(e.datum) !== aktiverMonat);
   speichern();
   zeigeAlles();
+  zeigeFA();
   toast(`Monat ${aktiverMonat} gelöscht`);
 }
 
-function zeigeAlles() {
-  zeigeTabs();
-  zeigeTabelle();
-}
+// ─── Tabelle & Tabs ────────────────────────────────────────────
+function zeigeAlles() { zeigeTabs(); zeigeTabelle(); }
 
 function zeigeTabs() {
   const tabs = document.getElementById('tabs');
-  // Alle vorhandenen Monate sammeln
   const monate = [...new Set(eintraege.map(e => monatsKey(e.datum)))];
-  // Aktuellen Monat hinzufügen falls nicht vorhanden
   const heuteMonat = monatsKey(new Date().toISOString().split('T')[0]);
   if (!monate.includes(heuteMonat)) monate.push(heuteMonat);
-  // Falls aktiver Monat noch nicht in der Liste (z.B. nach Löschen), aktiven Monat hinzufügen
   if (aktiverMonat && !monate.includes(aktiverMonat)) monate.push(aktiverMonat);
-  // Sortieren chronologisch
   monate.sort((a, b) => {
     const ay = parseInt(a.slice(-2)), by = parseInt(b.slice(-2));
     if (ay !== by) return ay - by;
-    const am = MONATE.indexOf(a.slice(0, -2)), bm = MONATE.indexOf(b.slice(0, -2));
-    return am - bm;
+    return MONATE.indexOf(a.slice(0, -2)) - MONATE.indexOf(b.slice(0, -2));
   });
-
   tabs.innerHTML = '';
   monate.forEach(m => {
     const anzahl = eintraege.filter(e => monatsKey(e.datum) === m).length;
@@ -934,51 +1069,37 @@ function zeigeTabs() {
 function zeigeTabelle() {
   const c = document.getElementById('tabelle-container');
   const info = document.getElementById('monat-info');
-
-  // Einträge des aktiven Monats mit Original-Index
   const monatsEintraege = [];
   eintraege.forEach((e, i) => {
     if (monatsKey(e.datum) === aktiverMonat) monatsEintraege.push({ ...e, originalIndex: i });
   });
-
-  // Stunden-Summe (Frei = 0, Kombi = extraStunden)
   const summe = monatsEintraege.reduce((s, e) => {
     if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn || !e.ende) return s;
     if (e.extraStunden !== undefined) return s + e.extraStunden;
-    const istSonder = e.kurs === 'Sonderfahrt';
-    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, istSonder);
+    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt');
   }, 0);
   document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
   document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
   info.style.display = 'flex';
-
   if (monatsEintraege.length === 0) {
-    c.innerHTML = `<div class="empty">Keine Einträge im Monat ${aktiverMonat}.<br>Trage oben deinen ersten Kurs ein.</div>`;
+    c.innerHTML = `<div class="empty">Keine Einträge im Monat ${aktiverMonat}.</div>`;
     return;
   }
-
   let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th>Üb.</th><th></th></tr></thead><tbody>`;
   monatsEintraege.forEach(e => {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
-    const istSonder = e.kurs === 'Sonderfahrt';
     const std = istFrei ? '—' : (e.extraStunden !== undefined
       ? e.extraStunden
-      : berechneNettoStunden(e.beginn, e.ende, e.pause, istSonder)
+      : berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt')
     ).toFixed(2).replace('.', ',');
-    const pauseAnzeige = e.pause ? e.pause : '—';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : extrahiereKurs(e.kurs);
     const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
     html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
-      <td>${datumKurz}</td>
-      <td>${e.beginn || '—'}</td>
-      <td>${e.ende || '—'}</td>
-      <td class="std">${std}</td>
-      <td>${kursAnzeige}</td>
-      <td>${e.sonderfahrt || '—'}</td>
-      <td>${pauseAnzeige}</td>
-      <td>${uebAnzeige}</td>
+      <td>${datumKurz}</td><td>${e.beginn||'—'}</td><td>${e.ende||'—'}</td>
+      <td class="std">${std}</td><td>${kursAnzeige}</td>
+      <td>${e.sonderfahrt||'—'}</td><td>${e.pause||'—'}</td><td>${uebAnzeige}</td>
       <td class="actions"><button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button></td>
     </tr>`;
   });
@@ -986,94 +1107,49 @@ function zeigeTabelle() {
   c.innerHTML = html;
 }
 
-// Gibt nur den Kursanteil zurück — "Kurs 211 + Verstärker" → "Kurs 211"
-function extrahiereKurs(kurs) {
-  if (!kurs) return kurs;
-  const plusIdx = kurs.indexOf(' + ');
-  return plusIdx !== -1 ? kurs.substring(0, plusIdx) : kurs;
-}
-
-function ersetzeUmlaute(text) {
-  if (!text) return text;
-  return text
-    .replace(/ä/g, 'ae').replace(/Ä/g, 'Ae')
-    .replace(/ö/g, 'oe').replace(/Ö/g, 'Oe')
-    .replace(/ü/g, 'ue').replace(/Ü/g, 'Ue')
-    .replace(/ß/g, 'ss');
-}
-
+// ─── CSV Export ────────────────────────────────────────────────
 function exportMonatCSV() {
-  const monatsEintraege = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
-  if (monatsEintraege.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
-
+  const me = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
+  if (me.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
   const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung\n';
-  const zeilen = monatsEintraege.map(e => {
+  const zeilen = me.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
-    const pauseWert = e.pause ? e.pause : '';
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(extrahiereKurs(e.kurs));
-    const sonderfahrtAnzeige = ersetzeUmlaute(e.sonderfahrt);
-    const uebWert = e.uebernachtung ? 'X' : '';
+    const sf = ersetzeUmlaute(e.sonderfahrt);
+    const ueb = e.uebernachtung ? 'X' : '';
     if (istFrei) return `${datumDE};;;-;${e.kurs};;`;
-    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sonderfahrtAnzeige};${pauseWert};${uebWert}`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sf};${e.pause||''};${ueb}`;
   }).join('\n');
-  const csv = header + zeilen;
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob([header + zeilen], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = `stundenzettel_${aktiverMonat}.csv`;
   link.click();
-  URL.revokeObjectURL(url);
   toast('CSV exportiert');
 }
 
+// ─── Backup ────────────────────────────────────────────────────
 function backupSpeichern() {
   if (eintraege.length === 0) { toast('Keine Einträge zum Sichern', true); return; }
-
-  const backup = {
-    version: 1,
-    erstellt: new Date().toISOString(),
-    eintraege: eintraege
-  };
-  const json = JSON.stringify(backup, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
-  const datum = new Date().toISOString().split('T')[0];
-  const dateiname = `stundenzettel_backup_${datum}.json`;
-
-  // Web Share API für Android (öffnet Teilen-Dialog mit Drive-Option)
+  const backup = { version: 1, erstellt: new Date().toISOString(), eintraege };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const dateiname = `stundenzettel_backup_${new Date().toISOString().split('T')[0]}.json`;
   if (navigator.canShare && navigator.canShare({ files: [new File([blob], dateiname, { type: 'application/json' })] })) {
-    const file = new File([blob], dateiname, { type: 'application/json' });
-    navigator.share({
-      files: [file],
-      title: 'Stundenzettel Backup',
-      text: 'Backup vom ' + new Date().toLocaleDateString('de-DE')
-    }).then(() => {
-      backupErfolgreich();
-    }).catch(err => {
-      if (err.name !== 'AbortError') {
-        // Fallback: Download
-        downloadBackup(blob, dateiname);
-      }
-    });
-  } else {
-    // Fallback für Browser ohne Share API
-    downloadBackup(blob, dateiname);
-  }
+    navigator.share({ files: [new File([blob], dateiname, { type: 'application/json' })], title: 'Stundenzettel Backup' })
+      .then(() => backupErfolgreich())
+      .catch(err => { if (err.name !== 'AbortError') downloadBackup(blob, dateiname); });
+  } else { downloadBackup(blob, dateiname); }
 }
-
 function downloadBackup(blob, dateiname) {
-  const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = dateiname;
   link.click();
-  URL.revokeObjectURL(url);
   backupErfolgreich();
-  toast('Backup heruntergeladen — bitte in Drive speichern');
+  toast('Backup heruntergeladen');
 }
-
 function backupErfolgreich() {
   letztesBackup = new Date().toISOString();
   eintraegeSeitBackup = 0;
@@ -1081,11 +1157,7 @@ function backupErfolgreich() {
   localStorage.setItem('eintraegeSeitBackup', '0');
   zeigeBackupStatus();
 }
-
-function backupLaden() {
-  document.getElementById('backup-input').click();
-}
-
+function backupLaden() { document.getElementById('backup-input').click(); }
 function backupDateiVerarbeiten(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -1093,120 +1165,74 @@ function backupDateiVerarbeiten(event) {
   reader.onload = (e) => {
     try {
       const backup = JSON.parse(e.target.result);
-      if (!backup.eintraege || !Array.isArray(backup.eintraege)) {
-        toast('Ungültige Backup-Datei', true);
-        return;
-      }
+      if (!backup.eintraege || !Array.isArray(backup.eintraege)) { toast('Ungültige Backup-Datei', true); return; }
       const erstellt = backup.erstellt ? new Date(backup.erstellt).toLocaleDateString('de-DE') : 'unbekannt';
-      if (!confirm(`Backup vom ${erstellt} mit ${backup.eintraege.length} Einträgen laden?\n\nACHTUNG: Aktuelle Einträge (${eintraege.length}) werden ersetzt!`)) {
-        event.target.value = '';
-        return;
-      }
+      if (!confirm(`Backup vom ${erstellt} mit ${backup.eintraege.length} Einträgen laden?\n\nACHTUNG: Aktuelle Einträge (${eintraege.length}) werden ersetzt!`)) { event.target.value = ''; return; }
       eintraege = backup.eintraege;
       speichern();
       zeigeAlles();
+      zeigeFA();
       toast(`${backup.eintraege.length} Einträge geladen`);
-    } catch (err) {
-      toast('Fehler beim Lesen der Datei', true);
-    }
+    } catch { toast('Fehler beim Lesen der Datei', true); }
     event.target.value = '';
   };
   reader.readAsText(file);
 }
-
 function zeigeBackupStatus() {
   const bar = document.getElementById('backup-bar');
   const text = document.getElementById('backup-text');
-
-  if (eintraege.length === 0) {
-    bar.style.display = 'none';
-    return;
-  }
-
+  if (eintraege.length === 0) { bar.style.display = 'none'; return; }
   bar.style.display = 'flex';
   bar.classList.remove('warn');
-
   if (!letztesBackup) {
     text.textContent = `⚠ Noch nie gesichert (${eintraege.length} Einträge)`;
     bar.classList.add('warn');
   } else {
     const datum = new Date(letztesBackup).toLocaleDateString('de-DE');
-    if (eintraegeSeitBackup >= 10) {
-      text.textContent = `⚠ ${eintraegeSeitBackup} neue Einträge seit letzter Sicherung (${datum})`;
-      bar.classList.add('warn');
-    } else if (eintraegeSeitBackup > 0) {
-      text.textContent = `Letzte Sicherung: ${datum} · ${eintraegeSeitBackup} neue Einträge`;
-    } else {
-      text.textContent = `Letzte Sicherung: ${datum} ✓`;
-    }
+    if (eintraegeSeitBackup >= 10) { text.textContent = `⚠ ${eintraegeSeitBackup} neue Einträge seit letzter Sicherung (${datum})`; bar.classList.add('warn'); }
+    else if (eintraegeSeitBackup > 0) { text.textContent = `Letzte Sicherung: ${datum} · ${eintraegeSeitBackup} neue Einträge`; }
+    else { text.textContent = `Letzte Sicherung: ${datum} ✓`; }
   }
 }
 
 // ─── GitHub Sync ──────────────────────────────────────────────
 function aktualisiereSync(erfolg = false) {
-  const bar = document.getElementById('sync-bar');
   const dot = document.getElementById('sync-dot');
   const text = document.getElementById('sync-text');
-  dot.classList.remove('ok', 'warn');
-  if (!syncToken || !syncRepo) {
-    text.textContent = 'GitHub Sync nicht eingerichtet — tippe auf ⚙';
-    return;
-  }
+  dot.classList.remove('ok');
+  if (!syncToken || !syncRepo) { text.textContent = 'GitHub Sync nicht eingerichtet — tippe auf ⚙'; return; }
   dot.classList.add('ok');
   const zeit = letzterSync ? new Date(letzterSync).toLocaleString('de-DE', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : 'noch nie';
   text.textContent = `Sync: ${syncRepo} · Zuletzt: ${zeit}`;
-
-  // Grüner Puls-Effekt nach erfolgreichem Sync
   if (erfolg) {
-    dot.style.transform = 'scale(1.8)';
-    dot.style.transition = 'transform 0.3s';
+    dot.style.transform = 'scale(1.8)'; dot.style.transition = 'transform 0.3s';
     setTimeout(() => { dot.style.transform = 'scale(1)'; }, 400);
   }
 }
 
 async function githubSync(autoSync = false) {
-  if (!syncToken || !syncRepo) {
-    if (!autoSync) { toast('Erst GitHub Sync einrichten (⚙ Knopf)', true); zeigeSync(); }
-    return;
-  }
-
+  if (!syncToken || !syncRepo) { if (!autoSync) { toast('Erst GitHub Sync einrichten (⚙ Knopf)', true); zeigeSync(); } return; }
   const syncBtn = document.querySelector('[onclick="githubSync()"]');
   if (syncBtn) syncBtn.textContent = '⏳ Sync...';
-
   try {
-    // 1. Aktuelle Datei von GitHub holen (falls vorhanden)
     const apiUrl = `https://api.github.com/repos/${syncRepo}/contents/daten.json`;
-    const headers = {
-      'Authorization': `token ${syncToken}`,
-      'Accept': 'application/vnd.github.v3+json'
-    };
-
-    let remoteSha = null;
-    let remoteEintraege = [];
-
+    const headers = { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' };
+    let remoteSha = null, remoteEintraege = [];
     let decoded = { eintraege: [], geloescht: [] };
     const getResp = await fetch(apiUrl, { headers });
     if (getResp.ok) {
-      const remoteDaten = await getResp.json();
-      remoteSha = remoteDaten.sha;
-      // UTF-8 sicher dekodieren (atob versteht kein UTF-8)
-      const binStr = atob(remoteDaten.content.replace(/\n/g, ''));
+      const rd = await getResp.json();
+      remoteSha = rd.sha;
+      const binStr = atob(rd.content.replace(/\n/g, ''));
       const bytes = new Uint8Array(binStr.length);
       for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
       decoded = JSON.parse(new TextDecoder('utf-8').decode(bytes));
       remoteEintraege = decoded.eintraege || [];
-    } else if (getResp.status !== 404) {
-      throw new Error(`GitHub Fehler: ${getResp.status}`);
-    }
+    } else if (getResp.status !== 404) { throw new Error(`GitHub Fehler: ${getResp.status}`); }
 
-    // 2. Zusammenführen mit Tombstone-Logik
     let geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
-    // Remote gelöschte auch lokal übernehmen
     const remoteGeloescht = decoded.geloescht || [];
     remoteGeloescht.forEach(k => { if (!geloescht.includes(k)) geloescht.push(k); });
-
-    // Lokale Einträge haben immer Vorrang:
-    // Wenn ein lokaler Eintrag denselben Key hat wie ein gelöschter, aus der geloescht-Liste entfernen
     const lokaleKeys = new Set(eintraege.map(e => `${e.datum}|${e.beginn}|${e.kurs}`));
     geloescht = geloescht.filter(k => !lokaleKeys.has(k));
     localStorage.setItem('geloescht', JSON.stringify(geloescht));
@@ -1216,50 +1242,35 @@ async function githubSync(autoSync = false) {
     const gesehen = new Set();
     alle.forEach(e => {
       const key = `${e.datum}|${e.beginn}|${e.kurs}`;
-      if (!gesehen.has(key) && !geloescht.includes(key)) {
-        gesehen.add(key);
-        einzigartig.push(e);
-      }
+      if (!gesehen.has(key) && !geloescht.includes(key)) { gesehen.add(key); einzigartig.push(e); }
     });
     einzigartig.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
 
-    // 3. Zusammengeführte Daten zurück zu GitHub schreiben
-    // UTF-8 sicher kodieren
-    const jsonStr = JSON.stringify({ version: 1, aktualisiert: new Date().toISOString(), eintraege: einzigartig, geloescht: geloescht }, null, 2);
+    const jsonStr = JSON.stringify({ version: 1, aktualisiert: new Date().toISOString(), eintraege: einzigartig, geloescht }, null, 2);
     const utf8Bytes = new TextEncoder().encode(jsonStr);
-    let binStr = '';
-    utf8Bytes.forEach(b => binStr += String.fromCharCode(b));
-    const inhalt = btoa(binStr);
-
-    const putBody = {
-      message: `Sync ${new Date().toISOString().slice(0, 16)}`,
-      content: inhalt,
-      ...(remoteSha && { sha: remoteSha })
-    };
+    let binStr2 = '';
+    utf8Bytes.forEach(b => binStr2 += String.fromCharCode(b));
 
     const putResp = await fetch(apiUrl, {
       method: 'PUT',
       headers: { ...headers, 'Content-Type': 'application/json' },
-      body: JSON.stringify(putBody)
+      body: JSON.stringify({ message: `Sync ${new Date().toISOString().slice(0,16)}`, content: btoa(binStr2), ...(remoteSha && { sha: remoteSha }) })
     });
-
     if (!putResp.ok) throw new Error(`Schreiben fehlgeschlagen: ${putResp.status}`);
 
-    // 4. Lokal aktualisieren
     eintraege = einzigartig;
     speichern();
     letzterSync = new Date().toISOString();
     localStorage.setItem('letzterSync', letzterSync);
-    aktualisiereSync(true); // grüner Punkt
+    aktualisiereSync(true);
     zeigeAlles();
+    zeigeFA();
     if (!autoSync) toast(`Sync erfolgreich · ${einzigartig.length} Einträge`);
     else toast('Gespeichert und synchronisiert ✓');
-
   } catch (err) {
     toast(`Sync Fehler: ${err.message}`, true);
     console.error(err);
   }
-
   if (syncBtn) syncBtn.textContent = '☁ Sync';
 }
 
@@ -1269,35 +1280,22 @@ function zeigeSync() {
   document.getElementById('sync-modal').classList.add('show');
 }
 function schliesseSync() { document.getElementById('sync-modal').classList.remove('show'); }
-
 function syncSpeichern() {
   const token = document.getElementById('sync-token').value.trim();
   const repo = document.getElementById('sync-repo').value.trim();
-  if (token && !token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
-    toast('Token sieht nicht richtig aus (sollte mit ghp_ beginnen)', true);
-    return;
-  }
-  syncToken = token;
-  syncRepo = repo;
-  localStorage.setItem('syncToken', token);
-  localStorage.setItem('syncRepo', repo);
-  aktualisiereSync();
-  schliesseSync();
+  if (token && !token.startsWith('ghp_') && !token.startsWith('github_pat_')) { toast('Token sieht nicht richtig aus', true); return; }
+  syncToken = token; syncRepo = repo;
+  localStorage.setItem('syncToken', token); localStorage.setItem('syncRepo', repo);
+  aktualisiereSync(); schliesseSync();
   toast('Sync-Einstellungen gespeichert');
   if (token && repo) githubSync();
 }
-
 function syncTrennen() {
   if (!confirm('GitHub Sync trennen?')) return;
   syncToken = ''; syncRepo = ''; letzterSync = null;
-  localStorage.removeItem('syncToken');
-  localStorage.removeItem('syncRepo');
-  localStorage.removeItem('letzterSync');
-  aktualisiereSync();
-  schliesseSync();
-  toast('Sync getrennt');
+  localStorage.removeItem('syncToken'); localStorage.removeItem('syncRepo'); localStorage.removeItem('letzterSync');
+  aktualisiereSync(); schliesseSync(); toast('Sync getrennt');
 }
-// ─────────────────────────────────────────────────────────────
 
 function toast(text, fehler = false) {
   const t = document.getElementById('toast');
@@ -1308,8 +1306,6 @@ function toast(text, fehler = false) {
 }
 
 init();
-
-// Service Worker für PWA-Funktion (nur wenn von einer https-URL geladen)
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed:', err));
