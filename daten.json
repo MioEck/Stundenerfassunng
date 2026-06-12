@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-11T05:59:44.847Z",
+  "aktualisiert": "2026-06-12T03:41:49.513Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1088,14 +1088,6 @@
     },
     {
       "datum": "2026-05-04",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-05-04",
       "beginn": "08:20",
       "ende": "14:38",
       "kurs": "Sonderfahrt",
@@ -1126,15 +1118,6 @@
       "kurs": "Kurs 215",
       "sonderfahrt": "",
       "pause": ""
-    },
-    {
-      "datum": "2026-05-07",
-      "beginn": "07:00",
-      "ende": "15:00",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Schlüttsiel , Schleswig",
-      "pause": "",
-      "uebernachtung": false
     },
     {
       "datum": "2026-05-08",
@@ -1210,7 +1193,7 @@
       "beginn": "19:30",
       "ende": "05:40",
       "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV , wegbringer",
+      "sonderfahrt": "SEV , Wegbringer",
       "pause": "",
       "uebernachtung": false
     },
@@ -1428,6 +1411,15 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-06-12",
+      "beginn": "23:10",
+      "ende": "05:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": "",
+      "uebernachtung": false
     }
   ],
   "geloescht": [
@@ -1449,6 +1441,8 @@
     "2026-05-28|12:43|Kurs 217",
     "2026-05-28|10:00|Sonderfahrt",
     "2026-06-04||Frei",
+    "2026-05-04||Frei",
+    "2026-05-07|07:00|Sonderfahrt",
     "2026-05-29|10:10|Sonderfahrt"
   ]
 }
