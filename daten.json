@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-15T02:49:53.415Z",
+  "aktualisiert": "2026-06-15T02:50:22.158Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1423,7 +1423,7 @@
     },
     {
       "datum": "2026-06-14",
-      "beginn": "20:50",
+      "beginn": "20:40",
       "ende": "04:40",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SEV",
@@ -1453,6 +1453,7 @@
     "2026-05-04||Frei",
     "2026-05-07|07:00|Sonderfahrt",
     "2026-05-29|10:10|Sonderfahrt",
-    "2026-06-12|23:10|Sonderfahrt"
+    "2026-06-12|23:10|Sonderfahrt",
+    "2026-06-14|20:50|Sonderfahrt"
   ]
 }
