@@ -320,7 +320,7 @@ td.actions { text-align: right; }
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.24</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.25</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -423,6 +423,13 @@ td.actions { text-align: right; }
         <div class="field">
           <label>Übernachtung</label>
           <button type="button" id="uebernachtung-btn" onclick="toggleUebernachtung()"
+            style="width:100%;padding:12px 14px;background:#0d1a2a;border:1px solid #1e3050;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
+            Nein
+          </button>
+        </div>
+        <div class="field">
+          <label>Doppelbesatzung</label>
+          <button type="button" id="doppelbesatzung-btn" onclick="toggleDoppelbesatzung()"
             style="width:100%;padding:12px 14px;background:#0d1a2a;border:1px solid #1e3050;border-radius:8px;color:#a8a49d;font-size:15px;font-weight:600;cursor:pointer;text-align:left;transition:all 0.15s;">
             Nein
           </button>
@@ -805,6 +812,24 @@ function uebernachtungReset() {
   btn.style.color='#a8a49d'; btn.style.borderColor='#1e3050'; btn.style.background='#0d1a2a';
 }
 
+function toggleDoppelbesatzung() {
+  const btn = document.getElementById('doppelbesatzung-btn');
+  const aktiv = btn.getAttribute('data-aktiv') === '1';
+  if (aktiv) {
+    btn.setAttribute('data-aktiv','0'); btn.textContent='Nein';
+    btn.style.color='#a8a49d'; btn.style.borderColor='#1e3050'; btn.style.background='#0d1a2a';
+  } else {
+    btn.setAttribute('data-aktiv','1'); btn.textContent='✕  Ja — Doppelbesatzung';
+    btn.style.color='#0d1a2a'; btn.style.borderColor='#00b8c8'; btn.style.background='#00b8c8';
+  }
+}
+
+function doppelbesatzungReset() {
+  const btn = document.getElementById('doppelbesatzung-btn');
+  btn.setAttribute('data-aktiv','0'); btn.textContent='Nein';
+  btn.style.color='#a8a49d'; btn.style.borderColor='#1e3050'; btn.style.background='#0d1a2a';
+}
+
 function setKombiOrder(order) {
   kombiOrder = order;
   document.getElementById('kombi-order-vor').classList.toggle('active', order === 'vor');
@@ -841,6 +866,7 @@ function aktualisiereKombiGesamt() {
 
 function formularZuruecksetzen() {
   uebernachtungReset();
+  doppelbesatzungReset();
   document.getElementById('datum').value = new Date().toISOString().split('T')[0];
   document.getElementById('kurs').value = '';
   document.getElementById('vorschau').style.display = 'none';
@@ -885,6 +911,11 @@ function bearbeiten(originalIndex) {
       const btn = document.getElementById('uebernachtung-btn');
       btn.setAttribute('data-aktiv','1'); btn.textContent='✕  Ja — Übernachtung';
       btn.style.color='#0d1a2a'; btn.style.borderColor='#00b8c8'; btn.style.background='#00b8c8';
+    }
+    if (e.doppelbesatzung) {
+      const btn2 = document.getElementById('doppelbesatzung-btn');
+      btn2.setAttribute('data-aktiv','1'); btn2.textContent='✕  Ja — Doppelbesatzung';
+      btn2.style.color='#0d1a2a'; btn2.style.borderColor='#00b8c8'; btn2.style.background='#00b8c8';
     }
   } else if (e.extraStunden !== undefined) {
     setMode('kombi');
@@ -954,9 +985,10 @@ function eintragen() {
     const pe = document.getElementById('sonder-pause-einheit').value;
     const pause = pw ? `${pw} ${pe === 'std' ? 'Std' : 'min'}` : '';
     const uebernachtung = document.getElementById('uebernachtung-btn').getAttribute('data-aktiv') === '1';
+    const doppelbesatzung = document.getElementById('doppelbesatzung-btn').getAttribute('data-aktiv') === '1';
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
-    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung };
+    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung, doppelbesatzung };
   } else if (modus === 'kombi') {
     const nr = document.getElementById('kombi-kurs').value;
     const sBeginn = document.getElementById('kombi-beginn').value;
@@ -1085,7 +1117,7 @@ function zeigeTabelle() {
     c.innerHTML = `<div class="empty">Keine Einträge im Monat ${aktiverMonat}.</div>`;
     return;
   }
-  let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th>Üb.</th><th></th></tr></thead><tbody>`;
+  let html = `<table><thead><tr><th>Datum</th><th>Beginn</th><th>Ende</th><th>Std</th><th>Kurs</th><th>Sonderfahrt</th><th>Pause</th><th>Üb.</th><th>DB</th><th></th></tr></thead><tbody>`;
   monatsEintraege.forEach(e => {
     const d = new Date(e.datum);
     const datumKurz = d.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit' });
@@ -1096,10 +1128,11 @@ function zeigeTabelle() {
     ).toFixed(2).replace('.', ',');
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : extrahiereKurs(e.kurs);
     const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
+    const dbAnzeige = e.doppelbesatzung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
     html += `<tr style="cursor:pointer;" onclick="bearbeiten(${e.originalIndex})">
       <td>${datumKurz}</td><td>${e.beginn||'—'}</td><td>${e.ende||'—'}</td>
       <td class="std">${std}</td><td>${kursAnzeige}</td>
-      <td>${e.sonderfahrt||'—'}</td><td>${e.pause||'—'}</td><td>${uebAnzeige}</td>
+      <td>${e.sonderfahrt||'—'}</td><td>${e.pause||'—'}</td><td>${uebAnzeige}</td><td>${dbAnzeige}</td>
       <td class="actions"><button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button></td>
     </tr>`;
   });
@@ -1111,7 +1144,7 @@ function zeigeTabelle() {
 function exportMonatCSV() {
   const me = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (me.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
-  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung\n';
+  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung;Doppelbesatzung\n';
   const zeilen = me.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
@@ -1119,8 +1152,9 @@ function exportMonatCSV() {
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '-' : ersetzeUmlaute(extrahiereKurs(e.kurs));
     const sf = ersetzeUmlaute(e.sonderfahrt);
     const ueb = e.uebernachtung ? 'X' : '';
-    if (istFrei) return `${datumDE};;;-;${e.kurs};;`;
-    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sf};${e.pause||''};${ueb}`;
+    const db = e.doppelbesatzung ? 'X' : '';
+    if (istFrei) return `${datumDE};;;-;${e.kurs};;;`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sf};${e.pause||''};${ueb};${db}`;
   }).join('\n');
   const blob = new Blob([header + zeilen], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
