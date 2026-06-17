@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-17T05:43:59.836Z",
+  "aktualisiert": "2026-06-17T05:44:24.327Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1454,7 +1454,8 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Bad Wildungen",
       "pause": "",
-      "uebernachtung": false
+      "uebernachtung": false,
+      "doppelbesatzung": true
     }
   ],
   "geloescht": [
