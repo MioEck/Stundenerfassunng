@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-16T01:21:48.563Z",
+  "aktualisiert": "2026-06-17T05:24:43.948Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1427,6 +1427,15 @@
       "ende": "04:50",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SEV",
+      "pause": "",
+      "uebernachtung": false
+    },
+    {
+      "datum": "2026-06-16",
+      "beginn": "03:45",
+      "ende": "17:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Bad Wildungen",
       "pause": "",
       "uebernachtung": false
     },
