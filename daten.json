@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-17T05:26:08.922Z",
+  "aktualisiert": "2026-06-17T05:26:43.981Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1431,6 +1431,15 @@
       "uebernachtung": false
     },
     {
+      "datum": "2026-06-15",
+      "beginn": "04:27",
+      "ende": "08:53",
+      "kurs": "Kurs 211 + Büdelsdorf schwimmen",
+      "sonderfahrt": "Büdelsdorf schwimmen",
+      "pause": "3 Std",
+      "extraStunden": 14.983333333333334
+    },
+    {
       "datum": "2026-06-16",
       "beginn": "03:45",
       "ende": "17:30",
@@ -1438,15 +1447,6 @@
       "sonderfahrt": "Bad Wildungen",
       "pause": "",
       "uebernachtung": false
-    },
-    {
-      "datum": "2026-06-16",
-      "beginn": "04:27",
-      "ende": "15:00",
-      "kurs": "Kurs 211 + Büdelsdorf schwimmen",
-      "sonderfahrt": "Büdelsdorf schwimmen",
-      "pause": "3 Std",
-      "extraStunden": 10.533333333333333
     }
   ],
   "geloescht": [
@@ -1473,6 +1473,7 @@
     "2026-05-29|10:10|Sonderfahrt",
     "2026-06-12|23:10|Sonderfahrt",
     "2026-06-14|20:50|Sonderfahrt",
-    "2026-06-15|06:40|Kurs 215"
+    "2026-06-15|06:40|Kurs 215",
+    "2026-06-16|04:27|Kurs 211 + Büdelsdorf schwimmen"
   ]
 }
