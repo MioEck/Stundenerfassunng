@@ -327,7 +327,7 @@ td.actions { text-align: right; }
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.26</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.27</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -758,10 +758,12 @@ function berechnePausenabzug(pauseStr) {
   return 2 + (std - 2) * 0.5;
 }
 
-function berechneNettoStunden(beginn, ende, pause, istSonder) {
+function berechneNettoStunden(beginn, ende, pause, istSonder, doppelbesatzung) {
   const brutto = berechneStunden(beginn, ende);
-  if (!istSonder || !pause) return brutto;
-  return Math.max(0, brutto - berechnePausenabzug(pause));
+  if (!istSonder) return brutto;
+  let netto = pause ? Math.max(0, brutto - berechnePausenabzug(pause)) : brutto;
+  if (doppelbesatzung) netto = netto * 0.75;
+  return netto;
 }
 
 function extrahiereKurs(kurs) {
@@ -1115,7 +1117,7 @@ function zeigeTabelle() {
   const summe = monatsEintraege.reduce((s, e) => {
     if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn || !e.ende) return s;
     if (e.extraStunden !== undefined) return s + e.extraStunden;
-    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt');
+    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung);
   }, 0);
   document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
   document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
@@ -1131,7 +1133,7 @@ function zeigeTabelle() {
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
     const std = istFrei ? '—' : (e.extraStunden !== undefined
       ? e.extraStunden
-      : berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt')
+      : berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung)
     ).toFixed(2).replace('.', ',');
     const kursAnzeige = e.kurs === 'Sonderfahrt' ? '—' : extrahiereKurs(e.kurs);
     const uebAnzeige = e.uebernachtung ? '<span style="color:#00b8c8;font-weight:700;">✕</span>' : '—';
