@@ -220,7 +220,14 @@ input:focus, select:focus { outline: none; border-color: #00b8c8; }
 
 .entries-actions { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
 
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 700px; }
+.tabelle-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 1px solid #1a2d45;
+  background: #0d1a2a;
+}
 th { text-align: left; padding: 8px 6px; color: #8a8680; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #1e3050; }
 td { padding: 10px 6px; border-bottom: 1px solid #1a2d45; color: #e8e6e1; }
 td.std { color: #00b8c8; font-weight: 600; }
@@ -320,7 +327,7 @@ td.actions { text-align: right; }
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.25</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.26</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -541,7 +548,7 @@ td.actions { text-align: right; }
       </div>
 
       <input type="file" id="backup-input" accept=".json" style="display:none;" onchange="backupDateiVerarbeiten(event)">
-      <div id="tabelle-container"></div>
+      <div class="tabelle-scroll"><div id="tabelle-container"></div></div>
     </div>
   </div>
 
