@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-21T09:51:51.373Z",
+  "aktualisiert": "2026-06-24T03:36:34.079Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1507,6 +1507,16 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-06-23",
+      "beginn": "07:30",
+      "ende": "14:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Rendsburg",
+      "pause": "2.40 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
