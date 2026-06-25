@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-24T09:10:32.380Z",
+  "aktualisiert": "2026-06-25T13:45:14.810Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1533,6 +1533,15 @@
       "kurs": "Kurs 215",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-06-25",
+      "beginn": "04:38",
+      "ende": "14:30",
+      "kurs": "Kurs 212 + Owschlag, Verstärker",
+      "sonderfahrt": "Owschlag, Verstärker",
+      "pause": "",
+      "extraStunden": 9.85
     }
   ],
   "geloescht": [
