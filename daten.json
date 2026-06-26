@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-25T13:45:14.810Z",
+  "aktualisiert": "2026-06-26T16:58:06.962Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1542,6 +1542,16 @@
       "sonderfahrt": "Owschlag, Verstärker",
       "pause": "",
       "extraStunden": 9.85
+    },
+    {
+      "datum": "2026-06-26",
+      "beginn": "06:00",
+      "ende": "12:10",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Meldelby",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
