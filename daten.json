@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-29T01:00:06.624Z",
+  "aktualisiert": "2026-06-29T21:46:15.374Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1562,6 +1562,14 @@
       "pause": "4.40 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-06-29",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
