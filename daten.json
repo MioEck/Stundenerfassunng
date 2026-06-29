@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-26T16:58:06.962Z",
+  "aktualisiert": "2026-06-29T00:59:25.427Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1550,6 +1550,16 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Meldelby",
       "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-06-28",
+      "beginn": "15:50",
+      "ende": "02:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Kiwi Feuerwerk",
+      "pause": "4.40 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
