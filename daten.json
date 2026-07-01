@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-06-29T21:46:15.374Z",
+  "aktualisiert": "2026-07-01T05:42:07.447Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1570,6 +1570,16 @@
       "kurs": "Kurs 216",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-06-30",
+      "beginn": "11:00",
+      "ende": "01:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Barcleys Arena",
+      "pause": "7 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
