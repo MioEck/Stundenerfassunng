@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-01T05:51:08.246Z",
+  "aktualisiert": "2026-07-01T18:41:52.811Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1406,14 +1406,6 @@
     },
     {
       "datum": "2026-06-11",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-06-11",
       "beginn": "23:10",
       "ende": "05:20",
       "kurs": "Sonderfahrt",
@@ -1429,15 +1421,6 @@
       "sonderfahrt": "SEV",
       "pause": "",
       "uebernachtung": false
-    },
-    {
-      "datum": "2026-06-15",
-      "beginn": "04:27",
-      "ende": "08:53",
-      "kurs": "Kurs 211 + Büdelsdorf Schwimmen",
-      "sonderfahrt": "Büdelsdorf Schwimmen",
-      "pause": "3 Std",
-      "extraStunden": 8.866666666666667
     },
     {
       "datum": "2026-06-15",
@@ -1580,6 +1563,14 @@
       "pause": "7 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-07-01",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -1608,6 +1599,8 @@
     "2026-06-14|20:50|Sonderfahrt",
     "2026-06-16|04:27|Kurs 211 + Büdelsdorf schwimmen",
     "2026-06-15|06:40|Kurs 215",
-    "2026-06-15|08:54|Kurs 211 + Büdelsdorf schwimmen"
+    "2026-06-15|08:54|Kurs 211 + Büdelsdorf schwimmen",
+    "2026-06-15|04:27|Kurs 211 + Büdelsdorf Schwimmen",
+    "2026-06-11||Frei"
   ]
 }
