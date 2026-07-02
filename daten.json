@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-01T18:41:52.811Z",
+  "aktualisiert": "2026-07-02T10:31:40.190Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1425,11 +1425,11 @@
     {
       "datum": "2026-06-15",
       "beginn": "04:27",
-      "ende": "15:00",
-      "kurs": "Kurs 211 + Büdelsdorf schwimmen",
-      "sonderfahrt": "Büdelsdorf schwimmen",
+      "ende": "08:53",
+      "kurs": "Kurs 211 + Büdelsdorf schwimmen Verstärker",
+      "sonderfahrt": "Büdelsdorf schwimmen Verstärker",
       "pause": "3 Std",
-      "extraStunden": 10.533333333333333
+      "extraStunden": 14.983333333333334
     },
     {
       "datum": "2026-06-16",
@@ -1601,6 +1601,7 @@
     "2026-06-15|06:40|Kurs 215",
     "2026-06-15|08:54|Kurs 211 + Büdelsdorf schwimmen",
     "2026-06-15|04:27|Kurs 211 + Büdelsdorf Schwimmen",
-    "2026-06-11||Frei"
+    "2026-06-11||Frei",
+    "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen"
   ]
 }
