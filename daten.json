@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-04T21:48:57.120Z",
+  "aktualisiert": "2026-07-04T21:50:56.402Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1596,7 +1596,7 @@
       "ende": "19:20",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Flensburg",
-      "pause": "",
+      "pause": "2.40 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
