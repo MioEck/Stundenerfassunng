@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-02T11:17:38.430Z",
+  "aktualisiert": "2026-07-04T06:51:47.222Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1579,6 +1579,16 @@
       "kurs": "Kurs 217",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-07-03",
+      "beginn": "14:30",
+      "ende": "02:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Rheinsberg",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
