@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-04T06:51:47.222Z",
+  "aktualisiert": "2026-07-04T21:48:57.120Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1586,6 +1586,16 @@
       "ende": "02:20",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Rheinsberg",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-07-04",
+      "beginn": "09:50",
+      "ende": "19:20",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Flensburg",
       "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
