@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-13T08:02:45.443Z",
+  "aktualisiert": "2026-07-15T07:37:04.231Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1675,6 +1675,16 @@
       "kurs": "Kurs 413",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-07-14",
+      "beginn": "19:30",
+      "ende": "00:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
