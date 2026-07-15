@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-15T07:37:11.438Z",
+  "aktualisiert": "2026-07-15T07:39:47.146Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1671,10 +1671,11 @@
     {
       "datum": "2026-07-13",
       "beginn": "07:21",
-      "ende": "18:37",
-      "kurs": "Kurs 413",
-      "sonderfahrt": "",
-      "pause": ""
+      "ende": "20:50",
+      "kurs": "Kurs 413 + 415 mit nach Wahlstedt genommen",
+      "sonderfahrt": "415 mit nach Wahlstedt genommen",
+      "pause": "",
+      "extraStunden": 13.483333333333334
     },
     {
       "datum": "2026-07-14",
@@ -1725,6 +1726,7 @@
     "2026-06-15|04:27|Kurs 211 + Büdelsdorf Schwimmen",
     "2026-06-11||Frei",
     "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen",
-    "2026-07-07|07:21|Kurs 413"
+    "2026-07-07|07:21|Kurs 413",
+    "2026-07-13|07:21|Kurs 413"
   ]
 }
