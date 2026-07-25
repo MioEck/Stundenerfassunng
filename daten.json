@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-21T16:31:38.624Z",
+  "aktualisiert": "2026-07-25T06:44:31.870Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1696,12 +1696,14 @@
       "pause": ""
     },
     {
-      "datum": "2026-07-21",
-      "beginn": "14:40",
-      "ende": "22:25",
-      "kurs": "Kurs 613",
-      "sonderfahrt": "",
-      "pause": ""
+      "datum": "2026-07-16",
+      "beginn": "06:45",
+      "ende": "21:15",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Tolk Schau",
+      "pause": "7 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
@@ -1735,6 +1737,7 @@
     "2026-06-11||Frei",
     "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen",
     "2026-07-07|07:21|Kurs 413",
-    "2026-07-13|07:21|Kurs 413"
+    "2026-07-13|07:21|Kurs 413",
+    "2026-07-21|14:40|Kurs 613"
   ]
 }
