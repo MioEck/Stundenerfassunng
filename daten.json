@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-25T06:44:31.870Z",
+  "aktualisiert": "2026-07-26T09:18:24.396Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1702,6 +1702,16 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Tolk Schau",
       "pause": "7 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-07-17",
+      "beginn": "18:00",
+      "ende": "00:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
