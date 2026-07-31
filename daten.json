@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-07-31T13:14:46.340Z",
+  "aktualisiert": "2026-07-31T13:14:51.620Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1791,6 +1791,14 @@
     },
     {
       "datum": "2026-07-27",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Urlaub",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-07-28",
       "beginn": "",
       "ende": "",
       "kurs": "Urlaub",
