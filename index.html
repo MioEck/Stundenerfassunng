@@ -327,7 +327,7 @@ td.actions { text-align: right; }
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.28</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.29</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -521,6 +521,25 @@ td.actions { text-align: right; }
       </div>
     </div>
 
+    <!-- Kursstatistik-Karte -->
+    <div class="fa-card">
+      <div class="fa-header" onclick="toggleKS()">
+        <div>
+          <div class="fa-titel">Kursstatistik</div>
+          <div class="fa-sub">Wie oft welcher Kurs gefahren</div>
+        </div>
+        <div class="fa-pfeil" id="ks-pfeil">▼</div>
+      </div>
+      <div id="ks-inhalt" style="display:none;">
+        <div style="display:flex;gap:8px;padding:0 20px 12px;flex-wrap:wrap;">
+          <button id="ks-monat-btn" class="fa-jahr-btn active" onclick="setKSModus('monat')">Aktueller Monat</button>
+          <button id="ks-jahr-btn" class="fa-jahr-btn" onclick="setKSModus('jahr')">Gesamtjahr</button>
+          <div id="ks-jahr-auswahl" style="display:none;margin-left:auto;"></div>
+        </div>
+        <div class="fa-monate" id="ks-liste"></div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-title">Monatsübersicht</div>
 
@@ -612,6 +631,80 @@ function wechsleReiter(reiter) {
   document.getElementById(`reiter-${reiter}`).classList.add('active');
   event.target.classList.add('active');
   if (reiter === 'uebersicht') { zeigeAlles(); zeigeFA(); }
+}
+
+// ─── Kursstatistik ────────────────────────────────────────────
+let ksOffen = false;
+let ksModus = 'monat'; // 'monat' oder 'jahr'
+let ksJahr = new Date().getFullYear();
+
+function toggleKS() {
+  ksOffen = !ksOffen;
+  document.getElementById('ks-inhalt').style.display = ksOffen ? 'block' : 'none';
+  document.getElementById('ks-pfeil').classList.toggle('offen', ksOffen);
+  if (ksOffen) zeigeKS();
+}
+
+function setKSModus(modus) {
+  ksModus = modus;
+  document.getElementById('ks-monat-btn').classList.toggle('active', modus === 'monat');
+  document.getElementById('ks-jahr-btn').classList.toggle('active', modus === 'jahr');
+  document.getElementById('ks-jahr-auswahl').style.display = modus === 'jahr' ? 'flex' : 'none';
+  zeigeKS();
+}
+
+function zeigeKS() {
+  const liste = document.getElementById('ks-liste');
+
+  // Jahres-Buttons aufbauen
+  const jahreDiv = document.getElementById('ks-jahr-auswahl');
+  const jahre = [...new Set(eintraege.map(e => new Date(e.datum).getFullYear()))].sort();
+  jahreDiv.innerHTML = '';
+  jahre.forEach(j => {
+    const btn = document.createElement('button');
+    btn.className = 'fa-jahr-btn' + (j === ksJahr ? ' active' : '');
+    btn.textContent = j;
+    btn.onclick = () => { ksJahr = j; zeigeKS(); };
+    jahreDiv.appendChild(btn);
+  });
+
+  // Einträge filtern — nur Linienkurse (kein Sonderfahrt, kein Frei, kein Urlaub, kein Kombi)
+  let gefiltert;
+  if (ksModus === 'monat') {
+    gefiltert = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
+  } else {
+    gefiltert = eintraege.filter(e => new Date(e.datum).getFullYear() === ksJahr);
+  }
+
+  // Nur reine Linienkurse zählen (kein " + " im Kurs-Text, kein Sonderfahrt/Frei/Urlaub)
+  const zaehler = {};
+  gefiltert.forEach(e => {
+    if (!e.kurs) return;
+    if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || e.kurs === 'Sonderfahrt') return;
+    if (e.kurs.includes(' + ')) return; // Kombi
+    const kurs = e.kurs.trim();
+    zaehler[kurs] = (zaehler[kurs] || 0) + 1;
+  });
+
+  if (Object.keys(zaehler).length === 0) {
+    liste.innerHTML = '<div style="color:#6a6660;font-size:13px;padding:8px 0;">Keine Linienkurse in diesem Zeitraum.</div>';
+    return;
+  }
+
+  // Nach Häufigkeit sortieren
+  const sortiert = Object.entries(zaehler).sort((a, b) => {
+    // Erst nach Häufigkeit absteigend, dann alphabetisch
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return a[0].localeCompare(b[0]);
+  });
+
+  liste.innerHTML = '';
+  sortiert.forEach(([kurs, anzahl]) => {
+    const div = document.createElement('div');
+    div.className = 'fa-monat-zeile';
+    div.innerHTML = `<span class="fa-monat-name">${kurs}</span><span class="fa-monat-tage"><span>${anzahl}</span>×</span>`;
+    liste.appendChild(div);
+  });
 }
 
 // ─── Finanzamt ─────────────────────────────────────────────────
@@ -1106,7 +1199,7 @@ function zeigeTabs() {
     const btn = document.createElement('button');
     btn.className = 'tab' + (m === aktiverMonat ? ' active' : '');
     btn.innerHTML = `${m}${anzahl > 0 ? `<span class="badge">${anzahl}</span>` : ''}`;
-    btn.onclick = () => { aktiverMonat = m; zeigeAlles(); };
+    btn.onclick = () => { aktiverMonat = m; zeigeAlles(); if (ksOffen && ksModus === 'monat') zeigeKS(); };
     tabs.appendChild(btn);
   });
 }
