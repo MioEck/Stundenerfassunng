@@ -327,7 +327,7 @@ td.actions { text-align: right; }
 <div class="container">
   <header>
     <div>
-      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.29</span></h1>
+      <h1>Stundenzettel <span style="font-size:12px;color:#6a6660;font-weight:400;">v1.31</span></h1>
       <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
     </div>
   </header>
@@ -588,6 +588,7 @@ const KURSE = {
   "413": { beginn: "07:21", ende: "18:37", tage: "Mo-Fr Ferienzeit" },
   "414": { beginn: "10:49", ende: "21:40", tage: "Mo-Fr Ferienzeit" },
   "611": { beginn: "05:30", ende: "14:55", tage: "Sa ganzjährig" },
+  "612": { beginn: "06:40", ende: "18:25", stunden: 10.75, tage: "Sa ganzjährig" },
   "613": { beginn: "14:40", ende: "22:25", tage: "Sa ganzjährig" },
   "811": { beginn: "07:49", ende: "20:25", tage: "So ganzjährig" }
 };
@@ -894,13 +895,16 @@ function zeigeVorschau() {
   const nr = document.getElementById('kurs').value;
   const v = document.getElementById('vorschau');
   if (nr && KURSE[nr]) {
-    const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std = kursStunden(nr);
     v.style.display = 'block';
     v.innerHTML = `Beginn: <strong>${KURSE[nr].beginn}</strong> · Ende: <strong>${KURSE[nr].ende}</strong> · Dauer: <strong>${std.toFixed(2).replace('.',',')} h</strong>`;
   } else { v.style.display = 'none'; }
 }
 
-function toggleUebernachtung() {
+function kursStunden(nr) {
+  if (KURSE[nr].stunden !== undefined) return KURSE[nr].stunden;
+  return kursStunden(nr);
+}
   const btn = document.getElementById('uebernachtung-btn');
   const aktiv = btn.getAttribute('data-aktiv') === '1';
   if (aktiv) {
@@ -948,7 +952,7 @@ function zeigeKombiVorschau() {
   const nr = document.getElementById('kombi-kurs').value;
   const v = document.getElementById('kombi-vorschau');
   if (nr && KURSE[nr]) {
-    const std = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std = kursStunden(nr);
     v.style.display = 'block';
     v.innerHTML = `Kurs ${nr}: <strong>${KURSE[nr].beginn}–${KURSE[nr].ende}</strong> · ${std.toFixed(2).replace('.',',')} h`;
   } else { v.style.display = 'none'; }
@@ -961,7 +965,7 @@ function aktualisiereKombiGesamt() {
   const sEnde = document.getElementById('kombi-ende').value;
   const g = document.getElementById('kombi-gesamt');
   if (nr && sBeginn && sEnde && KURSE[nr]) {
-    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std1 = kursStunden(nr);
     const std2 = berechneStunden(sBeginn, sEnde);
     const gBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
     const gEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
@@ -1082,7 +1086,8 @@ function eintragen() {
   if (modus === 'kurs') {
     const nr = document.getElementById('kurs').value;
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
-    eintrag = { datum, beginn: KURSE[nr].beginn, ende: KURSE[nr].ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '' };
+    eintrag = { datum, beginn: KURSE[nr].beginn, ende: KURSE[nr].ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '',
+      ...(KURSE[nr].stunden !== undefined ? { extraStunden: KURSE[nr].stunden } : {}) };
   } else if (modus === 'sonder') {
     const beginn = document.getElementById('sonder-beginn').value;
     const ende = document.getElementById('sonder-ende').value;
@@ -1106,7 +1111,7 @@ function eintragen() {
     if (!nr) { toast('Bitte Kurs wählen', true); return; }
     if (!sBeginn || !sEnde) { toast('Bitte Beginn und Ende der Sonderfahrt eingeben', true); return; }
     if (!sArt) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
-    const std1 = berechneStunden(KURSE[nr].beginn, KURSE[nr].ende);
+    const std1 = kursStunden(nr);
     const std2 = berechneStunden(sBeginn, sEnde);
     const gBeginn = kombiOrder === 'vor' ? sBeginn : KURSE[nr].beginn;
     const gEnde   = kombiOrder === 'vor' ? KURSE[nr].ende : sEnde;
