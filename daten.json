@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-07T18:44:56.867Z",
+  "aktualisiert": "2026-08-08T05:11:20.442Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1406,14 +1406,6 @@
     },
     {
       "datum": "2026-06-11",
-      "beginn": "",
-      "ende": "",
-      "kurs": "Frei",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-06-11",
       "beginn": "23:10",
       "ende": "05:20",
       "kurs": "Sonderfahrt",
@@ -1434,27 +1426,10 @@
       "datum": "2026-06-15",
       "beginn": "04:27",
       "ende": "08:53",
-      "kurs": "Kurs 211 + Büdelsdorf Schwimmen",
-      "sonderfahrt": "Büdelsdorf Schwimmen",
-      "pause": "3 Std",
-      "extraStunden": 8.866666666666667
-    },
-    {
-      "datum": "2026-06-15",
-      "beginn": "04:27",
-      "ende": "08:53",
       "kurs": "Kurs 211 + Büdelsdorf schwimmen Verstärker",
       "sonderfahrt": "Büdelsdorf schwimmen Verstärker",
       "pause": "3 Std",
       "extraStunden": 14.983333333333334
-    },
-    {
-      "datum": "2026-06-15",
-      "beginn": "06:40",
-      "ende": "18:08",
-      "kurs": "Kurs 215",
-      "sonderfahrt": "",
-      "pause": ""
     },
     {
       "datum": "2026-06-16",
@@ -1909,6 +1884,14 @@
       "kurs": "Kurs 412",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-08-08",
+      "beginn": "05:30",
+      "ende": "14:55",
+      "kurs": "Kurs 611",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -1936,8 +1919,11 @@
     "2026-06-12|23:10|Sonderfahrt",
     "2026-06-14|20:50|Sonderfahrt",
     "2026-06-16|04:27|Kurs 211 + Büdelsdorf schwimmen",
-    "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen",
+    "2026-06-15|06:40|Kurs 215",
     "2026-06-15|08:54|Kurs 211 + Büdelsdorf schwimmen",
+    "2026-06-15|04:27|Kurs 211 + Büdelsdorf Schwimmen",
+    "2026-06-11||Frei",
+    "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen",
     "2026-07-07|07:21|Kurs 413",
     "2026-07-13|07:21|Kurs 413",
     "2026-07-21|14:40|Kurs 613"
