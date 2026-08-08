@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-08T05:11:20.442Z",
+  "aktualisiert": "2026-08-08T08:01:33.038Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1892,6 +1892,15 @@
       "kurs": "Kurs 611",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-08-08",
+      "beginn": "06:40",
+      "ende": "18:25",
+      "kurs": "Kurs 612",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 10.75
     }
   ],
   "geloescht": [
