@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-08T08:01:33.038Z",
+  "aktualisiert": "2026-08-09T04:00:10.602Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1887,20 +1887,20 @@
     },
     {
       "datum": "2026-08-08",
-      "beginn": "05:30",
-      "ende": "14:55",
-      "kurs": "Kurs 611",
-      "sonderfahrt": "",
-      "pause": ""
-    },
-    {
-      "datum": "2026-08-08",
       "beginn": "06:40",
       "ende": "18:25",
       "kurs": "Kurs 612",
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 10.75
+    },
+    {
+      "datum": "2026-08-09",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -1935,6 +1935,7 @@
     "2026-06-15|04:27|Kurs 211 + Büdelsdorf schwimmen",
     "2026-07-07|07:21|Kurs 413",
     "2026-07-13|07:21|Kurs 413",
-    "2026-07-21|14:40|Kurs 613"
+    "2026-07-21|14:40|Kurs 613",
+    "2026-08-08|05:30|Kurs 611"
   ]
 }
