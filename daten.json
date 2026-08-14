@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-14T03:57:37.559Z",
+  "aktualisiert": "2026-08-14T03:59:47.966Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1927,6 +1927,15 @@
       "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-08-14",
+      "beginn": "05:30",
+      "ende": "18:55",
+      "kurs": "Kurs 412 + Ri 111 in die Firma",
+      "sonderfahrt": "Ri 111 in die Firma",
+      "pause": "",
+      "extraStunden": 13.416666666666666
     }
   ],
   "geloescht": [
