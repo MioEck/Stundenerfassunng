@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-14T04:00:40.383Z",
+  "aktualisiert": "2026-08-15T21:49:17.116Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1944,6 +1944,16 @@
       "sonderfahrt": "Ri 111 in die Firma",
       "pause": "",
       "extraStunden": 13.416666666666666
+    },
+    {
+      "datum": "2026-08-15",
+      "beginn": "05:30",
+      "ende": "21:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Hamburg",
+      "pause": "8.30 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
