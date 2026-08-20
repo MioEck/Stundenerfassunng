@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-15T21:49:17.116Z",
+  "aktualisiert": "2026-08-20T07:00:33.875Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1952,6 +1952,16 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Hamburg",
       "pause": "8.30 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-08-16",
+      "beginn": "14:20",
+      "ende": "01:35",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV",
+      "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
