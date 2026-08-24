@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-22T05:12:34.391Z",
+  "aktualisiert": "2026-08-24T16:44:09.975Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2018,6 +2018,15 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-08-24",
+      "beginn": "06:01",
+      "ende": "10:20",
+      "kurs": "Kurs 213 + Fahrt nach Kiel zwischen durch keine Pause in Surendorf",
+      "sonderfahrt": "Fahrt nach Kiel zwischen durch keine Pause in Surendorf",
+      "pause": "",
+      "extraStunden": 11.133333333333335
     }
   ],
   "geloescht": [
