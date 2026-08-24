@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-24T18:32:43.091Z",
+  "aktualisiert": "2026-08-24T18:34:56.300Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2021,11 +2021,12 @@
     },
     {
       "datum": "2026-08-24",
-      "beginn": "06:01",
+      "beginn": "05:51",
       "ende": "15:32",
       "kurs": "Kurs 213",
       "sonderfahrt": "",
-      "pause": ""
+      "pause": "",
+      "extraStunden": 8.23
     }
   ],
   "geloescht": [
@@ -2063,6 +2064,7 @@
     "2026-07-21|14:40|Kurs 613",
     "2026-08-08|05:30|Kurs 611",
     "2026-08-20|10:49|Kurs 414",
-    "2026-08-24|06:01|Kurs 213 + Fahrt nach Kiel zwischen durch keine Pause in Surendorf"
+    "2026-08-24|06:01|Kurs 213 + Fahrt nach Kiel zwischen durch keine Pause in Surendorf",
+    "2026-08-24|06:01|Kurs 213"
   ]
 }
