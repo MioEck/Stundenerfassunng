@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-24T18:34:56.300Z",
+  "aktualisiert": "2026-08-25T02:58:13.873Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2027,6 +2027,15 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 8.23
+    },
+    {
+      "datum": "2026-08-25",
+      "beginn": "08:54",
+      "ende": "08:53",
+      "kurs": "Kurs 211 + Dekra Golf",
+      "sonderfahrt": "Dekra Golf",
+      "pause": "",
+      "extraStunden": 7.533333333333333
     }
   ],
   "geloescht": [
