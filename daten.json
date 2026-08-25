@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-25T02:59:14.580Z",
+  "aktualisiert": "2026-08-25T03:00:36.382Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2030,8 +2030,8 @@
     },
     {
       "datum": "2026-08-25",
-      "beginn": "08:54",
-      "ende": "08:53",
+      "beginn": "04:27",
+      "ende": "12:00",
       "kurs": "Kurs 211 + Dekra Golf",
       "sonderfahrt": "Dekra Golf",
       "pause": "",
@@ -2074,6 +2074,7 @@
     "2026-08-08|05:30|Kurs 611",
     "2026-08-20|10:49|Kurs 414",
     "2026-08-24|06:01|Kurs 213 + Fahrt nach Kiel zwischen durch keine Pause in Surendorf",
-    "2026-08-24|06:01|Kurs 213"
+    "2026-08-24|06:01|Kurs 213",
+    "2026-08-25|08:54|Kurs 211 + Dekra Golf"
   ]
 }
