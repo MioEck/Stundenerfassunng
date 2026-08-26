@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-25T03:00:36.382Z",
+  "aktualisiert": "2026-08-26T19:55:51.705Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2036,6 +2036,16 @@
       "sonderfahrt": "Dekra Golf",
       "pause": "",
       "extraStunden": 7.533333333333333
+    },
+    {
+      "datum": "2026-08-26",
+      "beginn": "06:30",
+      "ende": "19:30",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Neuengamme KZ",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
