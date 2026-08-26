@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-26T19:59:52.931Z",
+  "aktualisiert": "2026-08-26T20:02:34.346Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2038,14 +2038,13 @@
       "extraStunden": 12.866666666666667
     },
     {
-      "datum": "2026-08-26",
-      "beginn": "06:30",
-      "ende": "19:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Neuengamme KZ",
-      "pause": "5 Std",
-      "uebernachtung": false,
-      "doppelbesatzung": false
+      "datum": "2026-08-25",
+      "beginn": "08:54",
+      "ende": "08:53",
+      "kurs": "Kurs 211 + Dekra,Golf,Kurs 216 bis 17 Uhr",
+      "sonderfahrt": "Dekra,Golf,Kurs 216 bis 17 Uhr",
+      "pause": "",
+      "extraStunden": 12.866666666666667
     }
   ],
   "geloescht": [
@@ -2086,6 +2085,7 @@
     "2026-08-24|06:01|Kurs 213 + Fahrt nach Kiel zwischen durch keine Pause in Surendorf",
     "2026-08-24|06:01|Kurs 213",
     "2026-08-25|08:54|Kurs 211 + Dekra Golf",
-    "2026-08-25|04:27|Kurs 211 + Dekra Golf"
+    "2026-08-25|04:27|Kurs 211 + Dekra Golf",
+    "2026-08-26|06:30|Sonderfahrt"
   ]
 }
