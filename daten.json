@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-26T20:07:15.493Z",
+  "aktualisiert": "2026-08-26T20:07:58.027Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -1938,12 +1938,12 @@
     },
     {
       "datum": "2026-08-14",
-      "beginn": "05:30",
+      "beginn": "08:25",
       "ende": "18:55",
-      "kurs": "Kurs 412 + Ri 111 in die Firma",
-      "sonderfahrt": "Ri 111 in die Firma",
+      "kurs": "Kurs 412 + Mit Ri 111 in die Firma",
+      "sonderfahrt": "Mit Ri 111 in die Firma",
       "pause": "",
-      "extraStunden": 13.416666666666666
+      "extraStunden": 23.916666666666664
     },
     {
       "datum": "2026-08-15",
@@ -2090,6 +2090,7 @@
     "2026-08-25|08:54|Kurs 211 + Dekra,Golf,Kurs 216 bis 17 Uhr",
     "2026-08-25|08:54|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr",
     "2026-08-25|08:53|Kurs 211 + Dekra,Golf,Kurs 216 bis 17 Uhr",
-    "2026-08-25|04:27|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr"
+    "2026-08-25|04:27|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr",
+    "2026-08-14|05:30|Kurs 412 + Ri 111 in die Firma"
   ]
 }
