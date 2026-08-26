@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-26T19:55:51.705Z",
+  "aktualisiert": "2026-08-26T19:56:42.328Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2043,7 +2043,7 @@
       "ende": "19:30",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Neuengamme KZ",
-      "pause": "",
+      "pause": "5 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
