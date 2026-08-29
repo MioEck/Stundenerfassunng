@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-26T20:07:58.027Z",
+  "aktualisiert": "2026-08-29T05:25:43.761Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2044,6 +2044,16 @@
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Neuengamme",
       "pause": "5 Std",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-08-28",
+      "beginn": "07:00",
+      "ende": "16:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Assens",
+      "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
     }
