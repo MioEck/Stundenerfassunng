@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-29T05:27:33.966Z",
+  "aktualisiert": "2026-08-30T06:10:57.358Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2069,6 +2069,16 @@
       "ende": "16:40",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Assens",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-08-29",
+      "beginn": "11:00",
+      "ende": "23:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Kiel , SEV",
       "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
