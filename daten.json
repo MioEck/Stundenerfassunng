@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-31T08:22:38.951Z",
+  "aktualisiert": "2026-08-31T08:22:55.767Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2084,7 +2084,7 @@
       "doppelbesatzung": false
     },
     {
-      "datum": "2026-08-31",
+      "datum": "2026-08-30",
       "beginn": "",
       "ende": "",
       "kurs": "Frei",
@@ -2135,6 +2135,7 @@
     "2026-08-25|08:54|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr",
     "2026-08-25|08:53|Kurs 211 + Dekra,Golf,Kurs 216 bis 17 Uhr",
     "2026-08-25|04:27|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr",
-    "2026-08-14|05:30|Kurs 412 + Ri 111 in die Firma"
+    "2026-08-14|05:30|Kurs 412 + Ri 111 in die Firma",
+    "2026-08-31||Frei"
   ]
 }
