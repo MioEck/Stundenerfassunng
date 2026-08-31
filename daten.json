@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-08-30T06:11:55.008Z",
+  "aktualisiert": "2026-08-31T08:22:38.951Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2082,6 +2082,14 @@
       "pause": "2.50 Std",
       "uebernachtung": false,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-08-31",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
