@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-09-14T15:57:03.404Z",
+  "aktualisiert": "2026-09-16T20:31:15.407Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2213,6 +2213,15 @@
     },
     {
       "datum": "2026-09-14",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 10.37
+    },
+    {
+      "datum": "2026-09-16",
       "beginn": "11:56",
       "ende": "23:18",
       "kurs": "Kurs 216",
