@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-09-16T20:31:32.782Z",
+  "aktualisiert": "2026-09-20T08:32:14.335Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2237,6 +2237,16 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 10.37
+    },
+    {
+      "datum": "2026-09-19",
+      "beginn": "07:30",
+      "ende": "21:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Husum",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
