@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-09-20T08:32:51.263Z",
+  "aktualisiert": "2026-09-21T18:47:57.623Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2263,6 +2263,15 @@
       "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-09-21",
+      "beginn": "06:40",
+      "ende": "18:08",
+      "kurs": "Kurs 215",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 10.47
     }
   ],
   "geloescht": [
