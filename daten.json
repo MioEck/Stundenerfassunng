@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-09-22T03:35:02.922Z",
+  "aktualisiert": "2026-09-25T05:36:46.454Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2281,6 +2281,14 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 8.23
+    },
+    {
+      "datum": "2026-09-24",
+      "beginn": "12:43",
+      "ende": "23:40",
+      "kurs": "Kurs 217",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
