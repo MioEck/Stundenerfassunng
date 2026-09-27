@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-09-25T05:36:46.454Z",
+  "aktualisiert": "2026-09-27T14:26:31.594Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2289,6 +2289,16 @@
       "kurs": "Kurs 217",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-09-25",
+      "beginn": "21:20",
+      "ende": "03:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Sev",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     }
   ],
   "geloescht": [
