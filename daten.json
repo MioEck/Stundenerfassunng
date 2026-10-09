@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-10-09T03:58:19.685Z",
+  "aktualisiert": "2026-10-09T04:01:03.674Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2356,6 +2356,16 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 10.47
+    },
+    {
+      "datum": "2026-10-05",
+      "beginn": "07:00",
+      "ende": "14:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Scheersberg Schönhagen",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
     },
     {
       "datum": "2026-10-06",
