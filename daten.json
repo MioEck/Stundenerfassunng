@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-10-09T04:04:53.810Z",
+  "aktualisiert": "2026-10-10T20:12:57.127Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2427,6 +2427,16 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-10-10",
+      "beginn": "06:00",
+      "ende": "22:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Swinemünde",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": true
     }
   ],
   "geloescht": [
