@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-10-10T20:12:57.127Z",
+  "aktualisiert": "2026-10-12T03:45:59.262Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2437,6 +2437,14 @@
       "pause": "",
       "uebernachtung": false,
       "doppelbesatzung": true
+    },
+    {
+      "datum": "2026-10-11",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
