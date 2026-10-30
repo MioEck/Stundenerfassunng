@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-10-30T18:45:55.762Z",
+  "aktualisiert": "2026-10-30T18:47:32.553Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2584,6 +2584,15 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 10.37
+    },
+    {
+      "datum": "2026-10-29",
+      "beginn": "04:27",
+      "ende": "10:30",
+      "kurs": "Kurs 211 + Stau Sperrung",
+      "sonderfahrt": "Stau Sperrung",
+      "pause": "",
+      "extraStunden": 6.033333333333333
     },
     {
       "datum": "2026-10-30",
