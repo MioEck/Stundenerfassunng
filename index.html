@@ -377,7 +377,7 @@ input:focus, select:focus {
         <h1>Stundenzettel</h1>
         <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
       </div>
-      <span class="version">v1.35</span>
+      <span class="version">v1.36</span>
     </div>
   </header>
 
@@ -410,7 +410,7 @@ input:focus, select:focus {
       </div>
       <div class="field">
         <label for="sync-repo">GitHub Benutzername/Repo</label>
-        <input type="text" id="sync-repo" placeholder="MioEck/Stundenerfassung">
+        <input type="text" id="sync-repo" placeholder="MioEck/Stundenerfassunng">
       </div>
       <p style="font-size:12px;color:var(--text-3);">Der Token wird nur lokal auf diesem Gerät gespeichert.</p>
       <div class="modal-buttons">
@@ -1395,9 +1395,11 @@ async function githubSync(autoSync = false) {
   try {
     const apiUrl = `https://api.github.com/repos/${syncRepo}/contents/daten.json`;
     const headers = { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' };
+    let einzigartig, putResp;
+    for (let versuch = 1; versuch <= 3; versuch++) {
     let remoteSha = null, remoteEintraege = [];
     let decoded = { eintraege: [], geloescht: [] };
-    const getResp = await fetch(apiUrl, { headers });
+    const getResp = await fetch(apiUrl, { headers, cache: 'no-store' });
     if (getResp.ok) {
       const rd = await getResp.json();
       remoteSha = rd.sha;
@@ -1416,7 +1418,7 @@ async function githubSync(autoSync = false) {
     localStorage.setItem('geloescht', JSON.stringify(geloescht));
 
     const alle = [...eintraege, ...remoteEintraege];
-    const einzigartig = [];
+    einzigartig = [];
     const gesehen = new Set();
     alle.forEach(e => {
       const key = `${e.datum}|${e.beginn}|${e.kurs}`;
@@ -1429,11 +1431,15 @@ async function githubSync(autoSync = false) {
     let binStr2 = '';
     utf8Bytes.forEach(b => binStr2 += String.fromCharCode(b));
 
-    const putResp = await fetch(apiUrl, {
+    putResp = await fetch(apiUrl, {
       method: 'PUT',
       headers: { ...headers, 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: `Sync ${new Date().toISOString().slice(0,16)}`, content: btoa(binStr2), ...(remoteSha && { sha: remoteSha }) })
     });
+    // 409/422 = Datei wurde inzwischen geändert (z.B. anderes Gerät) → neu lesen und erneut versuchen
+    if ((putResp.status === 409 || putResp.status === 422) && versuch < 3) { await new Promise(r => setTimeout(r, 800 * versuch)); continue; }
+    break;
+    }
     if (!putResp.ok) throw new Error(`Schreiben fehlgeschlagen: ${putResp.status}`);
 
     eintraege = einzigartig;
