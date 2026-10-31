@@ -1,8 +1,9 @@
 // Service Worker — macht die App offline-fähig und installierbar
-const CACHE_NAME = 'stundenzettel-v34';
+const CACHE_NAME = 'stundenzettel-v35';
 const URLS = [
   './stundenzettel.html',
   './manifest.json',
+  './logo.png',
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon.png'
