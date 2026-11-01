@@ -352,6 +352,29 @@ input:focus, select:focus {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* Tage-Check */
+.check-bar {
+  border-radius: 16px; padding: 12px 14px; margin-bottom: 14px;
+  background: linear-gradient(135deg,rgba(226,0,26,.10),rgba(247,166,0,.12));
+  border: 1px solid rgba(226,0,26,.28);
+}
+.check-kopf { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: var(--rot-dunkel); }
+.check-kopf button { background: none; border: none; color: var(--text-2); font-size: 18px; line-height: 1; cursor: pointer; padding: 2px 4px; }
+.check-hinweis { font-size: 12px; color: var(--text-2); margin: 2px 0 10px; }
+.check-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.check-chip {
+  padding: 7px 11px; border-radius: 11px; cursor: pointer; font-family: inherit;
+  font-size: 13px; font-weight: 700; color: var(--rot-dunkel);
+  background: linear-gradient(180deg,#fff,#fdf0f1); border: 1px solid rgba(226,0,26,.3);
+  box-shadow: 0 2px 6px -2px rgba(226,0,26,.35), inset 0 1px 0 #fff;
+}
+.check-chip:active { transform: scale(.97); }
+.check-ok {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px;
+  background: linear-gradient(180deg,rgba(93,174,58,.16),rgba(93,174,58,.08)); border: 1px solid rgba(93,174,58,.35);
+  color: #2f6a19; font-weight: 700; font-size: 14px;
+}
+
 @media (max-width: 480px) {
   .row { grid-template-columns: 1fr; }
 }
@@ -377,7 +400,7 @@ input:focus, select:focus {
         <h1>Stundenzettel</h1>
         <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
       </div>
-      <span class="version">v1.36</span>
+      <span class="version">v1.37</span>
     </div>
   </header>
 
@@ -397,6 +420,24 @@ input:focus, select:focus {
 
   <div id="backup-bar" class="backup-bar" style="display:none;">
     <span id="backup-text">Letzte Sicherung: noch nie</span>
+  </div>
+
+  <!-- Tage-Check: fehlende Tage der letzten 31 Tage -->
+  <div id="check-bar" class="check-bar" style="display:none;">
+    <div class="check-kopf"><span id="check-titel"></span><button onclick="checkBarAusblenden()" title="Ausblenden">×</button></div>
+    <div class="check-hinweis">Antippen, um den Tag einzutragen</div>
+    <div class="check-chips" id="check-chips"></div>
+  </div>
+
+  <!-- Tage-Check Modal (Monat) -->
+  <div id="check-modal" class="modal-overlay" onclick="if(event.target===this)schliesseCheck()">
+    <div class="modal">
+      <h3 id="check-modal-titel">Tage-Check</h3>
+      <div id="check-modal-inhalt"></div>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="schliesseCheck()">Schließen</button>
+      </div>
+    </div>
   </div>
 
   <!-- Sync Modal -->
@@ -602,6 +643,7 @@ input:focus, select:focus {
       </div>
 
       <div class="entries-actions">
+        <button class="btn-secondary" onclick="monatsCheck()">🔍 Tage-Check</button>
         <button class="btn-secondary" onclick="githubSync()">☁ Sync</button>
         <button class="btn-secondary" onclick="exportMonatCSV()">CSV (Monat)</button>
         <button class="btn-secondary" onclick="backupSpeichern()">📤 Backup</button>
@@ -1211,7 +1253,89 @@ function monatLoeschen() {
 }
 
 // ─── Tabelle & Tabs ────────────────────────────────────────────
-function zeigeAlles() { zeigeTabs(); zeigeTabelle(); }
+function zeigeAlles() { zeigeTabs(); zeigeTabelle(); zeigeCheckBar(); }
+
+// ─── Tage-Check ───────────────────────────────────────────────
+const WOCHENTAGE = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+function datumKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+// Fehlende Tage von gestern rückwärts bis 'von' (Date), neueste zuerst
+function fehlendeTage(von, bis) {
+  const eingetragen = new Set(eintraege.map(e => e.datum));
+  const fehlend = [];
+  const d = new Date(bis.getFullYear(), bis.getMonth(), bis.getDate());
+  const grenze = new Date(von.getFullYear(), von.getMonth(), von.getDate());
+  while (d >= grenze) {
+    const k = datumKey(d);
+    if (!eingetragen.has(k)) fehlend.push(new Date(d));
+    d.setDate(d.getDate() - 1);
+  }
+  return fehlend;
+}
+function gestern() { const d = new Date(); d.setDate(d.getDate() - 1); return d; }
+function ersterEintrag() {
+  if (eintraege.length === 0) return null;
+  const min = eintraege.reduce((m, e) => e.datum < m ? e.datum : m, eintraege[0].datum);
+  const [j, mo, t] = min.split('-').map(Number);
+  return new Date(j, mo - 1, t);
+}
+function checkChips(tage) {
+  return tage.map(d => `<button class="check-chip" onclick="tagEintragen('${datumKey(d)}')">${WOCHENTAGE[d.getDay()]} ${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.</button>`).join('');
+}
+function zeigeCheckBar() {
+  const bar = document.getElementById('check-bar');
+  const erster = ersterEintrag();
+  const ausgeblendet = sessionStorage.getItem('checkAusgeblendet') === datumKey(new Date());
+  if (!erster || ausgeblendet) { bar.style.display = 'none'; return; }
+  const von = new Date(); von.setDate(von.getDate() - 31);
+  const tage = fehlendeTage(von < erster ? erster : von, gestern());
+  if (tage.length === 0) { bar.style.display = 'none'; return; }
+  document.getElementById('check-titel').textContent = `⚠ ${tage.length} ${tage.length === 1 ? 'Tag' : 'Tage'} nicht eingetragen`;
+  document.getElementById('check-chips').innerHTML = checkChips(tage);
+  bar.style.display = 'block';
+}
+function checkBarAusblenden() {
+  try { sessionStorage.setItem('checkAusgeblendet', datumKey(new Date())); } catch (e) {}
+  document.getElementById('check-bar').style.display = 'none';
+}
+// Prüft den in der Übersicht gewählten Monat bis gestern
+function monatsCheck() {
+  const idx = MONATE.findIndex(m => aktiverMonat.startsWith(m));
+  const jahr = 2000 + parseInt(aktiverMonat.slice(MONATE[idx].length));
+  const anfang = new Date(jahr, idx, 1);
+  const monatsende = new Date(jahr, idx + 1, 0);
+  const g = gestern();
+  const bis = monatsende < g ? monatsende : g;
+  const titel = document.getElementById('check-modal-titel');
+  const inhalt = document.getElementById('check-modal-inhalt');
+  titel.textContent = `Tage-Check ${MONATE[idx]} ${jahr}`;
+  if (bis < anfang) {
+    inhalt.innerHTML = '<p>Für diesen Monat gibt es noch keine vergangenen Tage zu prüfen.</p>';
+  } else {
+    const tage = fehlendeTage(anfang, bis);
+    const bisText = `${String(bis.getDate()).padStart(2,'0')}.${String(bis.getMonth()+1).padStart(2,'0')}.`;
+    if (tage.length === 0) {
+      inhalt.innerHTML = `<div class="check-ok">✓ Alle Tage bis ${bisText} eingetragen</div>`;
+    } else {
+      inhalt.innerHTML = `<p><strong style="color:var(--rot)">${tage.length} ${tage.length === 1 ? 'Tag fehlt' : 'Tage fehlen'}</strong> (geprüft bis ${bisText}). Antippen, um den Tag einzutragen:</p><div class="check-chips">${checkChips(tage)}</div>`;
+    }
+  }
+  document.getElementById('check-modal').classList.add('show');
+}
+function schliesseCheck() { document.getElementById('check-modal').classList.remove('show'); }
+function tagEintragen(key) {
+  schliesseCheck();
+  if (bearbeitenIndex !== null) bearbeitenAbbrechen();
+  document.querySelectorAll('.reiter').forEach(r => r.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('reiter-eingabe').classList.add('active');
+  document.querySelectorAll('.nav-tab')[0].classList.add('active');
+  document.getElementById('datum').value = key;
+  document.querySelector('#reiter-eingabe .card').scrollIntoView({ behavior: 'smooth' });
+  const [j, m, t] = key.split('-');
+  toast(`Datum gesetzt: ${t}.${m}.${j}`);
+}
 
 function zeigeTabs() {
   const tabs = document.getElementById('tabs');
