@@ -1,6 +1,9 @@
 // Service Worker — macht die App offline-fähig und installierbar
-const CACHE_NAME = 'stundenzettel-v38';
+// Bei jeder Änderung an der App CACHE_NAME hochzählen, dann erscheint „Update verfügbar“.
+const CACHE_NAME = 'stundenzettel-v39';
 const URLS = [
+  './',
+  './index.html',
   './stundenzettel.html',
   './manifest.json',
   './logo.png',
@@ -11,8 +14,16 @@ const URLS = [
 ];
 
 self.addEventListener('install', (event) => {
+  // cache: 'reload' umgeht den Browser-Cache, damit wirklich die neue Version geladen wird
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(URLS))
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(URLS.map((url) =>
+        fetch(url, { cache: 'reload' }).then((resp) => {
+          if (!resp.ok) throw new Error(`${url}: ${resp.status}`);
+          return cache.put(url, resp);
+        })
+      ))
+    )
   );
   self.skipWaiting();
 });
@@ -21,15 +32,15 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  // Nur eigene GET-Anfragen aus dem Cache bedienen (GitHub-Sync läuft direkt übers Netz)
+  if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
+    caches.match(req, { ignoreSearch: true }).then((response) => response || fetch(req))
   );
 });

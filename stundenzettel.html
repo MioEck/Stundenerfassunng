@@ -391,7 +391,7 @@ input:focus, select:focus {
 </style>
 </head>
 <body>
-<div id="update-banner" onclick="window.location.reload(true)">🔄 Update verfügbar — jetzt neu laden</div>
+<div id="update-banner" onclick="window.location.reload()">🔄 Update verfügbar — tippen zum Aktualisieren</div>
 <div class="container">
   <header>
     <img src="logo.png" alt="Der Riesebyer" class="logo">
@@ -400,7 +400,7 @@ input:focus, select:focus {
         <h1>Stundenzettel</h1>
         <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
       </div>
-      <span class="version">v1.37</span>
+      <span class="version">v1.38</span>
     </div>
   </header>
 
@@ -1617,14 +1617,21 @@ init();
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {
+      const zeigeUpdate = () => { document.getElementById('update-banner').style.display = 'block'; };
+      // Update wurde schon im Hintergrund geladen
+      if (reg.waiting && navigator.serviceWorker.controller) zeigeUpdate();
       reg.addEventListener('updatefound', () => {
         const neu = reg.installing;
+        if (!neu) return;
         neu.addEventListener('statechange', () => {
-          if (neu.state === 'installed' && navigator.serviceWorker.controller) {
-            document.getElementById('update-banner').style.display = 'block';
-          }
+          if ((neu.state === 'installed' || neu.state === 'activated') && navigator.serviceWorker.controller) zeigeUpdate();
         });
       });
+      // Auf neue Version prüfen: beim Öffnen, beim Zurückholen aus dem Hintergrund und alle 15 Minuten
+      const pruefe = () => { reg.update().catch(() => {}); };
+      pruefe();
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') pruefe(); });
+      setInterval(pruefe, 15 * 60 * 1000);
     }).catch(err => console.log('SW failed:', err));
   });
 }
