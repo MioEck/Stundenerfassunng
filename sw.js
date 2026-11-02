@@ -1,6 +1,6 @@
 // Service Worker — macht die App offline-fähig und installierbar
 // Bei jeder Änderung an der App CACHE_NAME hochzählen, dann erscheint „Update verfügbar“.
-const CACHE_NAME = 'stundenzettel-v39';
+const CACHE_NAME = 'stundenzettel-v40';
 const URLS = [
   './',
   './index.html',

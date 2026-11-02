@@ -352,6 +352,32 @@ input:focus, select:focus {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* Vorschläge aus dem Kursplan */
+.bridge-bar {
+  border-radius: 16px; padding: 12px 14px; margin-bottom: 14px;
+  background: linear-gradient(135deg,rgba(0,159,227,.14),rgba(93,174,58,.10));
+  border: 1px solid rgba(0,159,227,.35);
+}
+.bridge-kopf { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; font-weight: 800; color: var(--blau-dunkel); margin-bottom: 8px; }
+.bridge-zeile {
+  display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 12px; margin-top: 6px;
+  background: rgba(255,255,255,.75); border: 1px solid var(--linie); font-size: 13.5px;
+}
+.bridge-zeile .bz-info { flex: 1; min-width: 0; color: var(--text-2); }
+.bridge-zeile .bz-info b { color: var(--text); }
+.bz-ok {
+  padding: 7px 11px; border-radius: 10px; border: 1px solid #08619a; cursor: pointer; font-family: inherit;
+  color: #fff; font-weight: 700; font-size: 13px;
+  background: linear-gradient(180deg,#45c6f7,var(--blau) 50%,#0a7fc0);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5);
+}
+.bz-weg { background: none; border: none; color: var(--text-3); font-size: 20px; line-height: 1; cursor: pointer; padding: 2px 4px; }
+.sf-btn {
+  flex-shrink: 0; padding: 5px 8px; border-radius: 9px; cursor: pointer; font-family: inherit;
+  font-size: 11.5px; font-weight: 800; color: var(--rot);
+  background: linear-gradient(180deg,#fff,#fdf0f1); border: 1px solid rgba(226,0,26,.3);
+}
+
 /* Tage-Check */
 .check-bar {
   border-radius: 16px; padding: 12px 14px; margin-bottom: 14px;
@@ -400,7 +426,7 @@ input:focus, select:focus {
         <h1>Stundenzettel</h1>
         <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
       </div>
-      <span class="version">v1.38</span>
+      <span class="version">v1.39</span>
     </div>
   </header>
 
@@ -420,6 +446,29 @@ input:focus, select:focus {
 
   <div id="backup-bar" class="backup-bar" style="display:none;">
     <span id="backup-text">Letzte Sicherung: noch nie</span>
+  </div>
+
+  <!-- Vorschläge aus dem Kursplan -->
+  <div id="bridge-bar" class="bridge-bar" style="display:none;">
+    <div class="bridge-kopf"><span id="bridge-titel">📥 Aus dem Kursplan</span></div>
+    <div id="bridge-liste"></div>
+  </div>
+
+  <!-- Sonderfahrt an Kurs anhängen -->
+  <div id="sf-modal" class="modal-overlay" onclick="if(event.target===this)schliesseSF()">
+    <div class="modal">
+      <h3 id="sf-titel">Sonderfahrt anhängen</h3>
+      <p id="sf-info"></p>
+      <div class="row">
+        <div class="field"><label for="sf-beginn">Beginn Sonderfahrt</label><input type="time" id="sf-beginn"></div>
+        <div class="field"><label for="sf-ende">Ende Sonderfahrt</label><input type="time" id="sf-ende"></div>
+      </div>
+      <div class="field"><label for="sf-art">Beschreibung</label><input type="text" id="sf-art" placeholder="z.B. Schulausflug, Feuerwehr"></div>
+      <div class="modal-buttons">
+        <button class="btn-secondary" onclick="schliesseSF()">Abbrechen</button>
+        <button class="btn-primary" style="width:auto;padding:10px 20px;margin:0;" onclick="sfSpeichern()">Anhängen</button>
+      </div>
+    </div>
   </div>
 
   <!-- Tage-Check: fehlende Tage der letzten 31 Tage -->
@@ -708,6 +757,8 @@ function init() {
   zeigeBackupStatus();
   zeigeAlles();
   zeigeFA();
+  bridgeLaden();
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') bridgeLaden(); });
 }
 
 // ─── Navigation ───────────────────────────────────────────────
@@ -1255,6 +1306,181 @@ function monatLoeschen() {
 // ─── Tabelle & Tabs ────────────────────────────────────────────
 function zeigeAlles() { zeigeTabs(); zeigeTabelle(); zeigeCheckBar(); }
 
+// ─── Kopplung mit dem Kursplan ────────────────────────────────
+// Der Kursplan schickt nur Datum und Kursnummer (bridge.json im Repo und/oder
+// localStorage unter BRIDGE_KEY). Beginn, Ende und Stunden kommen immer aus der
+// Tabelle KURSE hier – bei einer Kursplan-Änderung muss nur KURSE angepasst werden.
+// Vorschläge werden erst nach Bestätigung übernommen.
+const BRIDGE_KEY = 'bridge_kursplan_eintraege';
+let bridgeVorschlaege = [];
+let bridgeRemote = null; // { sha, inhalt }
+function bridgeStatusLokal() { try { return JSON.parse(localStorage.getItem('bridge_status') || '{}'); } catch (e) { return {}; } }
+function bridgeStatusSetzen(id, status) {
+  const st = bridgeStatusLokal(); st[id] = status; localStorage.setItem('bridge_status', JSON.stringify(st));
+  // gleicher Browser-Speicher wie der Kursplan: dort ebenfalls markieren
+  try {
+    const l = JSON.parse(localStorage.getItem(BRIDGE_KEY) || '[]');
+    l.forEach(e => { if (e.id === id) e.status = status; });
+    localStorage.setItem(BRIDGE_KEY, JSON.stringify(l));
+  } catch (e) {}
+}
+function bridgeB64Decode(b64) {
+  const bin = atob(b64.replace(/\n/g, '')); const u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(u);
+}
+function bridgeB64Encode(str) { let s = ''; new TextEncoder().encode(str).forEach(b => s += String.fromCharCode(b)); return btoa(s); }
+async function bridgeLaden() {
+  const alle = {};
+  try { JSON.parse(localStorage.getItem(BRIDGE_KEY) || '[]').forEach(e => { if (e && e.id) alle[e.id] = e; }); } catch (e) {}
+  bridgeRemote = null;
+  if (syncToken && syncRepo) {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${syncRepo}/contents/bridge.json`,
+        { headers: { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' }, cache: 'no-store' });
+      if (r.ok) {
+        const j = await r.json();
+        const inhalt = JSON.parse(bridgeB64Decode(j.content));
+        bridgeRemote = { sha: j.sha, inhalt };
+        (inhalt.eintraege || []).forEach(e => { if (e && e.id && !alle[e.id]) alle[e.id] = e; else if (e && e.id && e.status !== 'offen') alle[e.id].status = e.status; });
+      }
+    } catch (e) { console.log('bridge.json:', e); }
+  }
+  const st = bridgeStatusLokal();
+  bridgeVorschlaege = Object.values(alle)
+    .filter(e => e.status === 'offen' && !st[e.id] && e.datum && e.kurs)
+    .sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+  zeigeBridgeBar();
+  bridgeRemoteAbgleichen(st);
+}
+// Im Repo noch 'offen', hier aber schon erledigt/verworfen → bridge.json nachziehen
+async function bridgeRemoteAbgleichen(st) {
+  if (!bridgeRemote || !syncToken || !syncRepo) return;
+  const ein = bridgeRemote.inhalt.eintraege || [];
+  if (!ein.some(e => e.status === 'offen' && st[e.id])) return;
+  const url = `https://api.github.com/repos/${syncRepo}/contents/bridge.json`;
+  const headers = { 'Authorization': `token ${syncToken}`, 'Accept': 'application/vnd.github.v3+json' };
+  try {
+    for (let versuch = 1; versuch <= 3; versuch++) {
+      const g = await fetch(url, { headers, cache: 'no-store' });
+      if (!g.ok) return;
+      const j = await g.json();
+      const inhalt = JSON.parse(bridgeB64Decode(j.content));
+      const aktuell = bridgeStatusLokal();
+      (inhalt.eintraege || []).forEach(e => { if (e.status === 'offen' && aktuell[e.id]) e.status = aktuell[e.id]; });
+      inhalt.aktualisiert = new Date().toISOString();
+      const p = await fetch(url, { method: 'PUT', headers: { ...headers, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: 'Stundenerfassung: Kursplan-Vorschläge erledigt', content: bridgeB64Encode(JSON.stringify(inhalt, null, 2)), sha: j.sha }) });
+      if ((p.status === 409 || p.status === 422) && versuch < 3) { await new Promise(r => setTimeout(r, 800 * versuch)); continue; }
+      return;
+    }
+  } catch (e) { console.log('bridge abgleichen:', e); }
+}
+function bridgeDatumText(key) {
+  const [j, m, t] = key.split('-').map(Number);
+  const d = new Date(j, m - 1, t);
+  return `${WOCHENTAGE[d.getDay()]} ${String(t).padStart(2,'0')}.${String(m).padStart(2,'0')}.`;
+}
+function zeigeBridgeBar() {
+  const bar = document.getElementById('bridge-bar');
+  if (!bridgeVorschlaege.length) { bar.style.display = 'none'; return; }
+  document.getElementById('bridge-titel').textContent =
+    `📥 ${bridgeVorschlaege.length} ${bridgeVorschlaege.length === 1 ? 'Kurs' : 'Kurse'} aus dem Kursplan`;
+  document.getElementById('bridge-liste').innerHTML = bridgeVorschlaege.map(e => {
+    const k = KURSE[String(e.kurs).replace(/\D/g, '')];
+    const zeit = k ? `${k.beginn} – ${k.ende} · ${kursStunden(String(e.kurs).replace(/\D/g, '')).toFixed(2).replace('.', ',')} h` : '⚠ Kurs nicht in der Tabelle';
+    return `
+    <div class="bridge-zeile">
+      <div class="bz-info"><b>${bridgeDatumText(e.datum)} · ${e.kurs}</b><br>${zeit}</div>
+      <button class="bz-ok" onclick="bridgeUebernehmen('${e.id}')">Übernehmen</button>
+      <button class="bz-weg" onclick="bridgeVerwerfen('${e.id}')" title="Verwerfen">×</button>
+    </div>`; }).join('');
+  bar.style.display = 'block';
+}
+function bridgeUebernehmen(id) {
+  const v = bridgeVorschlaege.find(e => e.id === id);
+  if (!v) return;
+  const nr = String(v.kurs).replace(/\D/g, '');
+  if (!KURSE[nr]) { toast(`${v.kurs} gibt es in der Kurstabelle nicht`, true); return; }
+  const vorhanden = eintraege.filter(e => e.datum === v.datum);
+  const gleich = vorhanden.find(e => extrahiereKurs(e.kurs) === v.kurs);
+  if (gleich) {
+    toast(`${v.kurs} ist am ${bridgeDatumText(v.datum)} schon eingetragen`);
+  } else {
+    if (vorhanden.length && !confirm(`Am ${bridgeDatumText(v.datum)} gibt es schon: ${vorhanden.map(e => e.kurs).join(', ')}.\nTrotzdem ${v.kurs} zusätzlich übernehmen?`)) return;
+    // genau wie bei der Eingabe von Hand im Modus Linienkurs
+    const k = KURSE[nr];
+    const eintrag = { datum: v.datum, beginn: k.beginn, ende: k.ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '',
+      ...(k.stunden !== undefined ? { extraStunden: k.stunden } : {}) };
+    eintraege.push(eintrag);
+    eintraege.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+    speichern();
+    eintraegeSeitBackup++;
+    localStorage.setItem('eintraegeSeitBackup', eintraegeSeitBackup);
+    aktiverMonat = monatsKey(v.datum);
+    zeigeBackupStatus();
+    toast(`${v.kurs} am ${bridgeDatumText(v.datum)} übernommen`);
+  }
+  bridgeErledigt(id, 'erledigt');
+  if (!gleich && syncToken && syncRepo) githubSync(true);
+}
+function bridgeVerwerfen(id) {
+  if (!confirm('Diesen Vorschlag verwerfen?')) return;
+  bridgeErledigt(id, 'verworfen');
+}
+function bridgeErledigt(id, status) {
+  bridgeStatusSetzen(id, status);
+  bridgeVorschlaege = bridgeVorschlaege.filter(e => e.id !== id);
+  zeigeBridgeBar();
+  zeigeAlles();
+  bridgeRemoteAbgleichen(bridgeStatusLokal());
+}
+
+// ─── Sonderfahrt an einen Kurs anhängen ───────────────────────
+let sfIndex = null;
+function istReinerKurs(e) { return /^Kurs \d+$/.test(e.kurs || '') && e.beginn && e.ende; }
+function oeffneSF(idx) {
+  const e = eintraege[idx];
+  if (!e || !istReinerKurs(e)) return;
+  sfIndex = idx;
+  document.getElementById('sf-titel').textContent = `Sonderfahrt an ${e.kurs} anhängen`;
+  document.getElementById('sf-info').innerHTML = `${bridgeDatumText(e.datum)} · Dienst bisher <strong>${e.beginn} – ${e.ende}</strong>. Liegt die Sonderfahrt danach, verschiebt sich das Dienstende, liegt sie davor, der Dienstbeginn.`;
+  document.getElementById('sf-beginn').value = e.ende;
+  document.getElementById('sf-ende').value = '';
+  document.getElementById('sf-art').value = '';
+  document.getElementById('sf-modal').classList.add('show');
+}
+function schliesseSF() { document.getElementById('sf-modal').classList.remove('show'); sfIndex = null; }
+function sfSpeichern() {
+  const e = eintraege[sfIndex];
+  if (!e) { schliesseSF(); return; }
+  const sB = document.getElementById('sf-beginn').value;
+  const sE = document.getElementById('sf-ende').value;
+  const art = document.getElementById('sf-art').value.trim();
+  if (!sB || !sE) { toast('Bitte Beginn und Ende eingeben', true); return; }
+  if (!art) { toast('Bitte kurze Beschreibung eingeben', true); return; }
+  let beginn, ende;
+  if (sB >= e.ende) { beginn = e.beginn; ende = sE; }          // nach dem Kurs
+  else if (sE <= e.beginn) { beginn = sB; ende = e.ende; }     // vor dem Kurs
+  else { toast('Sonderfahrt überschneidet sich mit dem Kurs', true); return; }
+  // Stunden wie im Modus „Kurs+Sonder“: Kursstunden + Dauer der Sonderfahrt
+  const kursStd = e.extraStunden !== undefined ? e.extraStunden : berechneStunden(e.beginn, e.ende);
+  const neu = { datum: e.datum, beginn, ende, kurs: `${e.kurs} + ${art}`, sonderfahrt: art, pause: '',
+    extraStunden: kursStd + berechneStunden(sB, sE) };
+  // alten Eintrag ersetzen (wie beim Bearbeiten, damit der Sync ihn nicht zurückholt)
+  const alterKey = `${e.datum}|${e.beginn}|${e.kurs}`;
+  const geloescht = JSON.parse(localStorage.getItem('geloescht') || '[]');
+  if (!geloescht.includes(alterKey)) geloescht.push(alterKey);
+  localStorage.setItem('geloescht', JSON.stringify(geloescht));
+  eintraege.splice(sfIndex, 1, neu);
+  eintraege.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
+  speichern();
+  schliesseSF();
+  zeigeAlles();
+  toast(`Sonderfahrt angehängt · Dienst ${beginn} – ${ende}`);
+  if (syncToken && syncRepo) githubSync(true);
+}
+
 // ─── Tage-Check ───────────────────────────────────────────────
 const WOCHENTAGE = ['So','Mo','Di','Mi','Do','Fr','Sa'];
 function datumKey(d) {
@@ -1401,6 +1627,7 @@ function zeigeTabelle() {
       <div class="tag">${String(d.getDate()).padStart(2,'0')}<small>${WT[d.getDay()]}</small></div>
       <div class="eintrag-info"><b>${titel}${kenn}${extras}</b>${details.join(' · ') || '—'}</div>
       <div class="eintrag-std">${std}</div>
+      ${istReinerKurs(e) ? `<button class="sf-btn" onclick="event.stopPropagation();oeffneSF(${e.originalIndex})" title="Sonderfahrt anhängen">＋ SF</button>` : ''}
       <button class="delete-btn" onclick="event.stopPropagation();loeschen(${e.originalIndex})" title="Löschen">×</button>
     </div>`;
   });
