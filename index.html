@@ -1307,9 +1307,10 @@ function monatLoeschen() {
 function zeigeAlles() { zeigeTabs(); zeigeTabelle(); zeigeCheckBar(); }
 
 // ─── Kopplung mit dem Kursplan ────────────────────────────────
-// Der Kursplan legt bestätigte Kurse in bridge.json (Repo) und/oder im
-// localStorage unter BRIDGE_KEY ab. Hier werden sie als Vorschlag gezeigt
-// und erst nach Bestätigung übernommen.
+// Der Kursplan schickt nur Datum und Kursnummer (bridge.json im Repo und/oder
+// localStorage unter BRIDGE_KEY). Beginn, Ende und Stunden kommen immer aus der
+// Tabelle KURSE hier – bei einer Kursplan-Änderung muss nur KURSE angepasst werden.
+// Vorschläge werden erst nach Bestätigung übernommen.
 const BRIDGE_KEY = 'bridge_kursplan_eintraege';
 let bridgeVorschlaege = [];
 let bridgeRemote = null; // { sha, inhalt }
@@ -1385,28 +1386,32 @@ function zeigeBridgeBar() {
   if (!bridgeVorschlaege.length) { bar.style.display = 'none'; return; }
   document.getElementById('bridge-titel').textContent =
     `📥 ${bridgeVorschlaege.length} ${bridgeVorschlaege.length === 1 ? 'Kurs' : 'Kurse'} aus dem Kursplan`;
-  document.getElementById('bridge-liste').innerHTML = bridgeVorschlaege.map(e => `
+  document.getElementById('bridge-liste').innerHTML = bridgeVorschlaege.map(e => {
+    const k = KURSE[String(e.kurs).replace(/\D/g, '')];
+    const zeit = k ? `${k.beginn} – ${k.ende} · ${kursStunden(String(e.kurs).replace(/\D/g, '')).toFixed(2).replace('.', ',')} h` : '⚠ Kurs nicht in der Tabelle';
+    return `
     <div class="bridge-zeile">
-      <div class="bz-info"><b>${bridgeDatumText(e.datum)} · ${e.kurs}</b><br>${e.beginn || '—'} – ${e.ende || '—'}</div>
+      <div class="bz-info"><b>${bridgeDatumText(e.datum)} · ${e.kurs}</b><br>${zeit}</div>
       <button class="bz-ok" onclick="bridgeUebernehmen('${e.id}')">Übernehmen</button>
       <button class="bz-weg" onclick="bridgeVerwerfen('${e.id}')" title="Verwerfen">×</button>
-    </div>`).join('');
+    </div>`; }).join('');
   bar.style.display = 'block';
 }
 function bridgeUebernehmen(id) {
   const v = bridgeVorschlaege.find(e => e.id === id);
   if (!v) return;
   const nr = String(v.kurs).replace(/\D/g, '');
+  if (!KURSE[nr]) { toast(`${v.kurs} gibt es in der Kurstabelle nicht`, true); return; }
   const vorhanden = eintraege.filter(e => e.datum === v.datum);
   const gleich = vorhanden.find(e => extrahiereKurs(e.kurs) === v.kurs);
   if (gleich) {
     toast(`${v.kurs} ist am ${bridgeDatumText(v.datum)} schon eingetragen`);
   } else {
     if (vorhanden.length && !confirm(`Am ${bridgeDatumText(v.datum)} gibt es schon: ${vorhanden.map(e => e.kurs).join(', ')}.\nTrotzdem ${v.kurs} zusätzlich übernehmen?`)) return;
+    // genau wie bei der Eingabe von Hand im Modus Linienkurs
     const k = KURSE[nr];
-    const wieTabelle = k && k.beginn === v.beginn && k.ende === v.ende;
-    const eintrag = { datum: v.datum, beginn: v.beginn, ende: v.ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '',
-      ...(wieTabelle && k.stunden !== undefined ? { extraStunden: k.stunden } : {}) };
+    const eintrag = { datum: v.datum, beginn: k.beginn, ende: k.ende, kurs: `Kurs ${nr}`, sonderfahrt: '', pause: '',
+      ...(k.stunden !== undefined ? { extraStunden: k.stunden } : {}) };
     eintraege.push(eintrag);
     eintraege.sort((a, b) => (a.datum + a.beginn).localeCompare(b.datum + b.beginn));
     speichern();
