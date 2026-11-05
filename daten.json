@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-05T18:39:52.558Z",
+  "aktualisiert": "2026-11-05T18:40:54.435Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2688,12 +2688,11 @@
     },
     {
       "datum": "2026-11-05",
-      "beginn": "03:50",
+      "beginn": "04:27",
       "ende": "08:53",
-      "kurs": "Kurs 211 + Test",
-      "sonderfahrt": "Test",
-      "pause": "",
-      "extraStunden": 5.033333333333333
+      "kurs": "Kurs 211",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -2739,6 +2738,6 @@
     "2026-08-14|05:30|Kurs 412 + Ri 111 in die Firma",
     "2026-08-31||Frei",
     "2026-11-09|06:40|Kurs 215",
-    "2026-11-05|04:27|Kurs 211"
+    "2026-11-05|03:50|Kurs 211 + Test"
   ]
 }
