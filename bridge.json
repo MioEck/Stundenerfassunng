@@ -21,7 +21,14 @@
       "kurs": "Kurs 211",
       "erstellt": "2026-11-05T06:51:19.780Z",
       "status": "offen"
+    },
+    {
+      "id": "612_2026-11-07_mw5yrbkk",
+      "datum": "2026-11-07",
+      "kurs": "Kurs 612",
+      "erstellt": "2026-11-07T05:29:17.396Z",
+      "status": "offen"
     }
   ],
-  "aktualisiert": "2026-11-05T06:51:20.503Z"
+  "aktualisiert": "2026-11-07T05:29:18.171Z"
 }
