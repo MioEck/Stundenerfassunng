@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-06T05:21:18.461Z",
+  "aktualisiert": "2026-11-08T04:29:28.934Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2695,13 +2695,13 @@
       "pause": ""
     },
     {
-      "datum": "2026-11-09",
+      "datum": "2026-11-07",
       "beginn": "06:40",
-      "ende": "18:08",
-      "kurs": "Kurs 215",
+      "ende": "18:25",
+      "kurs": "Kurs 612",
       "sonderfahrt": "",
       "pause": "",
-      "extraStunden": 10.47
+      "extraStunden": 10.75
     }
   ],
   "geloescht": [
@@ -2746,6 +2746,7 @@
     "2026-08-25|04:27|Kurs 211 + Dekra ,Golf,Kurs 216 bis 17uhr",
     "2026-08-14|05:30|Kurs 412 + Ri 111 in die Firma",
     "2026-08-31||Frei",
+    "2026-11-09|06:40|Kurs 215",
     "2026-11-05|03:50|Kurs 211 + Test"
   ]
 }
