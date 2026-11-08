@@ -28,7 +28,14 @@
       "kurs": "Kurs 612",
       "erstellt": "2026-11-07T05:29:17.396Z",
       "status": "erledigt"
+    },
+    {
+      "id": "811_2026-11-08_mw7f9jxa",
+      "datum": "2026-11-08",
+      "kurs": "Kurs 811",
+      "erstellt": "2026-11-08T05:59:08.062Z",
+      "status": "offen"
     }
   ],
-  "aktualisiert": "2026-11-08T04:29:26.736Z"
+  "aktualisiert": "2026-11-08T05:59:08.627Z"
 }
