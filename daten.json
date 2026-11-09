@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-09T05:00:08.714Z",
+  "aktualisiert": "2026-11-09T05:00:48.050Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2716,6 +2716,14 @@
       "beginn": "",
       "ende": "",
       "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
+    },
+    {
+      "datum": "2026-11-09",
+      "beginn": "04:27",
+      "ende": "08:53",
+      "kurs": "Kurs 211",
       "sonderfahrt": "",
       "pause": ""
     }
