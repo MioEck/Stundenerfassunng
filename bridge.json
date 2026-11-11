@@ -56,7 +56,14 @@
       "kurs": "Kurs 211",
       "erstellt": "2026-11-09T03:33:47.728Z",
       "status": "erledigt"
+    },
+    {
+      "id": "217_2026-11-11_mwc4bri1",
+      "datum": "2026-11-11",
+      "kurs": "Kurs 217",
+      "erstellt": "2026-11-11T12:51:46.297Z",
+      "status": "offen"
     }
   ],
-  "aktualisiert": "2026-11-09T05:00:45.739Z"
+  "aktualisiert": "2026-11-11T12:51:47.043Z"
 }
