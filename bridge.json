@@ -69,7 +69,7 @@
       "datum": "2026-11-12",
       "kurs": "Kurs 216",
       "erstellt": "2026-11-12T14:58:57.727Z",
-      "status": "offen"
+      "status": "erledigt"
     },
     {
       "id": "216_2026-11-13_mwest6ag",
@@ -79,5 +79,5 @@
       "status": "offen"
     }
   ],
-  "aktualisiert": "2026-11-13T09:52:42.779Z"
+  "aktualisiert": "2026-11-13T09:52:59.694Z"
 }
