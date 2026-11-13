@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-12T22:39:46.962Z",
+  "aktualisiert": "2026-11-13T09:53:04.720Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2742,6 +2742,24 @@
       "kurs": "Kurs 217",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-11-12",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 10.37
+    },
+    {
+      "datum": "2026-11-13",
+      "beginn": "11:56",
+      "ende": "23:18",
+      "kurs": "Kurs 216",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 10.37
     }
   ],
   "geloescht": [
