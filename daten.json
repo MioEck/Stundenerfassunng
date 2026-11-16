@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-16T09:53:44.988Z",
+  "aktualisiert": "2026-11-16T09:54:39.184Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2760,6 +2760,16 @@
       "sonderfahrt": "",
       "pause": "",
       "extraStunden": 10.37
+    },
+    {
+      "datum": "2026-11-14",
+      "beginn": "12:44",
+      "ende": "23:59",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "Sev",
+      "pause": "",
+      "uebernachtung": true,
+      "doppelbesatzung": false
     },
     {
       "datum": "2026-11-15",
