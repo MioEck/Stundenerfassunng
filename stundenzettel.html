@@ -125,6 +125,7 @@ input:focus, select:focus {
   box-shadow: 0 0 0 4px rgba(0,159,227,.18), inset 0 2px 4px rgba(11,60,122,.07);
 }
 .field { margin-bottom: 14px; }
+.feld-hinweis { font-size: 12px; color: var(--text-3); margin-top: 4px; }
 
 /* Modus-Chips */
 .toggle-wrapper {
@@ -426,7 +427,7 @@ input:focus, select:focus {
         <h1>Stundenzettel</h1>
         <div class="subtitle">Der Riesebyer Kreutzer · Rieseby</div>
       </div>
-      <span class="version">v1.39</span>
+      <span class="version">v1.40</span>
     </div>
   </header>
 
@@ -528,7 +529,7 @@ input:focus, select:focus {
 
       <div class="field">
         <label for="datum">Datum</label>
-        <input type="date" id="datum">
+        <input type="date" id="datum" onchange="datumGeaendert()">
       </div>
 
       <div id="kurs-felder">
@@ -545,13 +546,19 @@ input:focus, select:focus {
         <div class="row">
           <div class="field">
             <label for="sonder-beginn">Beginn</label>
-            <input type="time" id="sonder-beginn">
+            <input type="time" id="sonder-beginn" onchange="zeigeSonderVorschau()">
           </div>
           <div class="field">
             <label for="sonder-ende">Ende</label>
-            <input type="time" id="sonder-ende">
+            <input type="time" id="sonder-ende" onchange="zeigeSonderVorschau()">
           </div>
         </div>
+        <div class="field">
+          <label for="sonder-ende-datum">Ende am (Datum)</label>
+          <input type="date" id="sonder-ende-datum" onchange="zeigeSonderVorschau()">
+          <div class="feld-hinweis">Endet die Fahrt erst nach Mitternacht, hier den Folgetag wählen. Die Stunden werden komplett beim Datum oben verbucht.</div>
+        </div>
+        <div id="sonder-vorschau" class="preview" style="display:none;"></div>
         <div class="field">
           <label for="sonder-art">Art der Sonderfahrt</label>
           <input type="text" id="sonder-art" placeholder="z.B. Schulausflug, Feuerwehr">
@@ -740,10 +747,13 @@ let letzterSync = localStorage.getItem('letzterSync') || null;
 let kombiOrder = 'vor';
 let faOffen = false;
 let faJahr = new Date().getFullYear();
+let letztesDatum = '';
 
 function init() {
   const heute = new Date().toISOString().split('T')[0];
   document.getElementById('datum').value = heute;
+  document.getElementById('sonder-ende-datum').value = heute;
+  letztesDatum = heute;
   const select = document.getElementById('kurs');
   Object.keys(KURSE).forEach(nr => {
     const opt = document.createElement('option');
@@ -973,11 +983,30 @@ function monatsKey(datumStr) {
   return `${MONATE[d.getMonth()]}${String(d.getFullYear()).slice(-2)}`;
 }
 
-function berechneStunden(beginn, ende) {
+// Anzahl Kalendertage zwischen zwei Datumsangaben (JJJJ-MM-TT)
+function tageDiff(von, bis) {
+  if (!von || !bis) return 0;
+  const [vj, vm, vt] = von.split('-').map(Number);
+  const [bj, bm, bt] = bis.split('-').map(Number);
+  return Math.round((Date.UTC(bj, bm - 1, bt) - Date.UTC(vj, vm - 1, vt)) / 86400000);
+}
+
+// Tage, um die das Ende eines Eintrags nach seinem Datum liegt (0 = gleicher Tag)
+function eintragTage(e) {
+  return e.endeDatum ? Math.max(0, tageDiff(e.datum, e.endeDatum)) : 0;
+}
+
+function kurzDatum(key) {
+  const [, m, t] = key.split('-');
+  return `${t}.${m}.`;
+}
+
+function berechneStunden(beginn, ende, tage = 0) {
   const [bh, bm] = beginn.split(':').map(Number);
   const [eh, em] = ende.split(':').map(Number);
   let min = (eh * 60 + em) - (bh * 60 + bm);
-  if (min < 0) min += 24 * 60;
+  if (tage > 0) min += tage * 24 * 60;      // Ende an einem späteren Tag
+  else if (min < 0) min += 24 * 60;         // altes Verhalten: über Mitternacht
   return min / 60;
 }
 
@@ -992,8 +1021,8 @@ function berechnePausenabzug(pauseStr) {
   return 2 + (std - 2) * 0.5;
 }
 
-function berechneNettoStunden(beginn, ende, pause, istSonder, doppelbesatzung) {
-  const brutto = berechneStunden(beginn, ende);
+function berechneNettoStunden(beginn, ende, pause, istSonder, doppelbesatzung, tage = 0) {
+  const brutto = berechneStunden(beginn, ende, tage);
   if (!istSonder) return brutto;
   let netto = pause ? Math.max(0, brutto - berechnePausenabzug(pause)) : brutto;
   if (doppelbesatzung) netto = netto * 0.75;
@@ -1025,6 +1054,31 @@ function setMode(neuerModus) {
   document.getElementById('kurs-felder').style.display = modus === 'kurs' ? 'block' : 'none';
   document.getElementById('sonder-felder').style.display = modus === 'sonder' ? 'block' : 'none';
   document.getElementById('kombi-felder').style.display = modus === 'kombi' ? 'block' : 'none';
+  if (modus === 'sonder') zeigeSonderVorschau();
+}
+
+// Datum oben geändert: Ende-Datum mitziehen, solange es nicht bewusst auf einen anderen Tag gesetzt wurde
+function datumGeaendert() {
+  const d = document.getElementById('datum').value;
+  const ed = document.getElementById('sonder-ende-datum');
+  if (d && (!ed.value || ed.value === letztesDatum || ed.value < d)) ed.value = d;
+  letztesDatum = d;
+  zeigeSonderVorschau();
+}
+
+function zeigeSonderVorschau() {
+  const v = document.getElementById('sonder-vorschau');
+  const datum = document.getElementById('datum').value;
+  const b = document.getElementById('sonder-beginn').value;
+  const e = document.getElementById('sonder-ende').value;
+  const ed = document.getElementById('sonder-ende-datum').value || datum;
+  if (!datum || !b || !e) { v.style.display = 'none'; return; }
+  v.style.display = 'block';
+  if (ed < datum) { v.innerHTML = '⚠ <strong>Ende-Datum liegt vor dem Beginn</strong>'; return; }
+  const tage = tageDiff(datum, ed);
+  const std = berechneStunden(b, e, tage);
+  v.innerHTML = `${kurzDatum(datum)} <strong>${b}</strong> → ${kurzDatum(ed)} <strong>${e}</strong> · <strong>${std.toFixed(2).replace('.', ',')} h</strong> (vor Pause/Doppelbesatzung)`
+    + (tage > 0 ? `<br>Wird komplett am <strong>${kurzDatum(datum)}</strong> verbucht.` : '');
 }
 
 function zeigeVorschau() {
@@ -1100,11 +1154,15 @@ function aktualisiereKombiGesamt() {
 function formularZuruecksetzen() {
   uebernachtungReset();
   doppelbesatzungReset();
-  document.getElementById('datum').value = new Date().toISOString().split('T')[0];
+  const heute = new Date().toISOString().split('T')[0];
+  document.getElementById('datum').value = heute;
+  document.getElementById('sonder-ende-datum').value = heute;
+  letztesDatum = heute;
   document.getElementById('kurs').value = '';
   document.getElementById('vorschau').style.display = 'none';
   document.getElementById('sonder-beginn').value = '';
   document.getElementById('sonder-ende').value = '';
+  document.getElementById('sonder-vorschau').style.display = 'none';
   document.getElementById('sonder-art').value = '';
   document.getElementById('sonder-pause').value = '';
   document.getElementById('sonder-pause-einheit').value = 'min';
@@ -1127,11 +1185,12 @@ function bearbeiten(originalIndex) {
   document.getElementById('abbrechen-btn').style.display = 'block';
   document.getElementById('loeschen-btn').style.display = 'block';
   document.getElementById('datum').value = e.datum;
+  document.getElementById('sonder-ende-datum').value = e.endeDatum || e.datum;
+  letztesDatum = e.datum;
 
   if (e.kurs === 'Frei') { setMode('frei');
   } else if (e.kurs === 'Urlaub') { setMode('urlaub');
   } else if (e.kurs === 'Sonderfahrt') {
-    setMode('sonder');
     document.getElementById('sonder-beginn').value = e.beginn;
     document.getElementById('sonder-ende').value = e.ende;
     document.getElementById('sonder-art').value = e.sonderfahrt;
@@ -1146,6 +1205,7 @@ function bearbeiten(originalIndex) {
     if (e.doppelbesatzung) {
       setzeSchalter('doppelbesatzung-btn', true, 'Ja — Doppelbesatzung');
     }
+    setMode('sonder');
   } else if (e.extraStunden !== undefined) {
     setMode('kombi');
     const nr = e.kurs.match(/Kurs (\d+)/)?.[1] || '';
@@ -1210,6 +1270,7 @@ function eintragen() {
   } else if (modus === 'sonder') {
     const beginn = document.getElementById('sonder-beginn').value;
     const ende = document.getElementById('sonder-ende').value;
+    const endeDatum = document.getElementById('sonder-ende-datum').value || datum;
     const art = document.getElementById('sonder-art').value.trim();
     const pw = document.getElementById('sonder-pause').value.trim();
     const pe = document.getElementById('sonder-pause-einheit').value;
@@ -1218,7 +1279,11 @@ function eintragen() {
     const doppelbesatzung = document.getElementById('doppelbesatzung-btn').getAttribute('data-aktiv') === '1';
     if (!beginn || !ende) { toast('Bitte Beginn und Ende eingeben', true); return; }
     if (!art) { toast('Bitte Art der Sonderfahrt angeben', true); return; }
-    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung, doppelbesatzung };
+    if (endeDatum < datum) { toast('Ende-Datum liegt vor dem Beginn', true); return; }
+    const tage = tageDiff(datum, endeDatum);
+    if (tage > 1 && !confirm(`Ende liegt ${tage} Tage nach dem Beginn (${berechneStunden(beginn, ende, tage).toFixed(2).replace('.', ',')} h). Wirklich so speichern?`)) return;
+    eintrag = { datum, beginn, ende, kurs: 'Sonderfahrt', sonderfahrt: art, pause, uebernachtung, doppelbesatzung,
+      ...(tage > 0 ? { endeDatum } : {}) };
   } else if (modus === 'kombi') {
     const nr = document.getElementById('kombi-kurs').value;
     const sBeginn = document.getElementById('kombi-beginn').value;
@@ -1558,6 +1623,7 @@ function tagEintragen(key) {
   document.getElementById('reiter-eingabe').classList.add('active');
   document.querySelectorAll('.nav-tab')[0].classList.add('active');
   document.getElementById('datum').value = key;
+  datumGeaendert();
   document.querySelector('#reiter-eingabe .card').scrollIntoView({ behavior: 'smooth' });
   const [j, m, t] = key.split('-');
   toast(`Datum gesetzt: ${t}.${m}.${j}`);
@@ -1595,7 +1661,7 @@ function zeigeTabelle() {
   const summe = monatsEintraege.reduce((s, e) => {
     if (e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn || !e.ende) return s;
     if (e.extraStunden !== undefined) return s + e.extraStunden;
-    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung);
+    return s + berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung, eintragTage(e));
   }, 0);
   document.getElementById('anzahl-monat').textContent = monatsEintraege.length;
   document.getElementById('stunden-monat').textContent = summe.toFixed(2).replace('.', ',');
@@ -1611,7 +1677,7 @@ function zeigeTabelle() {
     const istFrei = e.kurs === 'Frei' || e.kurs === 'Urlaub' || !e.beginn;
     const std = istFrei ? '—' : (e.extraStunden !== undefined
       ? e.extraStunden
-      : berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung)
+      : berechneNettoStunden(e.beginn, e.ende, e.pause, e.kurs === 'Sonderfahrt', e.doppelbesatzung, eintragTage(e))
     ).toFixed(2).replace('.', ',');
     let titel, kenn;
     if (istFrei) { titel = e.kurs || 'Frei'; kenn = `<span class="kenn frei">${(e.kurs || 'Frei').toUpperCase()}</span>`; }
@@ -1619,7 +1685,7 @@ function zeigeTabelle() {
     else if (e.kurs && e.kurs.includes(' + ')) { titel = extrahiereKurs(e.kurs) + (e.sonderfahrt ? ' + ' + e.sonderfahrt : ''); kenn = '<span class="kenn sonder">KOMBI</span>'; }
     else { titel = extrahiereKurs(e.kurs); kenn = '<span class="kenn kurs">LINIE</span>'; }
     const details = [];
-    if (!istFrei) details.push(`${e.beginn||'—'} – ${e.ende||'—'}`);
+    if (!istFrei) details.push(`${e.beginn||'—'} – ${e.ende||'—'}${eintragTage(e) > 0 ? ` (${kurzDatum(e.endeDatum)})` : ''}`);
     if (e.pause) details.push('Pause ' + e.pause);
     if (e.kurs !== 'Sonderfahrt' && !istFrei && e.sonderfahrt && !(e.kurs && e.kurs.includes(' + '))) details.push(e.sonderfahrt);
     const extras = (e.uebernachtung ? '<span class="kenn extra">ÜB</span>' : '') + (e.doppelbesatzung ? '<span class="kenn extra">DB</span>' : '');
@@ -1638,7 +1704,7 @@ function zeigeTabelle() {
 function exportMonatCSV() {
   const me = eintraege.filter(e => monatsKey(e.datum) === aktiverMonat);
   if (me.length === 0) { toast('Keine Einträge in diesem Monat', true); return; }
-  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung;Doppelbesatzung\n';
+  const header = 'Datum;Beginn;Ende;Kurs;Sonderfahrt;Pause;Uebernachtung;Doppelbesatzung;EndeDatum\n';
   const zeilen = me.map(e => {
     const d = new Date(e.datum);
     const datumDE = d.toLocaleDateString('de-DE');
@@ -1647,8 +1713,9 @@ function exportMonatCSV() {
     const sf = ersetzeUmlaute(e.sonderfahrt);
     const ueb = e.uebernachtung ? 'X' : '';
     const db = e.doppelbesatzung ? 'X' : '';
-    if (istFrei) return `${datumDE};;;-;${e.kurs};;;`;
-    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sf};${e.pause||''};${ueb};${db}`;
+    const endeDE = eintragTage(e) > 0 ? new Date(e.endeDatum).toLocaleDateString('de-DE') : '';
+    if (istFrei) return `${datumDE};;;-;${e.kurs};;;;`;
+    return `${datumDE};${e.beginn};${e.ende};${kursAnzeige};${sf};${e.pause||''};${ueb};${db};${endeDE}`;
   }).join('\n');
   const blob = new Blob([header + zeilen], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
