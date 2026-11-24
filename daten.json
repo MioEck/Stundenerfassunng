@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-24T06:13:14.213Z",
+  "aktualisiert": "2026-11-24T06:16:22.618Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2804,6 +2804,16 @@
       "datum": "2026-11-18",
       "beginn": "04:00",
       "ende": "17:00",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH",
+      "pause": "",
+      "uebernachtung": false,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-11-19",
+      "beginn": "04:00",
+      "ende": "16:30",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "SEV HH",
       "pause": "",
