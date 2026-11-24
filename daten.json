@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-24T06:03:44.293Z",
+  "aktualisiert": "2026-11-24T06:05:13.896Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2811,7 +2811,7 @@
       "doppelbesatzung": false
     },
     {
-      "datum": "2026-11-19",
+      "datum": "2026-11-20",
       "beginn": "04:16",
       "ende": "13:30",
       "kurs": "Sonderfahrt",
@@ -2884,6 +2884,7 @@
     "2026-11-14|12:44|Sonderfahrt",
     "2026-11-16|00:00|Sonderfahrt",
     "2026-11-16|23:59|Sonderfahrt",
-    "2026-11-15|00:00|Sonderfahrt"
+    "2026-11-15|00:00|Sonderfahrt",
+    "2026-11-19|04:16|Sonderfahrt"
   ]
 }
