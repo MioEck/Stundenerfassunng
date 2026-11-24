@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-24T06:05:13.896Z",
+  "aktualisiert": "2026-11-24T06:06:50.426Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2818,6 +2818,16 @@
       "sonderfahrt": "SEV in Hamburg geblieben",
       "pause": "",
       "uebernachtung": true,
+      "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-11-22",
+      "beginn": "12:00",
+      "ende": "22:40",
+      "kurs": "Sonderfahrt",
+      "sonderfahrt": "SEV HH",
+      "pause": "",
+      "uebernachtung": false,
       "doppelbesatzung": false
     },
     {
