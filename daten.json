@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-21T09:44:15.213Z",
+  "aktualisiert": "2026-11-24T06:03:32.726Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2773,16 +2773,6 @@
     },
     {
       "datum": "2026-11-15",
-      "beginn": "00:00",
-      "ende": "23:59",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Sev",
-      "pause": "",
-      "uebernachtung": true,
-      "doppelbesatzung": false
-    },
-    {
-      "datum": "2026-11-15",
       "beginn": "14:00",
       "ende": "22:30",
       "kurs": "Sonderfahrt",
@@ -2801,16 +2791,6 @@
       "uebernachtung": false,
       "doppelbesatzung": false,
       "endeDatum": "2026-11-17"
-    },
-    {
-      "datum": "2026-11-16",
-      "beginn": "23:59",
-      "ende": "01:45",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV Rück",
-      "pause": "",
-      "uebernachtung": false,
-      "doppelbesatzung": false
     },
     {
       "datum": "2026-11-17",
@@ -2839,6 +2819,14 @@
       "pause": "",
       "uebernachtung": true,
       "doppelbesatzung": false
+    },
+    {
+      "datum": "2026-11-23",
+      "beginn": "",
+      "ende": "",
+      "kurs": "Frei",
+      "sonderfahrt": "",
+      "pause": ""
     }
   ],
   "geloescht": [
@@ -2886,6 +2874,8 @@
     "2026-11-09|06:40|Kurs 215",
     "2026-11-05|03:50|Kurs 211 + Test",
     "2026-11-14|12:44|Sonderfahrt",
-    "2026-11-16|00:00|Sonderfahrt"
+    "2026-11-16|00:00|Sonderfahrt",
+    "2026-11-16|23:59|Sonderfahrt",
+    "2026-11-15|00:00|Sonderfahrt"
   ]
 }
