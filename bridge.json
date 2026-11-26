@@ -84,7 +84,14 @@
       "kurs": "Kurs 216",
       "erstellt": "2026-11-25T11:10:14.460Z",
       "status": "erledigt"
+    },
+    {
+      "id": "217_2026-11-26_mwxq8e2j",
+      "datum": "2026-11-26",
+      "kurs": "Kurs 217",
+      "erstellt": "2026-11-26T15:48:10.171Z",
+      "status": "offen"
     }
   ],
-  "aktualisiert": "2026-11-26T07:36:50.912Z"
+  "aktualisiert": "2026-11-26T15:48:10.896Z"
 }
