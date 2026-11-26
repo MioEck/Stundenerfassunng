@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-26T15:58:14.864Z",
+  "aktualisiert": "2026-11-26T16:02:45.420Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2764,17 +2764,7 @@
     {
       "datum": "2026-11-14",
       "beginn": "11:00",
-      "ende": "23:59",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "Sev",
-      "pause": "",
-      "uebernachtung": true,
-      "doppelbesatzung": false
-    },
-    {
-      "datum": "2026-11-15",
-      "beginn": "00:00",
-      "ende": "23:59",
+      "ende": "22:15",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Sev",
       "pause": "",
@@ -2828,16 +2818,6 @@
       "sonderfahrt": "SEV HH",
       "pause": "",
       "uebernachtung": false,
-      "doppelbesatzung": false
-    },
-    {
-      "datum": "2026-11-19",
-      "beginn": "04:16",
-      "ende": "13:30",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV in Hamburg geblieben",
-      "pause": "",
-      "uebernachtung": true,
       "doppelbesatzung": false
     },
     {
@@ -2951,6 +2931,8 @@
     "2026-11-14|12:44|Sonderfahrt",
     "2026-11-16|00:00|Sonderfahrt",
     "2026-11-21|04:00|Sonderfahrt",
-    "2026-11-16|23:59|Sonderfahrt"
+    "2026-11-16|23:59|Sonderfahrt",
+    "2026-11-19|04:16|Sonderfahrt",
+    "2026-11-15|00:00|Sonderfahrt"
   ]
 }
