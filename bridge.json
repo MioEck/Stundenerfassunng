@@ -90,7 +90,7 @@
       "datum": "2026-11-26",
       "kurs": "Kurs 217",
       "erstellt": "2026-11-26T15:48:10.171Z",
-      "status": "offen"
+      "status": "erledigt"
     },
     {
       "id": "217_2026-11-26_mwxqaagt",
@@ -107,5 +107,5 @@
       "status": "verworfen"
     }
   ],
-  "aktualisiert": "2026-11-26T15:51:50.806Z"
+  "aktualisiert": "2026-11-26T15:51:52.372Z"
 }
