@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-26T15:51:55.065Z",
+  "aktualisiert": "2026-11-26T15:58:14.864Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2803,16 +2803,6 @@
       "endeDatum": "2026-11-17"
     },
     {
-      "datum": "2026-11-16",
-      "beginn": "23:59",
-      "ende": "01:45",
-      "kurs": "Sonderfahrt",
-      "sonderfahrt": "SEV Rück",
-      "pause": "",
-      "uebernachtung": false,
-      "doppelbesatzung": false
-    },
-    {
       "datum": "2026-11-17",
       "beginn": "",
       "ende": "",
@@ -2960,6 +2950,7 @@
     "2026-11-05|03:50|Kurs 211 + Test",
     "2026-11-14|12:44|Sonderfahrt",
     "2026-11-16|00:00|Sonderfahrt",
-    "2026-11-21|04:00|Sonderfahrt"
+    "2026-11-21|04:00|Sonderfahrt",
+    "2026-11-16|23:59|Sonderfahrt"
   ]
 }
