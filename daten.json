@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-26T16:02:45.420Z",
+  "aktualisiert": "2026-11-27T04:29:59.835Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2764,7 +2764,7 @@
     {
       "datum": "2026-11-14",
       "beginn": "11:00",
-      "ende": "22:15",
+      "ende": "23:59",
       "kurs": "Sonderfahrt",
       "sonderfahrt": "Sev",
       "pause": "",
@@ -2930,9 +2930,9 @@
     "2026-11-05|03:50|Kurs 211 + Test",
     "2026-11-14|12:44|Sonderfahrt",
     "2026-11-16|00:00|Sonderfahrt",
-    "2026-11-21|04:00|Sonderfahrt",
     "2026-11-16|23:59|Sonderfahrt",
+    "2026-11-15|00:00|Sonderfahrt",
     "2026-11-19|04:16|Sonderfahrt",
-    "2026-11-15|00:00|Sonderfahrt"
+    "2026-11-21|04:00|Sonderfahrt"
   ]
 }
