@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "aktualisiert": "2026-11-28T04:40:32.026Z",
+  "aktualisiert": "2026-11-28T07:15:06.590Z",
   "eintraege": [
     {
       "datum": "2026-01-01",
@@ -2898,6 +2898,15 @@
       "kurs": "Frei",
       "sonderfahrt": "",
       "pause": ""
+    },
+    {
+      "datum": "2026-11-28",
+      "beginn": "06:13",
+      "ende": "17:00",
+      "kurs": "Kurs 214",
+      "sonderfahrt": "",
+      "pause": "",
+      "extraStunden": 9.78
     },
     {
       "datum": "2026-11-29",
